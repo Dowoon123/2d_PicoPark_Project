@@ -37,9 +37,12 @@ public class Player_ : MonoBehaviour
         if (GetComponent<PhotonView>().IsMine)
         {
             var h = Input.GetAxisRaw("Horizontal");
+            var v = Input.GetAxisRaw("Vertical");
 
             // if(PhotonNetwork)
             transform.Translate(Vector2.right * h * 5.5f * Time.deltaTime);
+
+            transform.Translate(Vector2.up * v * 5.5f * Time.deltaTime);
         }
 
      

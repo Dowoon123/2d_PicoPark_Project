@@ -70,6 +70,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             currPlayerIdx = 0;
             GOplayer = PhotonNetwork.Instantiate("Players", spawnPos1.transform.position, Quaternion.identity);
+             
 
             _player = GOplayer.GetComponent<Player_>();
 

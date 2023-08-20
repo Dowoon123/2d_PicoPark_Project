@@ -64,7 +64,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Debug.Log("방 접속 됨");
 
 
-        Player_ _player = null;
+        PlayerController _player = null;
         GameObject GOplayer;
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
@@ -72,7 +72,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             GOplayer = PhotonNetwork.Instantiate("Players", spawnPos1.transform.position, Quaternion.identity);
              
 
-            _player = GOplayer.GetComponent<Player_>();
+            _player = GOplayer.GetComponent<PlayerController>();
 
             Debug.Log("첫 플레이어 생성");
         }
@@ -80,7 +80,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
 
             GOplayer = PhotonNetwork.Instantiate("Players", spawnPos2.transform.position, Quaternion.identity);
-            _player = GOplayer.GetComponent<Player_>();
+            _player = GOplayer.GetComponent<PlayerController>();
             Debug.Log("두번째 플레이어 생성 ");
         }
 

@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     // Dictionary의 key value 값을 통해서 플레이어의 정보를 반환한다.
     // 플레이어의 정보가 필요할때 쓰일예정인데 안쓰일듯
     [SerializeField]
-    Dictionary<int, Player_> _mPlayer = new Dictionary<int, Player_>();
+    Dictionary<int, PlayerController> _mPlayer = new Dictionary<int, PlayerController>();
     int Currindex = 0;
     // Start is called before the first frame update
     void Start()
@@ -23,15 +23,15 @@ public class PlayerManager : MonoBehaviour
         UpdateNickName();
     }
 
-    public void AddPlayer(int ActorNumber, Player_ _player)
+    public void AddPlayer(int ActorNumber, PlayerController _player)
     {
         _mPlayer.Add(ActorNumber, _player);
 
     }
 
-    public Player_ GetPlayerByActorNumber(int actorNumber)
+    public PlayerController GetPlayerByActorNumber(int actorNumber)
     {
-        Player_ player = null;
+        PlayerController player = null;
         _mPlayer.TryGetValue(actorNumber, out player);
         return player;
     }

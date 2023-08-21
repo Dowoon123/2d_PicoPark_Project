@@ -23,7 +23,7 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.Update();
 
-        if(!player._colChecker.isObstacle)
+       // if(!player._colChecker.isObstacle)
         player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
 
 

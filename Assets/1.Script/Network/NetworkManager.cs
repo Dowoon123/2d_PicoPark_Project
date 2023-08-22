@@ -5,12 +5,12 @@ using UnityEngine.UI;
 using Photon.Realtime;
 using Photon.Pun;
 using TMPro;
-
+using Photon;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
 
-
-
+   
+     
     public int currPlayerIdx;
     public GameObject mainCam;
     // 필요한 매니저들 
@@ -50,12 +50,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         roomOptions.IsVisible = true;
 
         PhotonNetwork.JoinOrCreateRoom("MyRoomName", roomOptions, TypedLobby.Default);
+
+    
+      
         //  SetPlayerNickName();
 
 
 
-    }
+    } 
 
+    
 
     public override void OnJoinedRoom()
     {
@@ -146,5 +150,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinOrCreateRoom("MyRoomName", roomOptions, TypedLobby.Default);
     }
 
-
+    public override void OnPlayerEnteredRoom(Photon.Realtime.PlayerController newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+    }
 }

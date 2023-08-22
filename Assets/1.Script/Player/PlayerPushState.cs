@@ -11,6 +11,7 @@ public class PlayerPushState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        Debug.Log(" Push 상태 진입");
     }
 
     public override void Exit()

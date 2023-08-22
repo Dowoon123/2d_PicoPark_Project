@@ -414,7 +414,7 @@ TextureImporter:
         serializedVersion: 2
         x: 68
         y: 0
-        width: 34.545456
+        width: 33
         height: 44
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -439,7 +439,7 @@ TextureImporter:
         height: 44
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 0, z: 1, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -456,11 +456,11 @@ TextureImporter:
         serializedVersion: 2
         x: 136
         y: 0
-        width: 34.545456
+        width: 32
         height: 44
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -475,9 +475,9 @@ TextureImporter:
       name: pico_red-removebg-preview_16
       rect:
         serializedVersion: 2
-        x: 170
+        x: 171
         y: 0
-        width: 34.545456
+        width: 31
         height: 44
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

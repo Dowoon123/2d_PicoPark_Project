@@ -12,8 +12,10 @@ public class Map : MonoBehaviour
     public GameObject canvasPrefab;
 
     public GameObject canvas;  
+
     public string Scene_name = "TestScene";
     public string Map_name = "테스트 맵";
+    public string Map_subTitle = "테스트";
 
 
    public virtual void Awake()
@@ -21,6 +23,8 @@ public class Map : MonoBehaviour
         canvas = Instantiate(canvasPrefab);
 
         Timer_Text =  canvas.GetComponentInChildren<Text>();
+
+
 
     }
    

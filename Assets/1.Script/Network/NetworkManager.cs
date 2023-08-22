@@ -73,7 +73,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             currPlayerIdx = 0;
-            GOplayer = PhotonNetwork.Instantiate("Players", spawnPos1.transform.position, Quaternion.identity);
+            GOplayer = PhotonNetwork.Instantiate("Pl/Players", spawnPos1.transform.position, Quaternion.identity);
              
 
             _player = GOplayer.GetComponent<PlayerController>();

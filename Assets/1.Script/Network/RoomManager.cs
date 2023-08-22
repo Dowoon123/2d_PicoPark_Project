@@ -7,6 +7,8 @@ using Photon.Realtime;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
+
+
    // List<RoomInfo> m_roomList;
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
@@ -15,6 +17,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 
     }
+
+
+
+
+
 
 
 

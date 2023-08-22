@@ -5,6 +5,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerMoveState : PlayerGroundedState
 {
+    
     public PlayerMoveState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }
@@ -23,7 +24,7 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.Update();
 
-        if(!player._colChecker.isObstacle)
+       // if(!player._colChecker.isObstacle)
         player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
 
 

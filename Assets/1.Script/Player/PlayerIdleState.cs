@@ -13,6 +13,8 @@ public class PlayerIdleState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
+
+        Debug.Log(" Idle 상태 진입");
     }
 
     public override void Exit()

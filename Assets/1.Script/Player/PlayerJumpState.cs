@@ -15,7 +15,7 @@ public class PlayerJumpState : PlayerState
         base.Enter();
         rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
 
-        player._colChecker.JumpCollider(true);
+        //player._colChecker.JumpCollider(true);
 
            
     }
@@ -32,31 +32,15 @@ public class PlayerJumpState : PlayerState
         if (player.rb.velocity.y < 0)
             stateMachine.ChangeState(player.State_Air);
 
+
         if (player._colChecker.IsPlayerDetected())
+            player.SetVelocity(0, player.rb.velocity.y);
+        else
         {
-            GameObject targetObject = null;
-            
-            if(player.GetComponent<collideChecker>().playerObject != null)
-                targetObject = player.GetComponent<collideChecker>().playerObject;
 
 
-            if(targetObject.transform.position.x > player.transform.position.x)
-            {
-                if(xInput > 0)
-                {
-                    stateMachine.ChangeState(player.State_Push);
-                }
-            }
-            else if (targetObject.transform.position.x < player.transform.position.x)
-            {
-                if (xInput < 0)
-                {
-                    stateMachine.ChangeState(player.State_Push);
-                }
-            }
+            if (xInput != 0)
+                player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
         }
-
-        if (xInput != 0)
-            player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
     }
 }

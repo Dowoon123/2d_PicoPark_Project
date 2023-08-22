@@ -45,12 +45,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()// 포톤서버에 성공적으로 접속한 후 호출되는 콜백   
     {
         Debug.Log("서버접속");
-        RoomOptions roomOptions = new RoomOptions(); // 새로운 룸옵션 할당
-        roomOptions.MaxPlayers = 4;
-        roomOptions.IsVisible = true;
-
-        PhotonNetwork.JoinOrCreateRoom("MyRoomName", roomOptions, TypedLobby.Default);
-
+        PhotonNetwork.JoinLobby();
     
       
         //  SetPlayerNickName();
@@ -58,9 +53,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
 
     } 
-
     
-
     public override void OnJoinedRoom()
     {
 
@@ -153,5 +146,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.PlayerController newPlayer)
     {
         base.OnPlayerEnteredRoom(newPlayer);
+    }
+
+    public override void OnJoinedLobby()
+    {
+
+        RoomOptions roomOptions = new RoomOptions(); // 새로운 룸옵션 할당
+        roomOptions.MaxPlayers = 4;
+        roomOptions.IsVisible = true;
+
+        PhotonNetwork.JoinOrCreateRoom("MyRoomName", roomOptions, TypedLobby.Default);
     }
 }

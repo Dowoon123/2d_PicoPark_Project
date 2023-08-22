@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1847148750301406206}
   - component: {fileID: 4766328831822951343}
   - component: {fileID: -2171442960527140006}
-  - component: {fileID: 6317381382066465899}
+  - component: {fileID: 372209012128311148}
   m_Layer: 6
   m_Name: Players
   m_TagString: Untagged
@@ -38,8 +38,9 @@ Transform:
   - {fileID: 7907106058076839783}
   - {fileID: 6695292303929447901}
   - {fileID: 2440199717613171055}
+  - {fileID: 4344801559715170833}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6926159686036311779
 MonoBehaviour:
@@ -57,11 +58,14 @@ MonoBehaviour:
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 896
+  GroundChecker: {fileID: 4344801559715170833}
   rb: {fileID: 0}
   _colChecker: {fileID: 0}
   anim: {fileID: 0}
   jumpForce: 15
   moveSpeed: 5.5
+  isGround: 0
+  isUpperPlayer: 0
 --- !u!114 &7434081835152927566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +82,7 @@ MonoBehaviour:
   playerChecker: {fileID: 2440199717613171055}
   PlayerCheckRadius: 0
   UpperCollider: {fileID: 2804559710239955963}
-  BodyCollider: {fileID: 6317381382066465899}
+  BodyCollider: {fileID: 372209012128311148}
   WhatIsUpper:
     serializedVersion: 2
     m_Bits: 128
@@ -172,8 +176,8 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!70 &6317381382066465899
-CapsuleCollider2D:
+--- !u!61 &372209012128311148
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -204,9 +208,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.022795618, y: -0.074974805}
-  m_Size: {x: 0.4419074, y: 0.8785928}
-  m_Direction: 0
+  m_Offset: {x: 0, y: -0.059324622}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.49, y: 0.8513508}
+  m_EdgeRadius: 0
 --- !u!1 &2033445646012691448
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +245,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2033445646012691448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.595, y: 0, z: 0}
+  m_LocalPosition: {x: -0.515, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -467,7 +481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7907106058076839783
 Transform:
   m_ObjectHideFlags: 0
@@ -515,7 +529,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02, y: 0.46}
+  m_Offset: {x: 0, y: 0.4297924}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -526,5 +540,36 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9250395, y: 0.13676286}
+  m_Size: {x: 0.9250395, y: 0.049496412}
   m_EdgeRadius: 0
+--- !u!1 &8896979924716296370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4344801559715170833}
+  m_Layer: 6
+  m_Name: GroundChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4344801559715170833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8896979924716296370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.469, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8320717852037057439}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

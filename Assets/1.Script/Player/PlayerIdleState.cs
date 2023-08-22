@@ -15,6 +15,7 @@ public class PlayerIdleState : PlayerGroundedState
         base.Enter();
 
         Debug.Log(" Idle 상태 진입");
+        player._colChecker.JumpCollider(false);
     }
 
     public override void Exit()

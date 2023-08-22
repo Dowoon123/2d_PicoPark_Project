@@ -27,18 +27,19 @@ public class PlayerPushState : PlayerGroundedState
     {
         base.Update();
 
-        if (player._colChecker.IsPlayerDetected())
+        player.SetVelocity(0, player.rb.velocity.y);
+
+
+        if (xInput == 0)
+
         {
-            player.ZeroVelocity();
-
-            if (xInput == 0)
-
-            {
-                player.stateMachine.ChangeState(player.State_idle);
-            }
-        }
-       else //(!player._colChecker.IsPlayerDetected())
             player.stateMachine.ChangeState(player.State_idle);
+            return;
+        }
+
+
+        if (!player._colChecker.IsPlayerDetected())
+         player.stateMachine.ChangeState(player.State_idle);
        
         
     }

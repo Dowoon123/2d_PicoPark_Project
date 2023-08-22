@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerGroundedState : PlayerState
+
 {
+
+    
+    
+
     PlayerController player;
     public PlayerGroundedState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName)
         : base(_player, _stateMachine, _animBoolName)
@@ -16,7 +22,7 @@ public class PlayerGroundedState : PlayerState
     {
         base.Enter();
 
-       
+        Debug.Log(" 그라운드 상태 진입");
     }
 
     public override void Exit()
@@ -30,13 +36,14 @@ public class PlayerGroundedState : PlayerState
 
 
 
-      //  if (!player.IsGroundDetected())
+        //  if (!player.IsGroundDetected())
         //    stateMachine.ChangeState(player.airState);
-
+        
 
         if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
         {
             stateMachine.ChangeState(player.State_Jump);
         }
     }
+   
 }

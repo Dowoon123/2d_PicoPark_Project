@@ -6,17 +6,23 @@ using UnityEngine;
 public class collideChecker : MonoBehaviour
 {
     [SerializeField] Transform obstacleChecker;
-
+    [SerializeField] Transform playerChecker;
     [SerializeField] Collider2D UpperCollider;
     [SerializeField] Collider2D BodyCollider;
 
 
     [SerializeField] LayerMask WhatIsUpper;
     [SerializeField] LayerMask WhatIsObstacle;
+    [SerializeField] LayerMask WhatIsPlayer;
     PlayerController player;
 
     public bool isObstacle;
+    public bool isPlayer;
+
+
     public GameObject obstacleObject;
+    public GameObject playerObject;
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         
@@ -30,8 +36,25 @@ public class collideChecker : MonoBehaviour
     public void Update()
     {
         isObstacle = IsObstacleDetected();
+        isPlayer = IsPlayerDetected();
 
-        
+    }
+    public virtual bool IsPlayerDetected()
+    {
+        RaycastHit2D playerFind;
+        playerFind = Physics2D.Raycast(playerChecker.transform.position, Vector2.left, 1, WhatIsObstacle);
+        if (playerFind)
+        {
+            playerObject = playerFind.collider.gameObject;
+
+
+            return true;
+        }
+        else
+        {
+            playerObject = null;
+            return false;
+        }
     }
     public virtual bool IsObstacleDetected()
     {
@@ -61,7 +84,9 @@ public class collideChecker : MonoBehaviour
 
     protected virtual void OnDrawGizmos()
     {
-        Gizmos.DrawLine(transform.position, new Vector3(obstacleChecker.transform.position.x + 0.5f
+        Gizmos.DrawLine(transform.position, new Vector3(obstacleChecker.transform.position.x + 0.7f
+            , transform.position.y));
+        Gizmos.DrawLine(transform.position, new Vector3(playerChecker.transform.position.x + 0.5f
             , transform.position.y));
 
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x 

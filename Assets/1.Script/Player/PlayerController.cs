@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Photon.Realtime;
 using Photon.Pun;
-using Unity.IO.LowLevel.Unsafe;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,13 +10,14 @@ public class PlayerController : MonoBehaviour
 
     #region collision
     [SerializeField] float groundCheckDist = 1f;
-    [SerializeField]LayerMask WhatIsGround;
+    [SerializeField] LayerMask WhatIsGround;
+
     #endregion
 
     #region Components
     public Rigidbody2D rb;
     public collideChecker _colChecker;
-   public Animator anim;
+    public Animator anim;
     public PlayerStateMachine stateMachine;
     #endregion
 
@@ -37,11 +34,15 @@ public class PlayerController : MonoBehaviour
 
 
     #region states
-    public  PlayerIdleState State_idle;
-    public  PlayerMoveState State_move;
+    public PlayerIdleState State_idle;
+    public PlayerMoveState State_move;
     public PlayerJumpState State_Jump;
     public PlayerAirState State_Air;
+    public PlayerPushState State_Push;
     #endregion
+
+    public int facingDir { get; set; } = 1;
+    protected bool facingRight = false;
 
     int _actorNumber;
     public int actorNumber
@@ -64,6 +65,7 @@ public class PlayerController : MonoBehaviour
         State_move = new PlayerMoveState(this, stateMachine, "Move");
         State_Jump = new PlayerJumpState(this, stateMachine, "Jump");
         State_Air = new PlayerAirState(this, stateMachine, "Idle");
+        State_Push = new PlayerPushState(this, stateMachine, "Push");
     }
 
     private void Start()
@@ -77,16 +79,9 @@ public class PlayerController : MonoBehaviour
         {
             stateMachine.currentState.Update();
 
-           
-
-    
-
         }
 
-     
-  
     }
-
 
     public void CheckInput()
     {
@@ -121,14 +116,38 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    public void Flip()
+    {
+        facingDir = facingDir - facingDir * -1;
+        facingRight = !facingRight;
+        transform.Rotate(0, 180, 0);
+    }
+
+    public void FlipController(float _x)
+    {
+        if (_x > 0 && !facingRight)
+        {
+            Flip();
+
+        }
+        else if (_x < 0 && facingRight)
+        {
+            Flip();
+
+        }
+    }
+
     public bool IsGroundDetected() => Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, WhatIsGround);
+
 
     public void ZeroVelocity() => rb.velocity = Vector2.zero;
 
     public void SetVelocity(float _xVelocity, float _yVelocity)
     {
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
-      //  FlipController(_xVelocity);
+        FlipController(_xVelocity);
     }
+
+
 
 }

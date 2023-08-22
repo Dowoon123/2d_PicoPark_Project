@@ -7,7 +7,7 @@ public class PlayerJumpState : PlayerState
     PlayerController player;
     public PlayerJumpState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
-        player = _player;
+     player = _player;
     }
 
     public override void Enter()

@@ -5,6 +5,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerMoveState : PlayerGroundedState
 {
+    
     public PlayerMoveState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
     {
     }

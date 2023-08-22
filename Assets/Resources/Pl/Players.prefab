@@ -39,7 +39,7 @@ Transform:
   - {fileID: 6695292303929447901}
   - {fileID: 2440199717613171055}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6926159686036311779
 MonoBehaviour:
@@ -206,8 +206,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.45420337, y: -0.61420333}
-  m_Size: {x: 0.44185734, y: 0.86318636}
+  m_Offset: {x: -0.022795618, y: -0.074974805}
+  m_Size: {x: 0.4419074, y: 0.8785928}
   m_Direction: 0
 --- !u!1 &2033445646012691448
 GameObject:
@@ -300,7 +300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5934450142433903358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.4347, y: -0.5537, z: 0}
+  m_LocalPosition: {x: -0.023, y: -0.016, z: 0}
   m_LocalScale: {x: 29.836018, y: 29.836018, z: 0.542473}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -416,16 +416,19 @@ MonoBehaviour:
   m_SynchronizeParameters:
   - Type: 4
     SynchronizeType: 0
-    Name: idle
+    Name: Idle
   - Type: 4
     SynchronizeType: 0
-    Name: move
+    Name: Move
   - Type: 4
     SynchronizeType: 0
-    Name: jump
+    Name: Jump
   - Type: 4
     SynchronizeType: 0
-    Name: push
+    Name: Push
+  - Type: 1
+    SynchronizeType: 0
+    Name: yVelocity
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -514,7 +517,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.42373908, y: -0.05495596}
+  m_Offset: {x: -0.02, y: 0.46}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

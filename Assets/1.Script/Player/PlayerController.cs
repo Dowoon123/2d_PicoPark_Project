@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         stateMachine.Initialize(State_idle);
+
     }
     // Update is called once per frame
     void Update()

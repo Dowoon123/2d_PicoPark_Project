@@ -7,13 +7,14 @@ public class collideChecker : MonoBehaviour
 {
     [SerializeField] Transform obstacleChecker;
     [SerializeField] Transform playerChecker;
+    [SerializeField] float PlayerCheckRadius;
     [SerializeField] Collider2D UpperCollider;
     [SerializeField] Collider2D BodyCollider;
 
 
     [SerializeField] LayerMask WhatIsUpper;
     [SerializeField] LayerMask WhatIsObstacle;
-    [SerializeField] LayerMask WhatIsPlayer;
+    
     PlayerController player;
 
     public bool isObstacle;
@@ -41,11 +42,15 @@ public class collideChecker : MonoBehaviour
     }
     public virtual bool IsPlayerDetected()
     {
-        RaycastHit2D playerFind;
-        playerFind = Physics2D.Raycast(playerChecker.transform.position, Vector2.left, 1, WhatIsObstacle);
-        if (playerFind)
+        // RaycastHit2D playerFind;
+
+        //   playerFind = Physics2D.Raycast(playerChecker.transform.position, Vector2.right, 0.1f, WhatIsObstacle);
+
+     
+        var capsule = Physics2D.OverlapCapsule(playerChecker.transform.position, new Vector2(0.441907406f, 0.92f), CapsuleDirection2D.Vertical, 0,WhatIsObstacle);
+        if (capsule)
         {
-            playerObject = playerFind.collider.gameObject;
+            playerObject = capsule.gameObject;
 
 
             return true;
@@ -91,5 +96,7 @@ public class collideChecker : MonoBehaviour
 
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x 
            , transform.position.y -1f));
+
+        
     }
 }

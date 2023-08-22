@@ -22,7 +22,7 @@ public class PlayerJumpState : PlayerState
 
     public override void Exit()
     {
-        base.Exit();
+        base.Exit(); 
     }
 
     public override void Update()
@@ -32,7 +32,29 @@ public class PlayerJumpState : PlayerState
         if (player.rb.velocity.y < 0)
             stateMachine.ChangeState(player.State_Air);
 
-    
+        if (player._colChecker.IsPlayerDetected())
+        {
+            GameObject targetObject = null;
+            
+            if(player.GetComponent<collideChecker>().playerObject != null)
+                targetObject = player.GetComponent<collideChecker>().playerObject;
+
+
+            if(targetObject.transform.position.x > player.transform.position.x)
+            {
+                if(xInput > 0)
+                {
+                    stateMachine.ChangeState(player.State_Push);
+                }
+            }
+            else if (targetObject.transform.position.x < player.transform.position.x)
+            {
+                if (xInput < 0)
+                {
+                    stateMachine.ChangeState(player.State_Push);
+                }
+            }
+        }
 
         if (xInput != 0)
             player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);

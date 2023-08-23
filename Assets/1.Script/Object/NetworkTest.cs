@@ -8,28 +8,87 @@ using UnityEngine.UI;
 
 public class NetworkTest : MonoBehaviourPunCallbacks
 {
-    [SerializeField] Text txt;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] Text[] txt;
+
+    [SerializeField] Button btn;
+   
+    Player[] player;
+    int currPlayerIndex = 0;
+    bool isReady = false;
+
+    int readyCount = 1;
+    //Player[] player;
+    public override void OnJoinedRoom()
     {
-        
+        GetComponent<PhotonView>().RPC("SyncUI", RpcTarget.AllBuffered);
+     
+
+
+
     }
 
-    // Update is called once per frame
-    void Update()
+    [PunRPC]
+    void SyncUI()
     {
-        if (PhotonNetwork.IsMasterClient)
+        player = PhotonNetwork.PlayerList;
+
+        for(int i=0; i<player.Length; ++i)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (player[i] != null)
             {
-                txt.text = "R 눌림";
-
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                txt.text = "E 눌림";
+                    if (player[i].IsMasterClient)
+                    {
+                        txt[i].text = " 방장 ";
+                        txt[i].gameObject.SetActive(true);
+                    }
+                if (player[i].IsLocal)
+                {
+                    currPlayerIndex = i;
+                }
             }
         }
     }
+
+
+
+
+    public void OnClick()
+    {
+        GetComponent<PhotonView>().RPC("Ready", RpcTarget.AllBuffered, currPlayerIndex);
+    }
+
+    [PunRPC]
+    void Ready(int playerNum)
+    {
+
+        if (!player[playerNum].IsMasterClient)
+        {
+
+            var b = !isReady;
+            isReady = b;
+
+            if (isReady)
+                readyCount++;
+            else
+                readyCount--;
+
+            txt[playerNum].gameObject.SetActive(isReady);
+        }
+
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (readyCount == player.Length - 1)
+            {
+                Debug.Log("게임시작 완료");
+            }
+            else
+                Debug.Log("인원 부족");
+
+        }
+
+    }
+
+
+    
 }

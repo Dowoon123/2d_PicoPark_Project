@@ -32,7 +32,7 @@
         /// </summary>
         /// <param name="newOwner"></param>
         /// <param name="previousOwner"></param>
-        void OnOwnerChange(PlayerController newOwner, PlayerController previousOwner);
+        void OnOwnerChange(Player newOwner, Player previousOwner);
     }
 
     /// <summary>
@@ -45,6 +45,6 @@
         /// </summary>
         /// <param name="newOwner"></param>
         /// <param name="previousOwner"></param>
-        void OnControllerChange(PlayerController newController, PlayerController previousController);
+        void OnControllerChange(Player newController, Player previousController);
     }
 }

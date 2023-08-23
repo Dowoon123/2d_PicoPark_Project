@@ -143,7 +143,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinOrCreateRoom("MyRoomName", roomOptions, TypedLobby.Default);
     }
 
-    public override void OnPlayerEnteredRoom(Photon.Realtime.PlayerController newPlayer)
+    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         base.OnPlayerEnteredRoom(newPlayer);
     }

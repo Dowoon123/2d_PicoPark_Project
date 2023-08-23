@@ -148,6 +148,7 @@ public class PlayerController : MonoBehaviour
     public bool IsGroundDetected()
     {
         // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, WhatIsGround);
+        
 
         var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
         if (box)

@@ -76,7 +76,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         else
         {
 
-            GOplayer = PhotonNetwork.Instantiate("Players", spawnPos2.transform.position, Quaternion.identity);
+            GOplayer = PhotonNetwork.Instantiate("Pl/Players", spawnPos2.transform.position, Quaternion.identity);
             _player = GOplayer.GetComponent<PlayerController>();
             Debug.Log("두번째 플레이어 생성 ");
         }

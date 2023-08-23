@@ -123,24 +123,37 @@ public class PlayerController : MonoBehaviour
         return NicknameText;
     }
 
-
+    [PunRPC]
     public void Flip()
     {
-        facingDir = facingDir - facingDir * -1;
+        facingDir = facingDir * -1;
         facingRight = !facingRight;
-        transform.Rotate(0, 180, 0);
+
+
+        var flip = GetComponentInChildren<SpriteRenderer>().flipX == true ? false : true;
+        GetComponentInChildren<SpriteRenderer>().flipX = flip;
+
+        if(!flip)
+        _colChecker.playerChecker.transform.localPosition = new Vector2(-0.5f,-0.05f);
+        else
+            _colChecker.playerChecker.transform.localPosition = new Vector2(0.5f, -0.05f);
+
+        Debug.Log(facingDir + " " + facingRight);
     }
+
+  
 
     public void FlipController(float _x)
     {
         if (_x > 0 && !facingRight)
         {
-            Flip();
+            GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
+         
 
         }
         else if (_x < 0 && facingRight)
         {
-            Flip();
+            GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
 
         }
     }

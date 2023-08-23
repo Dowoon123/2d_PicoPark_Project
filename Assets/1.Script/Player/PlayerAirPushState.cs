@@ -22,7 +22,7 @@ public class PlayerAirPushState : PlayerState
     {
         if (player.IsGroundDetected())
             stateMachine.ChangeState(player.State_idle);
-
+    
 
         if (player._colChecker.IsPlayerDetected())
         {

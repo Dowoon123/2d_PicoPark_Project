@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerAirState : PlayerState
 {
@@ -12,12 +13,16 @@ public class PlayerAirState : PlayerState
     {
         base.Enter();
 
+
+
+
         player._colChecker.JumpCollider(false);
     }
 
     public override void Exit()
     {
         base.Exit();
+        player._colChecker.JumpCollider(true);
     }
 
     public override void Update()
@@ -28,7 +33,17 @@ public class PlayerAirState : PlayerState
             stateMachine.ChangeState(player.State_idle);
 
 
-        if (xInput != 0)
-            player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
+        if (player._colChecker.IsPlayerDetected())
+            player.SetVelocity(0, player.rb.velocity.y);
+        else
+        {
+            if (xInput != 0)
+            {
+                player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
+
+
+            }
+
+        }
     }
 }

@@ -4,11 +4,8 @@ using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerGroundedState : PlayerState
-
 {
 
-    
-    
 
     PlayerController player;
     public PlayerGroundedState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName)
@@ -23,6 +20,7 @@ public class PlayerGroundedState : PlayerState
         base.Enter();
 
         Debug.Log(" 그라운드 상태 진입");
+        player.SetVelocity(player.rb.velocity.x, 0);
     }
 
     public override void Exit()
@@ -35,6 +33,14 @@ public class PlayerGroundedState : PlayerState
         base.Update();
 
 
+        if(player.isGround)
+        {
+            player._colChecker.JumpCollider(true);
+        }
+        else if (player.isUpperPlayer)
+        {
+            player._colChecker.JumpCollider(false);
+        }
 
         //  if (!player.IsGroundDetected())
         //    stateMachine.ChangeState(player.airState);

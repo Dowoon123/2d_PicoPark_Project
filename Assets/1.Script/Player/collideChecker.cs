@@ -7,13 +7,14 @@ public class collideChecker : MonoBehaviour
 {
     [SerializeField] Transform obstacleChecker;
     [SerializeField] Transform playerChecker;
+    [SerializeField] float PlayerCheckRadius;
     [SerializeField] Collider2D UpperCollider;
     [SerializeField] Collider2D BodyCollider;
 
 
     [SerializeField] LayerMask WhatIsUpper;
     [SerializeField] LayerMask WhatIsObstacle;
-    [SerializeField] LayerMask WhatIsPlayer;
+    
     PlayerController player;
 
     public bool isObstacle;
@@ -41,11 +42,18 @@ public class collideChecker : MonoBehaviour
     }
     public virtual bool IsPlayerDetected()
     {
-        RaycastHit2D playerFind;
-        playerFind = Physics2D.Raycast(playerChecker.transform.position, Vector2.left, 1, WhatIsObstacle);
-        if (playerFind)
+        // RaycastHit2D playerFind;
+
+        //  playerFind = Physics2D.Raycast(playerChecker.transform.position, Vector2.right, 0.1f, WhatIsObstacle);
+
+
+        //  var capsule = Physics2D.OverlapCapsule(playerChecker.transform.position, new Vector2(0.441907406f, 0.92f), CapsuleDirection2D.Vertical, 0,WhatIsObstacle);
+
+        var colBox = Physics2D.OverlapBox(playerChecker.transform.position,new Vector2(0.15f, 0.84f), 0, WhatIsObstacle);
+
+        if (colBox)
         {
-            playerObject = playerFind.collider.gameObject;
+            playerObject = colBox.gameObject;
 
 
             return true;
@@ -73,7 +81,11 @@ public class collideChecker : MonoBehaviour
             return false;
         }
     }
-
+    /// <summary>
+    /// True : 머리컬라이더 무시 
+    /// False : 머리컬라이더 체크 
+    /// </summary>
+    /// <param name="b"></param>
     public void JumpCollider(bool b)
     {
         LayerMask mask;
@@ -91,5 +103,7 @@ public class collideChecker : MonoBehaviour
 
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x 
            , transform.position.y -1f));
+
+        
     }
 }

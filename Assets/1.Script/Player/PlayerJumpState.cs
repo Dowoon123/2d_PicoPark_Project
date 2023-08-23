@@ -15,14 +15,14 @@ public class PlayerJumpState : PlayerState
         base.Enter();
         rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
 
-        player._colChecker.JumpCollider(true);
+        //player._colChecker.JumpCollider(true);
 
            
     }
 
     public override void Exit()
     {
-        base.Exit();
+        base.Exit(); 
     }
 
     public override void Update()
@@ -32,9 +32,15 @@ public class PlayerJumpState : PlayerState
         if (player.rb.velocity.y < 0)
             stateMachine.ChangeState(player.State_Air);
 
-    
 
-        if (xInput != 0)
-            player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
+        if (player._colChecker.IsPlayerDetected())
+            player.SetVelocity(0, player.rb.velocity.y);
+        else
+        {
+
+
+            if (xInput != 0)
+                player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
+        }
     }
 }

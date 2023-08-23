@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     #region collision
     [SerializeField] float groundCheckDist = 1f;
     [SerializeField] LayerMask WhatIsGround;
+    [SerializeField] Transform GroundChecker;
 
     #endregion
 
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour
     public PlayerJumpState State_Jump;
     public PlayerAirState State_Air;
     public PlayerPushState State_Push;
+    public PlayerAirPushState State_AirPush;
     #endregion
 
     public int facingDir { get; set; } = 1;
@@ -51,6 +53,9 @@ public class PlayerController : MonoBehaviour
         set { _actorNumber = value; }
 
     }
+
+    public bool isGround = false;
+    public bool isUpperPlayer = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -66,11 +71,14 @@ public class PlayerController : MonoBehaviour
         State_Jump = new PlayerJumpState(this, stateMachine, "Jump");
         State_Air = new PlayerAirState(this, stateMachine, "Idle");
         State_Push = new PlayerPushState(this, stateMachine, "Push");
+        State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
+
     }
 
     private void Start()
     {
         stateMachine.Initialize(State_idle);
+
     }
     // Update is called once per frame
     void Update()
@@ -137,7 +145,41 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public bool IsGroundDetected() => Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, WhatIsGround);
+    public bool IsGroundDetected()
+    {
+        // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, WhatIsGround);
+
+        var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
+        if (box)
+        {
+            if (box.gameObject.layer == 7)
+            {
+                isGround = false;
+                isUpperPlayer = true;
+
+                _colChecker.JumpCollider(false);
+
+            }
+            else
+            {
+                isUpperPlayer = false;
+                isGround = true;
+                _colChecker.JumpCollider(true);
+            }
+
+            return true;
+        }
+        else
+
+        {
+            _colChecker.JumpCollider(true);
+            isUpperPlayer = false;
+            isGround = false;
+            return false;
+
+        }
+
+    }
 
 
     public void ZeroVelocity() => rb.velocity = Vector2.zero;

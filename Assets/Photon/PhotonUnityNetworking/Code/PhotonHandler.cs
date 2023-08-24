@@ -261,9 +261,9 @@ namespace Photon.Pun
         }
 
 
-        public void OnPlayerPropertiesUpdate(PlayerController targetPlayer, Hashtable changedProps) { }
+        public void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps) { }
 
-        public void OnMasterClientSwitched(PlayerController newMasterClient)
+        public void OnMasterClientSwitched(Player newMasterClient)
         {
             var views = PhotonNetwork.PhotonViewCollection;
             foreach (var view in views)
@@ -331,7 +331,7 @@ namespace Photon.Pun
         }
 
 
-        public void OnPlayerEnteredRoom(PlayerController newPlayer)
+        public void OnPlayerEnteredRoom(Player newPlayer)
         {
             // note: if the master client becomes inactive, someone else becomes master. so there is no case where the active master client reconnects
             // what may happen is that the Master Client disconnects locally and uses ReconnectAndRejoin before anyone (including the server) notices.
@@ -368,7 +368,7 @@ namespace Photon.Pun
 
         }
 
-        public void OnPlayerLeftRoom(PlayerController otherPlayer)
+        public void OnPlayerLeftRoom(Player otherPlayer)
         {
             var views = PhotonNetwork.PhotonViewCollection;
 

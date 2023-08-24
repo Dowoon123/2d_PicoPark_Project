@@ -6,7 +6,7 @@ using UnityEngine;
 public class collideChecker : MonoBehaviour
 {
     [SerializeField] Transform obstacleChecker;
-    [SerializeField] Transform playerChecker;
+    public Transform playerChecker;
     [SerializeField] float PlayerCheckRadius;
     [SerializeField] Collider2D UpperCollider;
     [SerializeField] Collider2D BodyCollider;
@@ -36,7 +36,7 @@ public class collideChecker : MonoBehaviour
 
     public void Update()
     {
-        isObstacle = IsObstacleDetected();
+       // isObstacle = IsObstacleDetected();
         isPlayer = IsPlayerDetected();
 
     }
@@ -67,6 +67,7 @@ public class collideChecker : MonoBehaviour
     public virtual bool IsObstacleDetected()
     {
         RaycastHit2D result;
+
         result = Physics2D.Raycast(obstacleChecker.transform.position, Vector2.right, 0.5f, WhatIsObstacle);
         if (result)
         {
@@ -96,8 +97,7 @@ public class collideChecker : MonoBehaviour
 
     protected virtual void OnDrawGizmos()
     {
-        Gizmos.DrawLine(transform.position, new Vector3(obstacleChecker.transform.position.x + 0.7f
-            , transform.position.y));
+      
         Gizmos.DrawLine(transform.position, new Vector3(playerChecker.transform.position.x + 0.5f
             , transform.position.y));
 

@@ -19,13 +19,11 @@ public class Map : MonoBehaviour
     public string Map_name = "테스트 맵";
     public string Map_subTitle = "테스트";
 
- 
-
-    public virtual void SetMapInfo(string scenename, string mapname, string subtitle)
+    public virtual void SetMapInfo(string SceneName, string MapName, string MapSubName)
     {
-        Scene_name = scenename;
-        Map_name = mapname;
-        Map_subTitle = subtitle;
+        this.Scene_name = SceneName;
+        this.Map_name = MapName;
+        this.Map_subTitle = MapSubName;
     }
 
 

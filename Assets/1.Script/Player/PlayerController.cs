@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     // 플레이어의 정보를 담고 있다. 이 정보는
     // 닉네임, 닉네임 UI Text , 그리고 Player가 보유한 조작가능한 오브젝트를 가지고 있다. 
 
+    public Map1 stageManeger;
 
     #region collision
     [SerializeField] float groundCheckDist = 1f;

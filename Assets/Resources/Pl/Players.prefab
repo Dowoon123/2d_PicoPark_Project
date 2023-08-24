@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87451215669eb843b36dab12db53de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageManeger: {fileID: 0}
   groundCheckDist: 1
   WhatIsGround:
     serializedVersion: 2

@@ -3,34 +3,13 @@ using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
-    /// <summary>
-    /// 만들려는거, 인원을 체크하고, 그 인원이 점프상태가 아니고 범위 안에만 있고,
-    /// 그 수 조건이 충족되면 엘리베이터 작동
-    /// 그게 아닐경우 하강, 생각보다 쉬우면서도 복잡함.
-    /// 
-    /// 여기서 구현해야되는거, 돌아가는 조건의 로직 수정이 필요함.
-    /// 플레이어가 지면 착지나, 플레이어의 위가 아닐때만 무조건 reverse되야함.
-    /// 
-    /// 지금은 작동 조건만 채워지면 무조건 위 아래로 이동함(자동 이동이니까)
-    /// 
-    /// 고쳐야 될것. 
-    /// 
-    /// 1. 위에 도착하면 기다린 후에 작동이 안되야함, 무조건 일시 정지.
-    /// 
-    /// 2. 그 자리에서 벗어날 경우 리버스.
-    /// 
-    /// 이게 먼저 구현되야함.
-    /// 
-    /// 
-    /// bool isCheckIntake  체크만 했지 사용은 안했음.
-    /// 벗어날 경우 반드시 강제로 리버스 시켜야됨.
-    /// 
-    /// 현재 올라가고 내려가는건 구현되었지만,
-    /// Stop상태가 없음.
-    /// 그걸 또 넣어야됨.
-    /// 변수값 새로 넣어서 위치 강제로 고정 시킬까 생각중.
-    /// 
-    /// </summary>
+    /*
+     * 이 스크립트는 무한히 올라가는 엘리베이터 기능이 탑재된
+     * 스크립트임 X축 이동을 원하면 MoveX 값을
+     * Y축 이동을 원하면 MoveY 값을 입력하면됨.
+     * 단) 무한히 위로만 올라가는 스크립트이며, 조건을 충족하지 않을시 제자리로 돌아감.
+     */
+   
 
     [SerializeField] private int CheckedIntake = 0; //수용된 인원
 
@@ -44,6 +23,7 @@ public class Elevator : MonoBehaviour
 
 
     [SerializeField] protected LayerMask whatIsGround;
+    //말만 WhatIsGround지 Player체크 해야됨
 
 
     //x축 이동거리
@@ -103,6 +83,7 @@ public class Elevator : MonoBehaviour
         }
         else
             isCheckIntake = false;//업데이트 문에서 이 조건이 항상 참인지 거짓인지 계속 체크할거임.
+        
 
 
 
@@ -113,32 +94,14 @@ public class Elevator : MonoBehaviour
 
 
         if (isCheckIntake)
-        {//정방향이동
-         //이동량이 양수고 이동위치가 초기 위치보다 크거나
-         //이동량이 음수고 이동 위치가 초기 위치보다 작은경우
-            if ((perDX >= 0.0f && x >= defpos.x + moveX) || (perDX < 0.0f && x < defpos.x + moveX))
-            {
-                endX = true; //X방향 이동 종료
-            }
-            if ((perDY >= 0.0f && y >= defpos.y + moveY) || (perDY < 0.0f && y < defpos.y + moveY))//x로 되있길래 y로 바꿧음
-            {
-                endY = true; //Y방향 이동 종료
-            }
+        {
             //블록 이동
             Vector3 v = new Vector3(perDX, perDY, defpos.z);
             transform.Translate(v);
         }
         else if (!isCheckIntake)
         {
-            if ((perDX >= 0.0f && x <= defpos.x) || (perDX <= 0.0f && x >= defpos.x))
-            {
-                //이동량이 +
-                endX = true;//X방향 이동 종료
-            }
-            if ((perDY >= 0.0f && y <= defpos.y) || (perDY <= 0.0f && y >= defpos.y))
-            {
-                endY = true;//Y방향 이동 종료
-            }
+           
             if (defpos.y > transform.position.y)
                 transform.position = defpos;
             //내려가는 최소 높이는 = 기존에 있던 위치임.
@@ -148,44 +111,11 @@ public class Elevator : MonoBehaviour
         }
 
 
-        /*
-
-        if (endX && endY)
-        {
-            //이동 종료
-            if (isReverse)
-            {
-                //위치가 어긋나는 것을 방지하고자 정면 방향 이동으로 돌아가기전에 초기위치로 돌리기
-                transform.position = defpos;
-            }
-            isReverse = !isReverse;
-            isCanMove = false;
-            if (isMoveWhenOn == false)
-            {
-                //올라갔을떄 움직이는 값이 꺼진경우
-                Invoke("Up", weight);
-            }
-        }*/
 
 
 
     }
-    /* 이 코드는 엘레베이터에서 올라가거나, 내려 가려는
-
-    public void Up()
-    {
-        isCanMove = true;
-
-
-    }
-
-    //이동하지 못하게 만들기
-
-    public void Stop()
-    {
-        isCanMove = false;
-    }
-    */
+   
 
     public void CheckPlayerZone()
     {
@@ -213,28 +143,5 @@ public class Elevator : MonoBehaviour
 
     }
 
-
-
-    //충돌체크를 OnCollision으로 처리할 거임
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            //접촉한것이 플레이어라면 이동 블록의 자식으로 만들기
-            collision.transform.SetParent(transform);
-
-           
-        }
-    }
-
-    //충돌 종료
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            //충돌에서 빠져나간 것이 플레이어라면 이동 블록의 자식에서 제외시키기
-            collision.transform.SetParent(null);
-        }
-    }
-
+  
 }

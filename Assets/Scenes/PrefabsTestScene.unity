@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CheckedPushingP: 0
-  CheckedPushAllPlayer: 1
+  CheckedPushAllPlayer: 2
   facingDirCheck: 0
   PushPlayer: []
   CheckRect: {x: 10, y: 2, z: 0}

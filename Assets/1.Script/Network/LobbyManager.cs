@@ -11,7 +11,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public GameObject RoomCreatePanel;
     public GameObject RoomPanelPrefab;
-    public List<GameObject> RoomList = new List<GameObject>();
+    public List<GameObject> RoomUi_List = new List<GameObject>();
+    public List<RoomInfo> RoomList = new List<RoomInfo>();
     public Transform panelPos;
     public GameObject canvas;
     public string currentRoomName;
@@ -78,7 +79,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PlayerController _player = null;
         GameObject GOplayer;
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
-        {
+        { 
 
             GOplayer = PhotonNetwork.Instantiate("Pl/Players", new Vector2(-4, -2.5f), Quaternion.identity);
 
@@ -108,12 +109,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
        
-        for (int i=0; i< RoomList.Count; ++i)
+        for (int i=0; i< RoomUi_List.Count; ++i)
         {
-            if (RoomList[i] != null)
-                Destroy(RoomList[i]);
+            if (RoomUi_List[i] != null)
+                Destroy(RoomUi_List[i]);
         }
-        RoomList.Clear();
+        RoomUi_List.Clear();
 
         for(int i=0; i<roomList.Count; i++)
         {
@@ -129,7 +130,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             panel.Room_Title.text = roomList[i].Name;
             panel.LM = this;
            // panel.startButton.onClick.AddListener(() => JoinRoom(roomList[i].Name));
-            RoomList.Add(panelObj);
+            RoomUi_List.Add(panelObj);
         }
 
 

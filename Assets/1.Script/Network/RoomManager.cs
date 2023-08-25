@@ -12,14 +12,23 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public int currentPlayerCount = 0;
 
 
-
+    public void Update()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                PhotonNetwork.LoadLevel("LobbyScene");
+            }
+        }
+    }
 
     [PunRPC]
     public void RefreshCurrentPlayer(int num)
     {
         currentPlayerCount += num;
 
-        playerCountText.text = num.ToString() + " / " + "4";
+        playerCountText.text = currentPlayerCount.ToString() + " / " + "4";
     }
 
     public override void OnJoinedRoom()

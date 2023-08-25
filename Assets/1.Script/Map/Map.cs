@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Photon.Realtime;
 
-public class Map : MonoBehaviour
+
+public class Map : MonoBehaviourPunCallbacks
 {
     public float Timer;
 
@@ -19,11 +22,20 @@ public class Map : MonoBehaviour
     public string Map_name = "테스트 맵";
     public string Map_subTitle = "테스트";
 
-    public virtual void SetMapInfo(string SceneName, string MapName, string MapSubName)
+    Vector2[] playerPosition = new Vector2[4];
+    public virtual void SetMapInfo(string SceneName, string MapName, string MapSubName,
+        Vector2 player1_pos, Vector2 player2_pos, Vector2 player3_pos, Vector2 player4_pos)
     {
         this.Scene_name = SceneName;
         this.Map_name = MapName;
         this.Map_subTitle = MapSubName;
+
+        playerPosition[0] = player1_pos;
+        playerPosition[1] = player2_pos;
+        playerPosition[2] = player3_pos;
+        playerPosition[3] = player4_pos;
+
+
     }
 
 
@@ -32,6 +44,8 @@ public class Map : MonoBehaviour
         canvas = Instantiate(canvasPrefab);
 
         Timer_Text =  canvas.GetComponentInChildren<Text>();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
 
     }
    
@@ -67,5 +81,20 @@ public class Map : MonoBehaviour
         
 
     }
+
+
+    public void SpawnPlayer()
+    {
+
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("OnSceneLoaded: " + scene.name);
+
+         
+     
+    }
+
 
 }

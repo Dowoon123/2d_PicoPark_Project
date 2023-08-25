@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
         if (_x > 0 && !facingRight)
         {
             GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
-         
+           
 
         }
         else if (_x < 0 && facingRight)

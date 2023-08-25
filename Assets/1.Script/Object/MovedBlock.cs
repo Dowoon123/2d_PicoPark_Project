@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class MovedBlock : MonoBehaviour
@@ -9,13 +6,13 @@ public class MovedBlock : MonoBehaviour
     [Header("수용된 인원")]
     [SerializeField] private int CheckedPushingP = 0; //수용된 인원
     [Header("수용 최대 인원(조건)")]
-    [SerializeField] private int CheckedPushAllPlayer; //수용 하려는 인원 임의로 설정
+    [SerializeField] private int CheckedPushAllPlayer; //수용 하려는 최대인원 임의로 설정
     [SerializeField] private int facingDirCheck;
     [SerializeField] private List<GameObject> PushPlayer;
     [SerializeField] private Vector3 CheckRect;
     private Rigidbody2D rb;
 
-    
+
 
 
 
@@ -37,7 +34,7 @@ public class MovedBlock : MonoBehaviour
     //정지시간
     public float weight = 0.0f;
 
- 
+
 
 
     //1프레임당 x 이동 값
@@ -61,7 +58,7 @@ public class MovedBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
         CheckPlayerZone();
 
         if ((CheckedPushAllPlayer - CheckedPushingP) == 0 && (CheckedPushAllPlayer - facingDirCheck) == 0)
@@ -69,16 +66,24 @@ public class MovedBlock : MonoBehaviour
             isCheckPush = true;
 
         }
+        else if ((CheckedPushAllPlayer - CheckedPushingP) == 0 && CheckedPushAllPlayer - (-facingDirCheck) == 0)
+        {
+            isCheckPush = true;
+        }
         else
             isCheckPush = false;
+
 
         if (isCheckPush && facingDirCheck == CheckedPushAllPlayer)
         {
             rb.velocity = new Vector2(moveX, 0);
+            Debug.Log("왼쪽에서 밀리고 있음.");
         }
-        else if (isCheckPush && facingDirCheck == -CheckedPushAllPlayer)
+
+        if (isCheckPush && -(facingDirCheck) == CheckedPushAllPlayer)
         {
             rb.velocity = new Vector2(-moveX, 0);
+            Debug.Log("오른쪽에서 밀리고 있음.");
         }
 
 
@@ -87,14 +92,15 @@ public class MovedBlock : MonoBehaviour
 
     public void OnDrawGizmos()
     {
-        Gizmos.DrawCube(transform.position - new Vector3(rectXSize, 0,0), CheckRect);
+        Gizmos.DrawCube(transform.position - new Vector3(0, 0, 0), CheckRect);
+        // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
     }
 
     public void CheckPlayerZone()
     {
-      
-       
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position - new Vector3(rectXSize, 0,0), CheckRect, 0, whatIsGround);
+
+
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, CheckRect, 0, whatIsGround);
 
 
         PushPlayer.Clear();//일단 전부 지움 어차피 업데이트에서 무한으로 굴러감
@@ -104,18 +110,37 @@ public class MovedBlock : MonoBehaviour
         {
             var player = colliders[i].GetComponent<PlayerController>();
 
-            if (player.stateMachine.currentState == player.State_Push)
+            if (player.stateMachine.currentState == player.State_Push && player.facingDir > 0)
             {
                 check++;
-                //   Debug.Log("감지 되었소");
+                Debug.Log("오른쪽에서 감지 되었소");
+
+                if (player.facingDir < 0)
+                {
+                    facingcheck++;
+
+                }
+                else if (player.facingDir > 0)
+                {
+                    facingcheck--;
+                }
+
+
+            }
+            else if (player.stateMachine.currentState == player.State_Push && player.facingDir < 0)
+            {
+                check++;
+                Debug.Log("왼쪽에서 감지 되었소");
+
 
                 if (player.facingDir > 0)
                 {
-                    facingcheck++;
+
+                    facingcheck--;
                 }
                 else if (player.facingDir < 0)
                 {
-                    facingcheck--;
+                    facingcheck++;
                 }
             }
 
@@ -134,7 +159,7 @@ public class MovedBlock : MonoBehaviour
             CheckedPushingP = 0;
             facingDirCheck = 0;
         }
-     
+
         //colliders의 리스트 값이 없을때. colliders.[0] 이 할당 한번이라도 받으면 1이니까.
         //CheckedIntake의 값을 0으로 초기화
 

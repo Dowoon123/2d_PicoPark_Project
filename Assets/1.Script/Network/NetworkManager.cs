@@ -35,9 +35,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     int maxPlayers = 4;
 
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+       
+    }
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();  // 포톤클라우드와 연결을 시작하는 메서드 
+
+       // PhotonNetwork.automaticallySyncScene 
     }
 
 

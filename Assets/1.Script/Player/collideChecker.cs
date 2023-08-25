@@ -32,6 +32,12 @@ public class collideChecker : MonoBehaviour
     private void Awake()
     {
         player = GetComponentInParent<PlayerController>();
+
+
+        if(player.stateMachine.currentState == player.State_Push)
+        {
+            // 措面 绢录备 历录备 
+        }
     }
 
     public void Update()

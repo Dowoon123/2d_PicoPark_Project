@@ -6,12 +6,13 @@ using UnityEngine;
 
 public class TestMap1 : Map
 {
-    // Start is called before the first frame update
-    public override void SetMapInfo(string SceneName, string MapName, string MapSubName)
+    public void Awake()
     {
-        Scene_name = "테스트씬1";
-
+        SetMapInfo("Stage_1", "Stage1", "테스트용", new Vector2(-11, -2), new Vector2(-9, -2), new Vector2(-7, -2), new Vector2(-5, -2));
     }
+
+    // Start is called before the first frame update
+
 
 
 

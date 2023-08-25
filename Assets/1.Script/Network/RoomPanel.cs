@@ -9,5 +9,13 @@ public class RoomPanel : MonoBehaviour
     public Text Map_subTitle;
     public Text Map_Name;
 
+    public Button startButton;
+
+    public LobbyManager LM;
+
+    public void ClickJoinRoomButton()
+    {
+        LM.JoinRoom(Room_Title.text);
+    }
 
 }

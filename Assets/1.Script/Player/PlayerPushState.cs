@@ -14,6 +14,7 @@ public class PlayerPushState : PlayerGroundedState
         base.Enter();
         player.ZeroVelocity();
         Debug.Log("푸쉬");
+        Debug.Log(" Push 상태 진입");
     }
 
     public override void Exit()

@@ -41,43 +41,49 @@ public class Map : MonoBehaviourPunCallbacks
 
    public virtual void Awake()
     {
-        canvas = Instantiate(canvasPrefab);
+        //canvas = Instantiate(canvasPrefab);
 
-        Timer_Text =  canvas.GetComponentInChildren<Text>();
+        //Timer_Text =  canvas.GetComponentInChildren<Text>();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
+        
+
     }
    
+    public virtual void Start()
+    {
+        SpawnPlayer();
+    }
 
    public virtual void Update()
     {
-        Timer += Time.deltaTime;
+        //Timer += Time.deltaTime;
 
 
-        int minutes = (int)(Timer / 60);
-        int seconds = (int)(Timer % 60);
+        //int minutes = (int)(Timer / 60);
+        //int seconds = (int)(Timer % 60);
 
-        string MinutesStr = "";
-        string SecondsStr = "";
+        //string MinutesStr = "";
+        //string SecondsStr = "";
 
-        if (minutes < 10)
-        {
-            MinutesStr = "0" + minutes;
+        //if (minutes < 10)
+        //{
+        //    MinutesStr = "0" + minutes;
 
-        }
-        else
-            MinutesStr = minutes.ToString();
+        //}
+        //else
+        //    MinutesStr = minutes.ToString();
 
-        if (seconds < 10)
-        {
-            SecondsStr = "0" + seconds;
-        }
-        else
-            SecondsStr = seconds.ToString();
+        //if (seconds < 10)
+        //{
+        //    SecondsStr = "0" + seconds;
+        //}
+        //else
+        //    SecondsStr = seconds.ToString();
 
 
-        Timer_Text.text = "Time / "+ MinutesStr + " : " + SecondsStr;
+        //Timer_Text.text = "Time / "+ MinutesStr + " : " + SecondsStr;
         
 
     }
@@ -85,7 +91,19 @@ public class Map : MonoBehaviourPunCallbacks
 
     public void SpawnPlayer()
     {
+        var pl = PhotonNetwork.PlayerList;
 
+        Debug.Log("스폰플레이어 실행됨");
+        for(int i=0; i< pl.Length; ++i)
+        {
+            if (pl[i].IsLocal)
+            {
+                Debug.Log("플레이어 스폰 시도" + pl[i].UserId +" " +  i);
+                PhotonNetwork.Instantiate("Pl/Players", playerPosition[i], Quaternion.identity);
+
+            }
+        }
+        
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)

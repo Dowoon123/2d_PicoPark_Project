@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using Photon.Pun;
+using Photon.Realtime;
 
 
-        //스테이지 선택시 씬 전환 스크립트
+//스테이지 선택시 씬 전환 스크립트
 
 public enum StageName
 {
@@ -13,7 +15,7 @@ public enum StageName
     stage5, stage6, stage7, stage8,
 };
 
-public class MapSelectUI : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
+public class MapSelectUI : MonoBehaviourPunCallbacks,IPointerEnterHandler, IPointerExitHandler
 {
     public StageName currentName;
 
@@ -28,17 +30,21 @@ public class MapSelectUI : MonoBehaviour,IPointerEnterHandler, IPointerExitHandl
     }
     public void OnBtnClick()
     {
-        switch (currentName)
+        if (PhotonNetwork.IsMasterClient)
         {
-            case StageName.stage1:
-                SceneManager.LoadScene("SampleScene");
-                break;
+            switch (currentName)
+            {
+                case StageName.stage1:
+                    PhotonNetwork.LoadLevel("Stage_1");
+                    break;
 
-            case StageName.stage2:
-                break;
+                case StageName.stage2:
+                    break;
 
-            case StageName.stage3:
-                break;
+                case StageName.stage3:
+                    break;
+            }
+
         }
     }
 

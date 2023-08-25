@@ -294,17 +294,21 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6926159686036311779, guid: 7249c85729908a74d92435574ad356a2, type: 3}
+      propertyPath: GroundChecker
+      value: 
+      objectReference: {fileID: 797913682}
     - target: {fileID: 8320717852037057439, guid: 7249c85729908a74d92435574ad356a2, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8320717852037057439, guid: 7249c85729908a74d92435574ad356a2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.874
+      value: 1.07
       objectReference: {fileID: 0}
     - target: {fileID: 8320717852037057439, guid: 7249c85729908a74d92435574ad356a2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.34
+      value: 0.27
       objectReference: {fileID: 0}
     - target: {fileID: 8320717852037057439, guid: 7249c85729908a74d92435574ad356a2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -460,8 +464,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280409985}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.1713, y: 0, z: 0}
+  m_LocalScale: {x: 1.1427441, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 797913682}
@@ -599,7 +603,7 @@ GameObject:
   - component: {fileID: 790825307}
   m_Layer: 0
   m_Name: JumpingBlock
-  m_TagString: Untagged
+  m_TagString: JumpBlock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -633,7 +637,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -661,10 +665,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c844c66264d9e547b4775546abf8c85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpBlock: {fileID: 790825302}
-  anim: {fileID: 0}
-  jumpForce: 5
-  moveSpeed: 0
+  jumpForce: 400
+  speed: 5
+  jumpBlockForce: 2
 --- !u!212 &790825305
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -725,7 +728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790825302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.27, y: -1.21, z: 0}
+  m_LocalPosition: {x: 2.84, y: -1.28, z: 0}
   m_LocalScale: {x: 1, y: 0.292, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -808,7 +811,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0065141916, y: 0}
+  m_Offset: {x: 0.17774528, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -819,7 +822,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.3679779, y: 1}
+  m_Size: {x: 2.7104402, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &797913682
 Transform:
@@ -856,11 +859,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3830789189340084748, guid: e730a34d39a38524ba4b70699c3e2982, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.73
       objectReference: {fileID: 0}
     - target: {fileID: 3830789189340084748, guid: e730a34d39a38524ba4b70699c3e2982, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.88
       objectReference: {fileID: 0}
     - target: {fileID: 3830789189340084748, guid: e730a34d39a38524ba4b70699c3e2982, type: 3}
       propertyPath: m_LocalPosition.z

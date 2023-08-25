@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bullet
   - NextStage
+  - JumpBlock
+  - Ground
   layers:
   - Default
   - TransparentFX

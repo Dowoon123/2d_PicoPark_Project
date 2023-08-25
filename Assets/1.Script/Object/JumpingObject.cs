@@ -5,66 +5,63 @@ using UnityEngine;
 
 public class JumpingObject : MonoBehaviour
 {
-    [SerializeField] private GameObject jumpBlock;
-    [SerializeField] private Animator anim;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float moveSpeed;
+    [SerializeField] float jumpForce = 400f;
+    [SerializeField] float speed = 5f;
+    [SerializeField] float jumpBlockForce = 2f;
 
+    int jumpCount = 1;
+    float moveX;
+
+    bool isGround = false;
+    bool isJumpBlock = false;
     Rigidbody2D rb;
 
-    bool jumping = false; //올라 갔을 때 점프
-    bool jumpState = false;
 
-
-
-    //발판을 밟았을 때 Y축 방향으로 가할 힘의 크기
-    Vector2 jumpBlockPw = new Vector2(0, 20);
-
-    
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        jumpCount = 0;
     }
 
     private void Update()
     {
-        if(Input.GetButtonDown("Space")&& !jumpState)
-        {
-            jumping = true;
-            jumpState = true;
-        }
-
-        Jump();
+        Move();
     }
 
-    private void Jump()
+    void Move()
     {
-        if(!jumping)
+        if(isGround)
         {
-            rb.velocity = Vector2.zero;
-            Vector2 jumpVelocity = new Vector2(0, jumpForce);
-            rb.AddForce(jumpVelocity,ForceMode2D.Impulse);
-            jumping = false;
+            if(jumpCount > 0)
+            {
+                if (Input.GetButtonDown("Space"))
+                {
+                    rb.AddForce(Vector2.up * jumpForce);
+                    jumpCount--;
+                }
+            }
+            if(isJumpBlock)
+            {
+                rb.AddForce(new Vector2(0,jumpBlockForce) * jumpForce);
+                isJumpBlock = false;
+            }
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+        moveX = Input.GetAxis("Horizontal") * speed;
+        rb.velocity = new Vector2(moveX,rb.velocity.y);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player" && rb.velocity.y <0)
+        if(collision.gameObject.tag == "Ground")
         {
-            //플레이어와 접촉하면
-            
+            isGround = true;
+            jumpCount = 1;
+        }
+        if(collision.gameObject.tag == "JumpBlock")
+        {
+            isJumpBlock = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            //플레이어와 접촉하면
-
-        }
-    }
 
 }

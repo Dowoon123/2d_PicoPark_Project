@@ -1,12 +1,22 @@
+using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovedBlock : MonoBehaviour
+
+public class MovedBlock : MonoBehaviourPunCallbacks
 {
     [Header("수용된 인원")]
-    [SerializeField] private int CheckedPushingP = 0; //수용된 인원
+    /// <summary>
+    /// 수용된 인원
+    /// </summary>
+    [SerializeField] private int CheckedPushingP = 0;
+  
     [Header("수용 최대 인원(조건)")]
-    [SerializeField] private int CheckedPushAllPlayer; //수용 하려는 최대인원 임의로 설정
+    /// <summary>
+    /// 수용 하려는 최대인원 임의로 설정
+    /// </summary>
+    [SerializeField] private int CheckedPushAllPlayer;
+ 
     [SerializeField] private int facingDirCheck;
     [SerializeField] private List<GameObject> PushPlayer;
     [SerializeField] private Vector3 CheckRect;
@@ -61,17 +71,26 @@ public class MovedBlock : MonoBehaviour
 
         CheckPlayerZone();
 
-        if ((CheckedPushAllPlayer - CheckedPushingP) == 0 && (CheckedPushAllPlayer - facingDirCheck) == 0)
+        var checkDirection = CheckedPushAllPlayer - facingDirCheck;
+        var checkDirection2 = CheckedPushAllPlayer - Mathf.Abs(facingDirCheck);
+
+        if (!isCheckPush)
         {
-            isCheckPush = true;
+            if (CheckedPushAllPlayer == CheckedPushingP && checkDirection == 0)
+            {
+                GetComponent<PhotonView>().RPC("CheckPush", RpcTarget.AllBuffered, true);
+
+            }
+            else if ((CheckedPushAllPlayer - CheckedPushingP) == 0 && checkDirection2 == 0)
+            {
+                GetComponent<PhotonView>().RPC("CheckPush", RpcTarget.AllBuffered, true);
+            }
 
         }
-        else if ((CheckedPushAllPlayer - CheckedPushingP) == 0 && CheckedPushAllPlayer - (-facingDirCheck) == 0)
-        {
-            isCheckPush = true;
-        }
-        else
-            isCheckPush = false;
+
+        if (CheckedPushAllPlayer != CheckedPushingP)
+            GetComponent<PhotonView>().RPC("CheckPush", RpcTarget.AllBuffered, false);
+
 
 
         if (isCheckPush && facingDirCheck == CheckedPushAllPlayer)
@@ -87,6 +106,14 @@ public class MovedBlock : MonoBehaviour
         }
 
 
+
+    }
+
+
+    [PunRPC]
+    public void CheckPush(bool b)
+    {
+        isCheckPush = b;
 
     }
 

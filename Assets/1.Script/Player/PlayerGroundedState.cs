@@ -21,6 +21,7 @@ public class PlayerGroundedState : PlayerState
 
         Debug.Log(" 그라운드 상태 진입");
         player.SetVelocity(player.rb.velocity.x, 0);
+  
     }
 
     public override void Exit()
@@ -31,25 +32,33 @@ public class PlayerGroundedState : PlayerState
     public override void Update()
     {
         base.Update();
+        player.IsGroundDetected();
 
 
-        if(player.isGround)
+
+        if (player.isGround)
         {
             player._colChecker.JumpCollider(true);
         }
         else if (player.isUpperPlayer)
         {
             player._colChecker.JumpCollider(false);
+       
         }
 
         //  if (!player.IsGroundDetected())
         //    stateMachine.ChangeState(player.airState);
         
 
-        if (Input.GetKeyDown(KeyCode.Space) && player.IsGroundDetected())
+        if (Input.GetKeyDown(KeyCode.Space) && (player.isUpperPlayer || player.isGround) )
         {
+      
+
             stateMachine.ChangeState(player.State_Jump);
         }
     }
-   
+
+
+
+
 }

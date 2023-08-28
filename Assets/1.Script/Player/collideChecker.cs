@@ -34,10 +34,6 @@ public class collideChecker : MonoBehaviour
         player = GetComponentInParent<PlayerController>();
 
 
-        if(player.stateMachine.currentState == player.State_Push)
-        {
-            // 措面 绢录备 历录备 
-        }
     }
 
     public void Update()
@@ -55,11 +51,13 @@ public class collideChecker : MonoBehaviour
 
         //  var capsule = Physics2D.OverlapCapsule(playerChecker.transform.position, new Vector2(0.441907406f, 0.92f), CapsuleDirection2D.Vertical, 0,WhatIsObstacle);
 
-        var colBox = Physics2D.OverlapBox(playerChecker.transform.position,new Vector2(0.15f, 0.84f), 0, WhatIsObstacle);
+        var colBox = Physics2D.OverlapBox(playerChecker.transform.position,new Vector2(0.15f, 0.80f), 0, WhatIsObstacle);
 
         if (colBox)
         {
             playerObject = colBox.gameObject;
+
+         
 
 
             return true;
@@ -112,4 +110,7 @@ public class collideChecker : MonoBehaviour
 
         
     }
+
+
+
 }

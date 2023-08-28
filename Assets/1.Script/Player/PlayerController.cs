@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
     public bool isGround = false;
     public bool isUpperPlayer = false;
     public GameObject downPlayer;
-
+    public Text stateTxt;
    
 
   
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
    public void SetCurrState()
     {
         currState = stateMachine.currentState;
+        stateTxt.text = currState.ToString();
      
     }
     private void Start()

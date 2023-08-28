@@ -22,7 +22,7 @@ public class collideChecker : MonoBehaviour
 
 
     public GameObject obstacleObject;
-    public GameObject playerObject;
+    public GameObject pushedObject;
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -55,7 +55,7 @@ public class collideChecker : MonoBehaviour
 
         if (colBox)
         {
-            playerObject = colBox.gameObject;
+            pushedObject = colBox.gameObject;
 
          
 
@@ -64,7 +64,7 @@ public class collideChecker : MonoBehaviour
         }
         else
         {
-            playerObject = null;
+            pushedObject = null;
             return false;
         }
     }

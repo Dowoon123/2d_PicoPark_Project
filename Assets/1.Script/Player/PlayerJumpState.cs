@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerJumpState : PlayerState
 {
     PlayerController player;
-    public PlayerJumpState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+    public PlayerJumpState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName, STATE_INFO _info) : base(_player, _stateMachine, _animBoolName, _info)
     {
      player = _player;
     }

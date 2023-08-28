@@ -15,18 +15,19 @@ public class PlayerState
     protected float xInput;
     protected float yInput;
     private string animBoolName;
-
+    public STATE_INFO state_info;
 
     protected float stateTimer;
     protected bool triggerCalled;
     
 
 
-    public PlayerState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName)
+    public PlayerState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName, STATE_INFO _info)
     {
         this.player = _player;
         this.stateMachine = _stateMachine;
         this.animBoolName = _animBoolName;
+        this.state_info = _info;
     }
 
 

@@ -2,9 +2,18 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public enum STATE_INFO
 {
+    IDLE,
+    MOVE,
+    JUMP,
+    AIR,
+    PUSH,
+}
 
+public class PlayerController : MonoBehaviourPunCallbacks
+{
+    public STATE_INFO currStateEnum = STATE_INFO.IDLE;
     // 플레이어의 정보를 담고 있다. 이 정보는
     // 닉네임, 닉네임 UI Text , 그리고 Player가 보유한 조작가능한 오브젝트를 가지고 있다. 
 
@@ -58,10 +67,10 @@ public class PlayerController : MonoBehaviour
     public bool isGround = false;
     public bool isUpperPlayer = false;
     public GameObject downPlayer;
+    public GameObject m_stateCanvas;
     public Text stateTxt;
-   
 
-  
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -74,21 +83,45 @@ public class PlayerController : MonoBehaviour
         stateMachine = new PlayerStateMachine();
         stateMachine.player = this;
 
-        State_idle = new PlayerIdleState(this, stateMachine, "Idle");
-        State_move = new PlayerMoveState(this, stateMachine, "Move");
-        State_Jump = new PlayerJumpState(this, stateMachine, "Jump");
-        State_Air = new PlayerAirState(this, stateMachine, "Idle");
-        State_Push = new PlayerPushState(this, stateMachine, "Push");
-        State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
+        State_idle = new PlayerIdleState(this, stateMachine, "Idle",STATE_INFO.IDLE);
+        State_move = new PlayerMoveState(this, stateMachine, "Move",STATE_INFO.MOVE);
+        State_Jump = new PlayerJumpState(this, stateMachine, "Jump", STATE_INFO.JUMP);
+        State_Air = new PlayerAirState(this, stateMachine, "Idle",STATE_INFO.AIR);
+        State_Push = new PlayerPushState(this, stateMachine, "Push",STATE_INFO.PUSH);
+       // State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
+
+      
+        
 
     }
 
+
     [PunRPC]
-   public void SetCurrState()
+    public void SetCurrState(STATE_INFO _State)
     {
-        currState = stateMachine.currentState;
+        PlayerState st = null;
+        switch(_State)
+        {
+            case STATE_INFO.IDLE:
+                st = State_idle;
+                break;
+            case STATE_INFO.JUMP:
+                st = State_move;
+                break;
+            case STATE_INFO.AIR:
+                st = State_Air;
+                break;
+            case STATE_INFO.PUSH:
+                st = State_Push;
+                break;
+            case STATE_INFO.MOVE:
+                st = State_move;
+                break;
+        }
+
+        currState = st;
         stateTxt.text = currState.ToString();
-     
+
     }
     private void Start()
     {
@@ -144,22 +177,22 @@ public class PlayerController : MonoBehaviour
         var flip = GetComponentInChildren<SpriteRenderer>().flipX == true ? false : true;
         GetComponentInChildren<SpriteRenderer>().flipX = flip;
 
-        if(!flip)
-        _colChecker.playerChecker.transform.localPosition = new Vector2(-0.5f,0f);
+        if (!flip)
+            _colChecker.playerChecker.transform.localPosition = new Vector2(-0.5f, 0f);
         else
             _colChecker.playerChecker.transform.localPosition = new Vector2(0.5f, 0f);
 
         Debug.Log(facingDir + " " + facingRight);
     }
 
-  
+
 
     public void FlipController(float _x)
     {
         if (_x > 0 && !facingRight)
         {
             GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
-           
+
 
         }
         else if (_x < 0 && facingRight)
@@ -174,38 +207,38 @@ public class PlayerController : MonoBehaviour
         // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, WhatIsGround);
 
 
-            var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
+        var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
 
-            if (box)
+        if (box)
+        {
+            if (box.gameObject.layer == 7)
             {
-                if (box.gameObject.layer == 7)
-                {
-                    isGround = false;
-                    isUpperPlayer = true;
-                    downPlayer = box.gameObject;
-                    
+                isGround = false;
+                isUpperPlayer = true;
+                downPlayer = box.gameObject;
 
-                }
-                else
-                {
-                    isUpperPlayer = false;
-                    downPlayer = null;
-                    isGround = true;
-                  
-                }
 
-                return true;
             }
             else
-
             {
-                
                 isUpperPlayer = false;
                 downPlayer = null;
-                isGround = false;
-                return false;
+                isGround = true;
 
             }
+
+            return true;
+        }
+        else
+
+        {
+
+            isUpperPlayer = false;
+            downPlayer = null;
+            isGround = false;
+            return false;
+
+        }
 
     }
 
@@ -217,6 +250,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
         FlipController(_xVelocity);
     }
+
 
 
 

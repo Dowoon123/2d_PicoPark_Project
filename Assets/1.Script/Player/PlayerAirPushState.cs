@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAirPushState : PlayerState
 {
-    public PlayerAirPushState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+    public PlayerAirPushState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName, STATE_INFO _info) : base(_player, _stateMachine, _animBoolName, _info)
     {
     }
 

@@ -7,7 +7,7 @@ public class PlayerMoveState : PlayerGroundedState
 {
     
      public collideChecker _colChecker;
-    public PlayerMoveState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+    public PlayerMoveState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName, STATE_INFO _info) : base(_player, _stateMachine, _animBoolName, _info)
     {
     }
 
@@ -36,8 +36,8 @@ public class PlayerMoveState : PlayerGroundedState
         {
             GameObject targetObject = null;
 
-            if (player.GetComponent<collideChecker>().playerObject != null)
-                targetObject = player.GetComponent<collideChecker>().playerObject;
+            if (player.GetComponent<collideChecker>().pushedObject != null)
+                targetObject = player.GetComponent<collideChecker>().pushedObject;
 
 
             if (targetObject.transform.position.x > player.transform.position.x)

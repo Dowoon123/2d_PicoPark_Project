@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
@@ -16,6 +17,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Transform panelPos;
     public GameObject canvas;
     public string currentRoomName;
+    public float imageSpeed;
+    public Button btn;
+
     void Start()
     {
         Screen.SetResolution(960, 600, false);
@@ -29,19 +33,32 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()// 포톤서버에 성공적으로 접속한 후 호출되는 콜백   
     {
-
         PhotonNetwork.JoinLobby();
-
     }
+
 
 
     public void RoomCreatePanelOpen()
     {
+     
+        StartCoroutine(RoomCreateDelay());
+        //StopCoroutine(RoomCreateDelay());
+
+       
+
+    }
+    IEnumerator RoomCreateDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
         RoomCreatePanel.SetActive(true);
+        GameObject.Find("PicoPark").transform.Translate(0, 100, 0);
+        btn.GetComponent<Button>().interactable = false;
 
 
     }
 
+
+    
     public void JoinRoom(string room_name)
     {
         SceneManager.LoadScene("RoomScene");

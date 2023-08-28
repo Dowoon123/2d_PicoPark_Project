@@ -11,15 +11,18 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public GameObject RoomCreatePanel;
+    public GameObject RoomPanel;
     public GameObject RoomPanelPrefab;
     public List<GameObject> RoomUi_List = new List<GameObject>();
     public List<RoomInfo> RoomList = new List<RoomInfo>();
     public Transform panelPos;
     public GameObject canvas;
     public string currentRoomName;
-    public float imageSpeed;
-    public Button btn;
-
+    public bool isShowRoomList = false;
+    public Button GameJoin;
+    public Button GameCreate;
+    public Button GameBack;
+    public string sceneName;
     void Start()
     {
         Screen.SetResolution(960, 600, false);
@@ -40,25 +43,53 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void RoomCreatePanelOpen()
     {
-     
+        RoomCreatePanel.SetActive(false);
         StartCoroutine(RoomCreateDelay());
-        //StopCoroutine(RoomCreateDelay());
-
-       
-
+        
     }
     IEnumerator RoomCreateDelay()
     {
         yield return new WaitForSeconds(0.5f);
-        RoomCreatePanel.SetActive(true);
-        GameObject.Find("PicoPark").transform.Translate(0, 100, 0);
-        btn.GetComponent<Button>().interactable = false;
+        RoomCreatePanel.SetActive(true); 
+    }
+    
+    public void RoomPanelOpen()
+    {
+        isShowRoomList = true;
+        RoomCreatePanel.SetActive(false);
+        GameCreate.GetComponent<Button>().interactable = false;
+        GameJoin.GetComponent<Button>().interactable = false;
+        
+        for (int i = 0; i < RoomUi_List.Count; i++)
+        {
+            RoomUi_List[i].SetActive(true);
+            GameBack.GetComponent<Button>().interactable = true;
+            
+        }   
+    }
+    public void RoomPanelBack()
+    {
+        GameCreate.GetComponent<Button>().interactable = true;
+        GameJoin.GetComponent<Button>().interactable = true;
+        isShowRoomList = false;
+        RoomCreatePanel.SetActive(false);
+        for (int i = 0; i < RoomUi_List.Count; i++)
+        {
+            RoomUi_List[i].SetActive(false);
+        }
+    }
 
+    //씬 불러오는 함수 Load
+    public void RoomPanelHome()
+    {
+
+        SceneManager.LoadScene("GameStart");
 
     }
 
 
-    
+
+
     public void JoinRoom(string room_name)
     {
         SceneManager.LoadScene("RoomScene");
@@ -138,7 +169,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             var panelObj = Instantiate(RoomPanelPrefab,canvas.transform);
 
             var pos = panelPos.position;
-            pos.y -= i * 40;
+            pos.y -= i * 100;
             panelObj.transform.position = pos;
             var panel = panelObj.GetComponent<RoomPanel>();
 
@@ -146,11 +177,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             panel.Map_subTitle.text = "normal";
             panel.Room_Title.text = roomList[i].Name;
             panel.LM = this;
-           // panel.startButton.onClick.AddListener(() => JoinRoom(roomList[i].Name));
+            bool active = isShowRoomList == true ? true : false;
+            panelObj.SetActive(active);
+            // panel을 보일지말지를 isShowRoomlist  bool 변수에 따라 보일지말지 체크하는것.
+            // panel.startButton.onClick.AddListener(() => JoinRoom(roomList[i].Name));
             RoomUi_List.Add(panelObj);
+            
         }
-
-
-        
     }
+  
 }

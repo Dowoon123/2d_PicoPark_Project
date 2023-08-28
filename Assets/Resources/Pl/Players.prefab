@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 6933198463198080602}
   m_Layer: 6
   m_Name: Players
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87451215669eb843b36dab12db53de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currStateEnum: 0
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 896
@@ -342,6 +343,7 @@ MonoBehaviour:
   isGround: 0
   isUpperPlayer: 0
   downPlayer: {fileID: 0}
+  m_stateCanvas: {fileID: 0}
   stateTxt: {fileID: 4710438909019867559}
 --- !u!114 &6256648354140747137
 MonoBehaviour:
@@ -369,7 +371,7 @@ MonoBehaviour:
   isObstacle: 0
   isPlayer: 0
   obstacleObject: {fileID: 0}
-  playerObject: {fileID: 0}
+  pushedObject: {fileID: 0}
 --- !u!114 &1348394173313278083
 MonoBehaviour:
   m_ObjectHideFlags: 0

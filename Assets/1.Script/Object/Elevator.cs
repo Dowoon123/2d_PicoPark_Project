@@ -127,11 +127,17 @@ public class Elevator : MonoBehaviour
         {
             var player = colliders[i].GetComponent<PlayerController>();
 
-            PlayerGroundedState state = gameObject.GetComponent<PlayerGroundedState>();
+            //  PlayerGroundedState state = gameObject.GetComponent<PlayerGroundedState>();
 
             //if (player.isGround || player.isUpperPlayer)
-           // if (player.currState == player.groundState)
+            // if (player.currState == player.groundState)
+            //if (player.currState.GetType() == typeof(PlayerGroundedState))
+            if (player.currState is PlayerGroundedState)
                 check++;
+                
+            
+
+            Debug.Log("박스 진입 상태 : " + player.currState.GetType());
 
             UpSidePlayer.Add(player.gameObject);
             //리스트에 var로 조장된 player는 결국 colliders[i]. 리스트에 할당 받은 것이니 리스트에 저장

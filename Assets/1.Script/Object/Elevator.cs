@@ -11,9 +11,9 @@ public class Elevator : MonoBehaviour
      */
    
 
-    [SerializeField] private int CheckedIntake = 0; //수용된 인원
+    [SerializeField] private int CheckedIntake = 0; //수용된 현재 인원
 
-    [SerializeField] private int intake; //수용 하려는 인원 임의로 설정
+    [SerializeField] private int maxIntake; //수용 하려는 최대 인원 임의로 설정
     [SerializeField] private List<GameObject> UpSidePlayer;
 
 
@@ -76,7 +76,7 @@ public class Elevator : MonoBehaviour
     {
 
 
-        if ((intake - CheckedIntake) == 0)
+        if ((maxIntake - CheckedIntake) == 0)
         {
             isCheckIntake = true;
 
@@ -127,7 +127,10 @@ public class Elevator : MonoBehaviour
         {
             var player = colliders[i].GetComponent<PlayerController>();
 
-            if (player.isGround || player.isUpperPlayer)
+            PlayerGroundedState state = gameObject.GetComponent<PlayerGroundedState>();
+
+            //if (player.isGround || player.isUpperPlayer)
+           // if (player.currState == player.groundState)
                 check++;
 
             UpSidePlayer.Add(player.gameObject);

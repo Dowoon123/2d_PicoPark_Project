@@ -16,12 +16,16 @@ public class PlayerIdleState : PlayerGroundedState
 
         Debug.Log(" Idle 상태 진입");
         player._colChecker.JumpCollider(false);
+
+        player.SetVelocity(0, rb.velocity.y);
     }
 
     public override void Exit()
     {
         base.Exit();
     }
+
+
 
     public override void Update()
     {

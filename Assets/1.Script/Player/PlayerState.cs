@@ -1,9 +1,10 @@
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerState
+public class PlayerState  
 {
     protected PlayerStateMachine stateMachine;
     protected PlayerController player;
@@ -45,6 +46,7 @@ public class PlayerState
         player.anim.SetFloat("yVelocity", rb.velocity.y);
 
     }
+  
 
     public virtual void Exit()
     {

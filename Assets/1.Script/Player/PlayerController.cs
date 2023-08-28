@@ -7,10 +7,7 @@ public class PlayerController : MonoBehaviour
     // 플레이어의 정보를 담고 있다. 이 정보는
     // 닉네임, 닉네임 UI Text , 그리고 Player가 보유한 조작가능한 오브젝트를 가지고 있다. 
 
-    public Map1 stageManeger;
-
     #region collision
-    [SerializeField] float groundCheckDist = 1f;
     [SerializeField] LayerMask WhatIsGround;
     [SerializeField] Transform GroundChecker;
 
@@ -18,9 +15,11 @@ public class PlayerController : MonoBehaviour
 
     #region Components
     public Rigidbody2D rb;
+    public PlayerState currState;
     public collideChecker _colChecker;
     public Animator anim;
     public PlayerStateMachine stateMachine;
+
     #endregion
 
 
@@ -57,15 +56,22 @@ public class PlayerController : MonoBehaviour
 
     public bool isGround = false;
     public bool isUpperPlayer = false;
+    public GameObject downPlayer;
 
+   
+
+  
     // Start is called before the first frame update
     void Awake()
     {
+       
+
         rb = GetComponent<Rigidbody2D>();
         _colChecker = GetComponent<collideChecker>();
         anim = GetComponentInChildren<Animator>();
 
         stateMachine = new PlayerStateMachine();
+        stateMachine.player = this;
 
         State_idle = new PlayerIdleState(this, stateMachine, "Idle");
         State_move = new PlayerMoveState(this, stateMachine, "Move");
@@ -76,6 +82,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    [PunRPC]
+   public void SetCurrState()
+    {
+        currState = stateMachine.currentState;
+     
+    }
     private void Start()
     {
         stateMachine.Initialize(State_idle);
@@ -92,10 +104,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void CheckInput()
-    {
-
-    }
     public void SetPlayerCharacter(GameObject obj)
     {
         PlayerAbleCharacter = obj;
@@ -135,9 +143,9 @@ public class PlayerController : MonoBehaviour
         GetComponentInChildren<SpriteRenderer>().flipX = flip;
 
         if(!flip)
-        _colChecker.playerChecker.transform.localPosition = new Vector2(-0.5f,-0.05f);
+        _colChecker.playerChecker.transform.localPosition = new Vector2(-0.5f,0f);
         else
-            _colChecker.playerChecker.transform.localPosition = new Vector2(0.5f, -0.05f);
+            _colChecker.playerChecker.transform.localPosition = new Vector2(0.5f, 0f);
 
         Debug.Log(facingDir + " " + facingRight);
     }
@@ -162,37 +170,40 @@ public class PlayerController : MonoBehaviour
     public bool IsGroundDetected()
     {
         // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, WhatIsGround);
-        
 
-        var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
-        if (box)
-        {
-            if (box.gameObject.layer == 7)
+
+            var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
+
+            if (box)
             {
-                isGround = false;
-                isUpperPlayer = true;
+                if (box.gameObject.layer == 7)
+                {
+                    isGround = false;
+                    isUpperPlayer = true;
+                    downPlayer = box.gameObject;
+                    
 
-                _colChecker.JumpCollider(false);
+                }
+                else
+                {
+                    isUpperPlayer = false;
+                    downPlayer = null;
+                    isGround = true;
+                  
+                }
 
+                return true;
             }
             else
+
             {
+                
                 isUpperPlayer = false;
-                isGround = true;
-                _colChecker.JumpCollider(true);
+                downPlayer = null;
+                isGround = false;
+                return false;
+
             }
-
-            return true;
-        }
-        else
-
-        {
-            _colChecker.JumpCollider(true);
-            isUpperPlayer = false;
-            isGround = false;
-            return false;
-
-        }
 
     }
 

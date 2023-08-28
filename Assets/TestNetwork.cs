@@ -30,6 +30,10 @@ public class TestNetwork : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        PhotonNetwork.JoinRandomOrCreateRoom();
+        RoomOptions roomOptions = new RoomOptions(); // 货肺款 冯可记 且寸
+        roomOptions.MaxPlayers = 4;
+        roomOptions.IsVisible = true;
+
+        PhotonNetwork.JoinOrCreateRoom("DowoonTest", roomOptions, TypedLobby.Default);
     }
 }

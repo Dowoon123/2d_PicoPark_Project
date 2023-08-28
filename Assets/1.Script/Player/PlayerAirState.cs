@@ -14,7 +14,7 @@ public class PlayerAirState : PlayerState
         base.Enter();
 
 
-
+        Debug.Log("에어진입");
 
         player._colChecker.JumpCollider(false);
     }

@@ -110,7 +110,7 @@ public class MovedBlock : MonoBehaviour
         {
             var player = colliders[i].GetComponent<PlayerController>();
 
-            if (player.stateMachine.currentState == player.State_Push && player.facingDir > 0)
+            if (player.currState == player.State_Push && player.facingDir > 0)
             {
                 check++;
                 Debug.Log("오른쪽에서 감지 되었소");

@@ -13,10 +13,12 @@ public class PlayerJumpState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        player._colChecker.JumpCollider(true);
         rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
 
         //player._colChecker.JumpCollider(true);
-
+        Debug.Log("점프진입");
            
     }
 
@@ -34,13 +36,14 @@ public class PlayerJumpState : PlayerState
 
 
         if (player._colChecker.IsPlayerDetected())
+        {
             player.SetVelocity(0, player.rb.velocity.y);
+        }
         else
         {
-
-
             if (xInput != 0)
                 player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
         }
+        
     }
 }

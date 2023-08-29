@@ -253,9 +253,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
     [PunRPC]
-    public void SetVelocityNetwork(Vector2 velocity)
+    public void SetParent(Transform _transform) 
     {
-        rb.velocity = velocity;
+        transform.parent = _transform;
+    }
+
+    [PunRPC]
+    public void RemoveParent()
+    {
+        transform.parent = null;
     }
 
 

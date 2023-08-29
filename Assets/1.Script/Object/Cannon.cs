@@ -19,7 +19,7 @@ public class Cannon : MonoBehaviour
     {
        if(!isShot)
         {
-            Shot();
+           Shot();
         }
       
     }
@@ -27,7 +27,7 @@ public class Cannon : MonoBehaviour
     private void Shot()
     {
         Instantiate(bullet, shotPos.transform.position, Quaternion.identity);
-        
+        StartCoroutine(isShoted());
 
     }
 

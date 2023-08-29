@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class collideChecker : MonoBehaviour
 {
@@ -43,15 +44,25 @@ public class collideChecker : MonoBehaviour
       //   isObstacle = IsObstacleDetected();
         isPlayer = IsFrontObject();
         IsUpsideDetected();
+
+       
     }
 
-
+    public void OnDrawGizmos()
+    {
+        var pos = transform.position;
+        pos.y += 5.0f;
+        Gizmos.DrawCube(pos, new Vector3(1, 10, 0));
+        // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
+    }
     public virtual void IsUpsideDetected()
     {
 
         var pos = transform.position;
-        pos.y += 2.0f;
-        var colBox = Physics2D.OverlapBoxAll(pos, new Vector2(0.5f, 4.0f), 0, WhatIsObstacle);
+        pos.y += 5.0f;
+        
+        var colBox = Physics2D.OverlapBoxAll(pos, new Vector2(0.8f, 15.0f), 0, WhatIsObstacle);
+        Debug.Log(colBox.Length);
         UpsidePlayers.Clear();
 
         if (colBox.Length > 0)
@@ -62,8 +73,10 @@ public class collideChecker : MonoBehaviour
                 {
                     var pc = colBox[i].gameObject.GetComponent<PlayerController>();
                      
+
                     if(pc.currState is PlayerGroundedState)
                     {
+                        if(pc != player)
                         UpsidePlayers.Add(pc);
                     }
                      
@@ -136,17 +149,7 @@ public class collideChecker : MonoBehaviour
 
     }
 
-    protected virtual void OnDrawGizmos()
-    {
-      
-        Gizmos.DrawLine(transform.position, new Vector3(playerChecker.transform.position.x + 0.5f
-            , transform.position.y));
 
-        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x 
-           , transform.position.y -1f));
-
-        
-    }
 
 
 

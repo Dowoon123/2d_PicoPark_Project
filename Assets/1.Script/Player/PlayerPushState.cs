@@ -41,7 +41,7 @@ public class PlayerPushState : PlayerGroundedState
                 player.SetVelocity(0, player.rb.velocity.y);
             else
             {
-                player.SetVelocity(xInput * player.moveSpeed * 0.4f, rb.velocity.y);
+                player.SetVelocity(xInput * player.moveSpeed * 0.4f, 0);
                 box.gameObject.GetComponent<Rigidbody2D>().velocity = player.rb.velocity;
             }
         }

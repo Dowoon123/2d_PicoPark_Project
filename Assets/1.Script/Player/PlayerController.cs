@@ -252,6 +252,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
     }
 
 
+    [PunRPC]
+    public void SetVelocityNetwork(Vector3 velocity)
+    {
+        rb.velocity = velocity;
+    }
+
 
 
 }

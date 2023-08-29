@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,6 +56,20 @@ public class PlayerGroundedState : PlayerState
 
             stateMachine.ChangeState(player.State_Jump);
         }
+
+        if(player._colChecker.UpsidePlayers.Count > 0)
+        {
+           
+            for(int i=0; i< player._colChecker.UpsidePlayers.Count; i++)
+            {
+                if (player._colChecker.UpsidePlayers[i].currState == player._colChecker.UpsidePlayers[i].State_idle)
+                    player._colChecker.UpsidePlayers[i].GetComponent<PhotonView>().RPC("SetVelocityNetwork", RpcTarget.All, player.rb.velocity);
+              
+            }
+           
+
+        }
+
     }
 
 

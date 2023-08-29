@@ -9,6 +9,7 @@ TagManager:
   - JumpBlock
   - Ground
   - KeyBottle
+  - CannonBullet
   layers:
   - Default
   - TransparentFX

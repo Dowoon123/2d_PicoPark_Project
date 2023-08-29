@@ -25,7 +25,7 @@ public class CannonBullet : MonoBehaviour
         }
         else if(collision.gameObject.CompareTag("KeyBottle"))
         {
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
             Destroy(transform.gameObject);
             
         }

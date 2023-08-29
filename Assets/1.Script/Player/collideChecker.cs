@@ -61,7 +61,7 @@ public class collideChecker : MonoBehaviour
         var pos = transform.position;
         pos.y += 5.0f;
         
-        var colBox = Physics2D.OverlapBoxAll(pos, new Vector2(0.8f, 15.0f), 0, WhatIsObstacle);
+        var colBox = Physics2D.OverlapBoxAll(pos, new Vector2(0.8f, 10.0f), 0, WhatIsObstacle);
         Debug.Log(colBox.Length);
         UpsidePlayers.Clear();
 
@@ -87,7 +87,8 @@ public class collideChecker : MonoBehaviour
         }
 
 
-    } 
+    }
+    
     public virtual bool IsFrontObject()
     {
         // RaycastHit2D playerFind;

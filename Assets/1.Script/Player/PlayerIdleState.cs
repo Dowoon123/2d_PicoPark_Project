@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerIdleState : PlayerGroundedState
 {
     PlayerController player;
-    public PlayerIdleState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName) : base(_player, _stateMachine, _animBoolName)
+    public PlayerIdleState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName, STATE_INFO _info) : base(_player, _stateMachine, _animBoolName, _info)
     {
         player = _player;
     }

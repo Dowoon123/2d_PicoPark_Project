@@ -1,12 +1,22 @@
+using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovedBlock : MonoBehaviour
+
+public class MovedBlock : MonoBehaviourPunCallbacks
 {
     [Header("수용된 인원")]
-    [SerializeField] private int CheckedPushingP = 0; //수용된 인원
+    /// <summary>
+    /// 수용된 인원
+    /// </summary>
+    [SerializeField] private int CheckedPushingP = 0;
+  
     [Header("수용 최대 인원(조건)")]
-    [SerializeField] private int CheckedPushAllPlayer; //수용 하려는 최대인원 임의로 설정
+    /// <summary>
+    /// 수용 하려는 최대인원 임의로 설정
+    /// </summary>
+    [SerializeField] private int CheckedPushAllPlayer;
+ 
     [SerializeField] private int facingDirCheck;
     [SerializeField] private List<GameObject> PushPlayer;
     [SerializeField] private Vector3 CheckRect;
@@ -18,7 +28,7 @@ public class MovedBlock : MonoBehaviour
 
     [SerializeField] protected LayerMask whatIsGround;
 
-    [SerializeField] private bool isCheckPush = false;
+    public bool isCheckPush;
     //수용인원 조건이 충족하는지 체크하는 bool값
     //TRUE면 엘레베이터 작동
 
@@ -33,6 +43,8 @@ public class MovedBlock : MonoBehaviour
     public float times = 0.0f;
     //정지시간
     public float weight = 0.0f;
+
+    PlayerController player;
 
 
 
@@ -53,6 +65,7 @@ public class MovedBlock : MonoBehaviour
     {
         // OnDrawGizmos();
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -61,32 +74,48 @@ public class MovedBlock : MonoBehaviour
 
         CheckPlayerZone();
 
-        if ((CheckedPushAllPlayer - CheckedPushingP) == 0 && (CheckedPushAllPlayer - facingDirCheck) == 0)
-        {
-            isCheckPush = true;
+        var checkDirection = CheckedPushAllPlayer - facingDirCheck;
+        var checkDirection2 = CheckedPushAllPlayer - Mathf.Abs(facingDirCheck);
 
-        }
-        else if ((CheckedPushAllPlayer - CheckedPushingP) == 0 && CheckedPushAllPlayer - (-facingDirCheck) == 0)
+        if (!isCheckPush)
         {
-            isCheckPush = true;
-        }
-        else
-            isCheckPush = false;
+            rb.velocity = Vector3.zero;
 
+            if (CheckedPushAllPlayer == CheckedPushingP && checkDirection == 0)
+            {
+                GetComponent<PhotonView>().RPC("CheckPush", RpcTarget.AllBuffered, true);
+
+            }
+            
+            if (CheckedPushAllPlayer == CheckedPushingP && checkDirection2 == 0)
+            {
+                GetComponent<PhotonView>().RPC("CheckPush", RpcTarget.AllBuffered, true);
+            }
+
+        }else if (CheckedPushAllPlayer != CheckedPushingP)
+            GetComponent<PhotonView>().RPC("CheckPush", RpcTarget.AllBuffered, false);
+
+        Debug.Log("isCheckPush : " +   isCheckPush);
+
+        /*
 
         if (isCheckPush && facingDirCheck == CheckedPushAllPlayer)
         {
-            rb.velocity = new Vector2(moveX, 0);
+            rb.velocity = new Vector2(player.rb.velocity.x, 0);
             Debug.Log("왼쪽에서 밀리고 있음.");
-        }
-
-        if (isCheckPush && -(facingDirCheck) == CheckedPushAllPlayer)
+        }else if (isCheckPush && Mathf.Abs(-facingDirCheck) == CheckedPushAllPlayer)
         {
-            rb.velocity = new Vector2(-moveX, 0);
+            rb.velocity = new Vector2(-player.rb.velocity.x, 0);
             Debug.Log("오른쪽에서 밀리고 있음.");
-        }
+        }*/
+
+    }
 
 
+    [PunRPC]
+    public void CheckPush(bool b)
+    {
+        isCheckPush = b;
 
     }
 
@@ -124,10 +153,10 @@ public class MovedBlock : MonoBehaviour
                 {
                     facingcheck--;
                 }
-
+               
 
             }
-            else if (player.stateMachine.currentState == player.State_Push && player.facingDir < 0)
+            else if (player.currState == player.State_Push && player.facingDir < 0)
             {
                 check++;
                 Debug.Log("왼쪽에서 감지 되었소");

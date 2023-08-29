@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1192517045de1c47bf04c437140f8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CheckedIntake: 1
-  intake: 1
+  CheckedIntake: 0
+  intake: 2
   UpSidePlayer: []
   endX: 0
   endY: 0

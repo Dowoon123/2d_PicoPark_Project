@@ -13,10 +13,11 @@ public class PlayerStateMachine
 
     public void Initialize(PlayerState _startState)
     {
-       
-     
+
+
         currentState = _startState;
-        player.GetComponent<PhotonView>().RPC("SetCurrState", RpcTarget.AllBuffered);
+        player.GetComponent<PhotonView>().RPC("SetCurrState", RpcTarget.AllBuffered,currentState.state_info);
+
         currentState.Enter();
     }
 
@@ -25,7 +26,7 @@ public class PlayerStateMachine
     {
         currentState.Exit();
         currentState = _newState;
-        player.GetComponent<PhotonView>().RPC("SetCurrState", RpcTarget.AllBuffered);
+        player.GetComponent<PhotonView>().RPC("SetCurrState", RpcTarget.AllBuffered, currentState.state_info);
         currentState.Enter();
     }
 

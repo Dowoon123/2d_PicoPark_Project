@@ -89,7 +89,7 @@ public class ElevatorDownFinite : MonoBehaviour
         if (isCheckIntake)
         {//정방향(아래)이동
 
-            Debug.Log("내려가고이씅ㅁ");
+            Debug.Log("내려가고있음");
             //블록 이동
             Vector3 v = new Vector3(-perDX, -perDY, defpos.z);
             transform.Translate(v);
@@ -114,10 +114,15 @@ public class ElevatorDownFinite : MonoBehaviour
 
     }
 
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(transform.position + new Vector3(0, 2, 0), CheckRect);
+        // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
+    }
 
     public void CheckPlayerZone()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, CheckRect, 0, whatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position + new Vector3(0, 2, 0), CheckRect, 0, whatIsGround);
 
         UpSidePlayer.Clear();//일단 전부 지움 어차피 업데이트에서 무한으로 굴러감
         int check = 0;//지역 변수로 CHECK를 지정
@@ -125,7 +130,7 @@ public class ElevatorDownFinite : MonoBehaviour
         {
             var player = colliders[i].GetComponent<PlayerController>();
 
-            if (player.isGround || player.isUpperPlayer)
+            if (player.currState is PlayerGroundedState)
                 check++;
 
             UpSidePlayer.Add(player.gameObject);

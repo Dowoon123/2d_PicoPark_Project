@@ -11,9 +11,9 @@ public class Elevator : MonoBehaviour
      */
    
 
-    [SerializeField] private int CheckedIntake = 0; //수용된 인원
+    [SerializeField] private int CheckedIntake = 0; //수용된 현재 인원
 
-    [SerializeField] private int intake; //수용 하려는 인원 임의로 설정
+    [SerializeField] private int maxIntake; //수용 하려는 최대 인원 임의로 설정
     [SerializeField] private List<GameObject> UpSidePlayer;
 
 
@@ -76,7 +76,7 @@ public class Elevator : MonoBehaviour
     {
 
 
-        if ((intake - CheckedIntake) == 0)
+        if ((maxIntake - CheckedIntake) == 0)
         {
             isCheckIntake = true;
 
@@ -85,12 +85,6 @@ public class Elevator : MonoBehaviour
             isCheckIntake = false;//업데이트 문에서 이 조건이 항상 참인지 거짓인지 계속 체크할거임.
         
 
-
-
-
-        //이동중
-        float x = transform.position.x;
-        float y = transform.position.y;
 
 
         if (isCheckIntake)
@@ -115,11 +109,17 @@ public class Elevator : MonoBehaviour
 
 
     }
-   
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(transform.position + new Vector3(0, 2, 0), CheckRect);
+        // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
+    }
+
+
 
     public void CheckPlayerZone()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, CheckRect, 0, whatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position + new Vector3(0, 2, 0), CheckRect, 0, whatIsGround);
 
         UpSidePlayer.Clear();//일단 전부 지움 어차피 업데이트에서 무한으로 굴러감
         int check = 0;//지역 변수로 CHECK를 지정
@@ -127,8 +127,17 @@ public class Elevator : MonoBehaviour
         {
             var player = colliders[i].GetComponent<PlayerController>();
 
-            if (player.isGround || player.isUpperPlayer)
+            //  PlayerGroundedState state = gameObject.GetComponent<PlayerGroundedState>();
+
+            //if (player.isGround || player.isUpperPlayer)
+            // if (player.currState == player.groundState)
+            //if (player.currState.GetType() == typeof(PlayerGroundedState))
+            if (player.currState is PlayerGroundedState)
                 check++;
+                
+            
+
+           // Debug.Log("박스 진입 상태 : " + player.currState.GetType());
 
             UpSidePlayer.Add(player.gameObject);
             //리스트에 var로 조장된 player는 결국 colliders[i]. 리스트에 할당 받은 것이니 리스트에 저장

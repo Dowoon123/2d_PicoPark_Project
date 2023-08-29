@@ -253,19 +253,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
     [PunRPC]
-    public void SetParent(int parentViewId)
+    public void SetVelocityNetwork(Vector2 vel)
     {
-        PhotonView parentView = PhotonView.Find(parentViewId);
-        if (parentView != null)
-        {
-            transform.SetParent(parentView.transform);
-        }
+        rb.velocity = vel;
     }
-    [PunRPC]
-    public void RemoveParent()
-    {
-        transform.parent = null;
-    }
+
 
 
 

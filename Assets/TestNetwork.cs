@@ -12,8 +12,9 @@ public class TestNetwork : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.ConnectUsingSettings();
 
+        PhotonNetwork.SendRate = 60; // 초당 30번 데이터 전송
+        PhotonNetwork.SerializationRate = 60;
 
-        
     }
 
     public override void OnConnectedToMaster()
@@ -34,6 +35,6 @@ public class TestNetwork : MonoBehaviourPunCallbacks
         roomOptions.MaxPlayers = 4;
         roomOptions.IsVisible = true;
 
-        PhotonNetwork.JoinOrCreateRoom("JeawooTest", roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom("DowwooTest", roomOptions, TypedLobby.Default);
     }
 }

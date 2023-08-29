@@ -34,6 +34,6 @@ public class TestNetwork : MonoBehaviourPunCallbacks
         roomOptions.MaxPlayers = 4;
         roomOptions.IsVisible = true;
 
-        PhotonNetwork.JoinOrCreateRoom("DowoonTest", roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom("YunjuTest", roomOptions, TypedLobby.Default);
     }
 }

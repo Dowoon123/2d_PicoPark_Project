@@ -58,13 +58,13 @@ public class PlayerController : MonoBehaviour
     public bool isUpperPlayer = false;
     public GameObject downPlayer;
 
-   
 
-  
+
+
     // Start is called before the first frame update
     void Awake()
     {
-       
+
 
         rb = GetComponent<Rigidbody2D>();
         _colChecker = GetComponent<collideChecker>();
@@ -83,10 +83,10 @@ public class PlayerController : MonoBehaviour
     }
 
     [PunRPC]
-   public void SetCurrState()
+    public void SetCurrState()
     {
         currState = stateMachine.currentState;
-     
+
     }
     private void Start()
     {
@@ -142,22 +142,22 @@ public class PlayerController : MonoBehaviour
         var flip = GetComponentInChildren<SpriteRenderer>().flipX == true ? false : true;
         GetComponentInChildren<SpriteRenderer>().flipX = flip;
 
-        if(!flip)
-        _colChecker.playerChecker.transform.localPosition = new Vector2(-0.5f,0f);
+        if (!flip)
+            _colChecker.playerChecker.transform.localPosition = new Vector2(-0.5f, 0f);
         else
             _colChecker.playerChecker.transform.localPosition = new Vector2(0.5f, 0f);
 
         Debug.Log(facingDir + " " + facingRight);
     }
 
-  
+
 
     public void FlipController(float _x)
     {
         if (_x > 0 && !facingRight)
         {
             GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
-           
+
 
         }
         else if (_x < 0 && facingRight)
@@ -172,38 +172,38 @@ public class PlayerController : MonoBehaviour
         // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, WhatIsGround);
 
 
-            var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
+        var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
 
-            if (box)
+        if (box)
+        {
+            if (box.gameObject.layer == 7)
             {
-                if (box.gameObject.layer == 7)
-                {
-                    isGround = false;
-                    isUpperPlayer = true;
-                    downPlayer = box.gameObject;
-                    
+                isGround = false;
+                isUpperPlayer = true;
+                downPlayer = box.gameObject;
 
-                }
-                else
-                {
-                    isUpperPlayer = false;
-                    downPlayer = null;
-                    isGround = true;
-                  
-                }
 
-                return true;
             }
             else
-
             {
-                
                 isUpperPlayer = false;
                 downPlayer = null;
-                isGround = false;
-                return false;
+                isGround = true;
 
             }
+
+            return true;
+        }
+        else
+
+        {
+
+            isUpperPlayer = false;
+            downPlayer = null;
+            isGround = false;
+            return false;
+
+        }
 
     }
 
@@ -217,5 +217,18 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    // 플레이어가 공에 닿으면 튕겨지는 부분 구현중
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    float[] arrAngles = { -75, -60, -45, -30, -15, 0, 15, 30, 45, 60, 75 };
+
+    //    if (collision.collider.CompareTag("Ball"))
+    //    {
+    //        int r = Random.Range(0,arrAngles.Length);
+    //        Vector3 tmp = collision.transform.eulerAngles;
+    //        tmp.z = arrAngles[r];
+    //        collision.transform.eulerAngles = tmp;
+    //    }
+    //}
 
 }

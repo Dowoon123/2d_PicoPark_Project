@@ -76,6 +76,8 @@ public class MovedBlock : MonoBehaviourPunCallbacks
 
         if (!isCheckPush)
         {
+            rb.velocity = Vector3.zero;
+
             if (CheckedPushAllPlayer == CheckedPushingP && checkDirection == 0)
             {
                 GetComponent<PhotonView>().RPC("CheckPush", RpcTarget.AllBuffered, true);

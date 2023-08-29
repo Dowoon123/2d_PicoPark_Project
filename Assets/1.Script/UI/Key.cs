@@ -1,38 +1,47 @@
-using Photon.Realtime;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class Key : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public GameObject target;
-    Vector2 dir;
-    Vector2 dirNo;
+    public float speed = 0.1f;
+    public GameObject Target;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+
+
+    }
+void Update()
+    {
+         if(Target)
         {
-            void OnTriggerEnter2D(Collider2D collision)
-            {
-                if (collision.tag == "Player")
-                {
-                    target = GameObject.Find(collision.tag);
-                    dir = target.transform.position - transform.position;
-                    dirNo = dir.normalized;
-                  
-                }
-
-
-            }
+            var pos = Target.transform.position;
+            pos.y += 1f;
+            
+            transform.position = Vector3.Lerp(pos, transform.position, 0.9f);
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        transform.Translate(dirNo * speed * Time.deltaTime);
+        if (collision.gameObject.CompareTag("Player"))
+            this.Target = collision.gameObject;
+        
+            
+                
+        
     }
 }
+
+
+//Vector2.MoveTowards(transform.position, collision.transform.position, speed * Time.deltaTime);
+
+
+
+
+
+
+
+
+
+
+// Update is called once per frame

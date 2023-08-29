@@ -8,6 +8,7 @@ TagManager:
   - NextStage
   - JumpBlock
   - Ground
+  - KeyBottle
   layers:
   - Default
   - TransparentFX

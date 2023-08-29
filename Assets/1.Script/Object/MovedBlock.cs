@@ -153,7 +153,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
                 {
                     facingcheck--;
                 }
-
+               
 
             }
             else if (player.currState == player.State_Push && player.facingDir < 0)

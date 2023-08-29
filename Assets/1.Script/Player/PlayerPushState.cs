@@ -28,7 +28,23 @@ public class PlayerPushState : PlayerGroundedState
     {
         base.Update();
 
-        player.SetVelocity(0, player.rb.velocity.y);
+        if (player._colChecker.obstacleObject)
+        {
+
+
+
+            var box = player._colChecker.obstacleObject.GetComponent<MovedBlock>();
+
+            Debug.Log(player._colChecker.obstacleObject);
+
+            if (!box.isCheckPush)
+                player.SetVelocity(0, player.rb.velocity.y);
+            else
+            {
+                player.SetVelocity(xInput * player.moveSpeed * 0.4f, rb.velocity.y);
+                box.gameObject.GetComponent<Rigidbody2D>().velocity = player.rb.velocity;
+            }
+        }
 
 
         if (xInput == 0)
@@ -39,7 +55,7 @@ public class PlayerPushState : PlayerGroundedState
         }
 
 
-        if (!player._colChecker.IsPlayerDetected())
+        if (!player._colChecker.IsFrontObject())
          player.stateMachine.ChangeState(player.State_idle);
        
         

@@ -40,8 +40,8 @@ public class collideChecker : MonoBehaviour
 
     public void Update()
     {
-        // isObstacle = IsObstacleDetected();
-        isPlayer = IsPlayerDetected();
+      //   isObstacle = IsObstacleDetected();
+        isPlayer = IsFrontObject();
         IsUpsideDetected();
     }
 
@@ -75,7 +75,7 @@ public class collideChecker : MonoBehaviour
 
 
     } 
-    public virtual bool IsPlayerDetected()
+    public virtual bool IsFrontObject()
     {
         // RaycastHit2D playerFind;
 
@@ -88,8 +88,11 @@ public class collideChecker : MonoBehaviour
 
         if (colBox)
         {
-            pushedObject = colBox.gameObject;
-
+            if (colBox.gameObject.layer == 6)
+                pushedObject = colBox.gameObject;
+            else if (colBox.gameObject.layer == 9)
+                obstacleObject = colBox.gameObject;
+            
          
 
 
@@ -98,6 +101,7 @@ public class collideChecker : MonoBehaviour
         else
         {
             pushedObject = null;
+            obstacleObject = null;
             return false;
         }
     }

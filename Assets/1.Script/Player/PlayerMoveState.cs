@@ -32,12 +32,15 @@ public class PlayerMoveState : PlayerGroundedState
        // if(!player._colChecker.isObstacle)
         player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
 
-        if (player._colChecker.IsPlayerDetected())
+        if (player._colChecker.IsFrontObject())
         {
             GameObject targetObject = null;
 
             if (player.GetComponent<collideChecker>().pushedObject != null)
                 targetObject = player.GetComponent<collideChecker>().pushedObject;
+
+            if (player.GetComponent<collideChecker>().obstacleObject != null)
+                targetObject = player.GetComponent<collideChecker>().obstacleObject;
 
 
             if (targetObject.transform.position.x > player.transform.position.x)

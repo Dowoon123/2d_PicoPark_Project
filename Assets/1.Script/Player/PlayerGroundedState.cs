@@ -63,7 +63,7 @@ public class PlayerGroundedState : PlayerState
             for(int i=0; i< player._colChecker.UpsidePlayers.Count; i++)
             {
                 if (player._colChecker.UpsidePlayers[i].currState == player._colChecker.UpsidePlayers[i].State_idle)
-                    player._colChecker.UpsidePlayers[i].GetComponent<PhotonView>().RPC("SetParent", RpcTarget.All, player.transform);
+                    player._colChecker.UpsidePlayers[i].GetComponent<PhotonView>().RPC("SetParent", RpcTarget.All, player.gameObject) ;
                 else
                     player._colChecker.UpsidePlayers[i].GetComponent<PhotonView>().RPC("RemoveParent", RpcTarget.All);
 

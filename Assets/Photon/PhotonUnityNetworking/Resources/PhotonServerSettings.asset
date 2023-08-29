@@ -49,6 +49,8 @@ MonoBehaviour:
   - CheckPush
   - SetText
   - SetVelocityNetwork
+  - RemoveParent
+  - SetParent
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

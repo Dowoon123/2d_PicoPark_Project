@@ -253,9 +253,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
     [PunRPC]
-    public void SetParent(Transform _transform) 
+    public void SetParent(GameObject _transform) 
     {
-        transform.parent = _transform;
+        transform.parent = _transform.transform;
     }
 
     [PunRPC]

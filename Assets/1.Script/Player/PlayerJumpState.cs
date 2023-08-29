@@ -35,7 +35,7 @@ public class PlayerJumpState : PlayerState
             stateMachine.ChangeState(player.State_Air);
 
 
-        if (player._colChecker.IsPlayerDetected())
+        if (player._colChecker.IsFrontObject())
         {
             player.SetVelocity(0, player.rb.velocity.y);
         }

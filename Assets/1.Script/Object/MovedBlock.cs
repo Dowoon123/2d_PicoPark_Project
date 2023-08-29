@@ -28,7 +28,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
 
     [SerializeField] protected LayerMask whatIsGround;
 
-    [SerializeField] private bool isCheckPush;
+    public bool isCheckPush;
     //수용인원 조건이 충족하는지 체크하는 bool값
     //TRUE면 엘레베이터 작동
 
@@ -43,6 +43,8 @@ public class MovedBlock : MonoBehaviourPunCallbacks
     public float times = 0.0f;
     //정지시간
     public float weight = 0.0f;
+
+    PlayerController player;
 
 
 
@@ -63,6 +65,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
     {
         // OnDrawGizmos();
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -94,19 +97,17 @@ public class MovedBlock : MonoBehaviourPunCallbacks
 
         Debug.Log("isCheckPush : " +   isCheckPush);
 
-
+        /*
 
         if (isCheckPush && facingDirCheck == CheckedPushAllPlayer)
         {
-            rb.velocity = new Vector2(moveX, 0);
+            rb.velocity = new Vector2(player.rb.velocity.x, 0);
             Debug.Log("왼쪽에서 밀리고 있음.");
         }else if (isCheckPush && Mathf.Abs(-facingDirCheck) == CheckedPushAllPlayer)
         {
-            rb.velocity = new Vector2(-moveX, 0);
+            rb.velocity = new Vector2(-player.rb.velocity.x, 0);
             Debug.Log("오른쪽에서 밀리고 있음.");
-        }
-
-
+        }*/
 
     }
 

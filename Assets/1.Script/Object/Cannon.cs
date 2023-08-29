@@ -34,7 +34,7 @@ public class Cannon : MonoBehaviour
     IEnumerator isShoted()
     {
         isShot = true;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(7f);
         isShot = false;
     }
 }

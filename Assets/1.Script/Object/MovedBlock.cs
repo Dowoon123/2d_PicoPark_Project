@@ -98,9 +98,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
         {
             rb.velocity = new Vector2(moveX, 0);
             Debug.Log("왼쪽에서 밀리고 있음.");
-        }
-
-        if (isCheckPush && Mathf.Abs(-facingDirCheck) == CheckedPushAllPlayer)
+        }else if (isCheckPush && Mathf.Abs(-facingDirCheck) == CheckedPushAllPlayer)
         {
             rb.velocity = new Vector2(-moveX, 0);
             Debug.Log("오른쪽에서 밀리고 있음.");

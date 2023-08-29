@@ -115,11 +115,17 @@ public class Elevator : MonoBehaviour
 
 
     }
-   
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(transform.position + new Vector3(0, 2, 0), CheckRect);
+        // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
+    }
+
+
 
     public void CheckPlayerZone()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, CheckRect, 0, whatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position + new Vector3(0, 2, 0), CheckRect, 0, whatIsGround);
 
         UpSidePlayer.Clear();//일단 전부 지움 어차피 업데이트에서 무한으로 굴러감
         int check = 0;//지역 변수로 CHECK를 지정

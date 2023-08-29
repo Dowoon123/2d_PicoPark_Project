@@ -197,7 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3157661448994235887, guid: b2222a749d2f7a04584eb2918d589aca, type: 3}
       propertyPath: m_BodyType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3157661448994235887, guid: b2222a749d2f7a04584eb2918d589aca, type: 3}
       propertyPath: m_Constraints
@@ -473,7 +473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 946253506375587930, guid: d429274b8de9d4c46b6b62dfe0e00f61, type: 3}
       propertyPath: maxIntake
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4293168496719209438, guid: d429274b8de9d4c46b6b62dfe0e00f61, type: 3}
       propertyPath: m_Name

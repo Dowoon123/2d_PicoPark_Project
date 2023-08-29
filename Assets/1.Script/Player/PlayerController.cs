@@ -253,11 +253,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
     [PunRPC]
-    public void SetParent(GameObject _transform) 
+    public void SetParent(int parentViewId)
     {
-        transform.parent = _transform.transform;
+        PhotonView parentView = PhotonView.Find(parentViewId);
+        if (parentView != null)
+        {
+            transform.SetParent(parentView.transform);
+        }
     }
-
     [PunRPC]
     public void RemoveParent()
     {

@@ -87,7 +87,8 @@ public class collideChecker : MonoBehaviour
         }
 
 
-    } 
+    }
+    
     public virtual bool IsFrontObject()
     {
         // RaycastHit2D playerFind;

@@ -99,6 +99,7 @@ MonoBehaviour:
   moveSpeed: 7.5
   isGround: 0
   isUpperPlayer: 0
+  isGimmicked: 0
   downPlayer: {fileID: 0}
   m_stateCanvas: {fileID: 2795903718565510813}
   stateTxt: {fileID: 4956395551984920949}

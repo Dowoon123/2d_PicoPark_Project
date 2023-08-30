@@ -44,6 +44,9 @@ public class PlayerJumpState : PlayerState
             if (xInput != 0)
                 player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
         }
-        
+
+        if (player.isGimmicked)
+            stateMachine.ChangeState(player.State_Hit);
+
     }
 }

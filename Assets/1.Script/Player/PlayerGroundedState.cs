@@ -85,6 +85,10 @@ public class PlayerGroundedState : PlayerState
         }
 
 
+        if (player.isGimmicked)
+            stateMachine.ChangeState(player.State_Hit);
+
+
 
 
 

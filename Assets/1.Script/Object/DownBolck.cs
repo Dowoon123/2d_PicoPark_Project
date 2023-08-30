@@ -4,30 +4,29 @@ public class DownBolck : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] float time;
+    [SerializeField] float downSpeed;
+    [SerializeField] bool isStep = false;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        rb.bodyType = RigidbodyType2D.Static;
-        rb.gravityScale = 0;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
-        if (rb.bodyType == RigidbodyType2D.Dynamic)
-        {
+        if(isStep)
             time += Time.deltaTime;
-        }
-        else if (time > 1f)
+
+        if (time > 0.3f)
         {
-            transform.Translate(Vector3.down * Time.deltaTime * time);
-          
+            transform.Translate(Vector3.down * Time.deltaTime * downSpeed);
+            Destroy(transform.gameObject, 2f);
         }
+          
+        
 
 
 
@@ -41,8 +40,7 @@ private void OnTriggerEnter2D(Collider2D collision)
 {
     if (collision.gameObject.CompareTag("Player"))
     {
-        time = 0;
-        rb.bodyType = RigidbodyType2D.Dynamic;
+        isStep = true;
     }
 }
 

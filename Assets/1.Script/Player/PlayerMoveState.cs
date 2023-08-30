@@ -9,6 +9,7 @@ public class PlayerMoveState : PlayerGroundedState
      public collideChecker _colChecker;
     public PlayerMoveState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName, STATE_INFO _info) : base(_player, _stateMachine, _animBoolName, _info)
     {
+
     }
 
     
@@ -63,5 +64,8 @@ public class PlayerMoveState : PlayerGroundedState
         
         if (xInput == 0)
             stateMachine.ChangeState(player.State_idle);
+
+        if (player.isGimmicked)
+            stateMachine.ChangeState(player.State_Hit);
     }
 }

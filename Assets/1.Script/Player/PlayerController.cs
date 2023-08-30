@@ -1,4 +1,7 @@
 using Photon.Pun;
+using Photon.Realtime;
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +19,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public STATE_INFO currStateEnum = STATE_INFO.IDLE;
     // 플레이어의 정보를 담고 있다. 이 정보는
     // 닉네임, 닉네임 UI Text , 그리고 Player가 보유한 조작가능한 오브젝트를 가지고 있다. 
+
+
+
 
     #region collision
     [SerializeField] LayerMask WhatIsGround;
@@ -70,11 +76,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public GameObject m_stateCanvas;
     public Text stateTxt;
 
-
     // Start is called before the first frame update
     void Awake()
     {
-       
+
 
         rb = GetComponent<Rigidbody2D>();
         _colChecker = GetComponent<collideChecker>();
@@ -83,15 +88,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
         stateMachine = new PlayerStateMachine();
         stateMachine.player = this;
 
-        State_idle = new PlayerIdleState(this, stateMachine, "Idle",STATE_INFO.IDLE);
-        State_move = new PlayerMoveState(this, stateMachine, "Move",STATE_INFO.MOVE);
+        State_idle = new PlayerIdleState(this, stateMachine, "Idle", STATE_INFO.IDLE);
+        State_move = new PlayerMoveState(this, stateMachine, "Move", STATE_INFO.MOVE);
         State_Jump = new PlayerJumpState(this, stateMachine, "Jump", STATE_INFO.JUMP);
-        State_Air = new PlayerAirState(this, stateMachine, "Idle",STATE_INFO.AIR);
-        State_Push = new PlayerPushState    (this, stateMachine, "Push",STATE_INFO.PUSH);
-       // State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
+        State_Air = new PlayerAirState(this, stateMachine, "Idle", STATE_INFO.AIR);
+        State_Push = new PlayerPushState(this, stateMachine, "Push", STATE_INFO.PUSH);
+        // State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
 
-      
-        
+
+
 
     }
 
@@ -100,7 +105,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public void SetCurrState(STATE_INFO _State)
     {
         PlayerState st = null;
-        switch(_State)
+        switch (_State)
         {
             case STATE_INFO.IDLE:
                 st = State_idle;
@@ -137,6 +142,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         }
 
+         
     }
 
     public void SetPlayerCharacter(GameObject obj)
@@ -253,5 +259,43 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
 
+    [PunRPC]
+    public void SetParents(int id)
+    {
+        PhotonView parentPhotonView = PhotonView.Find(id);
+
+        parentPhotonView.transform.parent = transform;
+    }
+
+
+    [PunRPC]
+    public void DeSetParents(int id)
+    {
+
+        PhotonView parentPhotonView = PhotonView.Find(id);
+
+        parentPhotonView.transform.parent = null;
+
+    }
+
+
 
 }
+
+
+
+// 플레이어가 공에 닿으면 튕겨지는 부분 구현중
+//private void OnCollisionEnter2D(Collision2D collision)
+//{
+//    float[] arrAngles = { -75, -60, -45, -30, -15, 0, 15, 30, 45, 60, 75 };
+
+//    if (collision.collider.CompareTag("Ball"))
+//    {
+//        int r = Random.Range(0,arrAngles.Length);
+//        Vector3 tmp = collision.transform.eulerAngles;
+//        tmp.z = arrAngles[r];
+//        collision.transform.eulerAngles = tmp;
+//    }
+//}
+
+

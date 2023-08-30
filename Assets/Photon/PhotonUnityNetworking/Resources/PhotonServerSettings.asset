@@ -48,6 +48,15 @@ MonoBehaviour:
   - SetCurrState
   - CheckPush
   - SetText
+  - SetVelocityNetwork
+  - RemoveParent
+  - SetParent
+  - UpdatePositionAndVelocity
+  - MovePlayter
+  - MovePlayer
+  - SyncUpsidePlayerPosition
+  - DeSetParents
+  - SetParents
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

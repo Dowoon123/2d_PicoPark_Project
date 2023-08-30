@@ -97,7 +97,7 @@ public class ElevatorUpFinite : MonoBehaviour
             //현재 올라가는 지점이 도착 지점보다 크다면 도착 지점만큼 멈출것임.
             //반드시 arrivePos값 x,y 정확히 도착하려는것에 입력 해야함.
             if (transform.position.y > arrivePos.y)
-                transform.position = new Vector3(arrivePos.x, arrivePos.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x, arrivePos.y, transform.position.z);
         }
         else if (!isCheckIntake)
         {
@@ -114,11 +114,15 @@ public class ElevatorUpFinite : MonoBehaviour
        
 
     }
-   
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(transform.position + new Vector3(0, 2, 0), CheckRect);
+        // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
+    }
 
     public void CheckPlayerZone()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, CheckRect, 0, whatIsGround);
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position + new Vector3(0, 2, 0), CheckRect, 0, whatIsGround);
 
         UpSidePlayer.Clear();//일단 전부 지움 어차피 업데이트에서 무한으로 굴러감
         int check = 0;//지역 변수로 CHECK를 지정
@@ -126,7 +130,7 @@ public class ElevatorUpFinite : MonoBehaviour
         {
             var player = colliders[i].GetComponent<PlayerController>();
 
-            if (player.isGround || player.isUpperPlayer)
+            if (player.currState is PlayerGroundedState)
                 check++;
 
             UpSidePlayer.Add(player.gameObject);

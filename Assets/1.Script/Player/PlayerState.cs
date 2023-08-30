@@ -46,6 +46,12 @@ public class PlayerState
         yInput = Input.GetAxisRaw("Vertical");
         player.anim.SetFloat("yVelocity", rb.velocity.y);
 
+
+       // player._colChecker.obstacleObject 이 오브젝트가 isCheckPush 면 
+       // 일단여기서 움직임을 구현해요 
+       // move스피드의 0.6배정도로 그리고 이 벨로시티 설정 이후에
+       // 박스의벨로시티에 내벨로시티를 대입한다 
+
     }
   
 

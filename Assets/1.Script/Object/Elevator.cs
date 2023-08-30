@@ -87,12 +87,6 @@ public class Elevator : MonoBehaviour
 
 
 
-
-        //이동중
-        float x = transform.position.x;
-        float y = transform.position.y;
-
-
         if (isCheckIntake)
         {
             //블록 이동
@@ -143,7 +137,7 @@ public class Elevator : MonoBehaviour
                 
             
 
-            Debug.Log("박스 진입 상태 : " + player.currState.GetType());
+           // Debug.Log("박스 진입 상태 : " + player.currState.GetType());
 
             UpSidePlayer.Add(player.gameObject);
             //리스트에 var로 조장된 player는 결국 colliders[i]. 리스트에 할당 받은 것이니 리스트에 저장

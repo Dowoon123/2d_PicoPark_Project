@@ -58,6 +58,8 @@ MonoBehaviour:
   - DeSetParents
   - SetParents
   - CanBeStunned
+  - Setvelocity_network
+  - SetPlayerVelocity
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

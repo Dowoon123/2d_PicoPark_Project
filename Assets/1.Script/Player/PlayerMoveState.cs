@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,7 +34,10 @@ public class PlayerMoveState : PlayerGroundedState
         // if(!player._colChecker.isObstacle)
 
       //  player.transform.Translate(xInput * Vector2.right * player.moveSpeed * Time.deltaTime);
-        player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
+     //   player.SetVelocity(, );
+
+        
+       player.GetComponent<PhotonView>().RPC("SetPlayerVelocity", RpcTarget.All, xInput * player.moveSpeed, rb.velocity.y);
 
         if (player._colChecker.IsFrontObject())
         {

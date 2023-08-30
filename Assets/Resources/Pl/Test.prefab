@@ -129,6 +129,7 @@ MonoBehaviour:
   isPlayer: 0
   obstacleObject: {fileID: 0}
   pushedObject: {fileID: 0}
+  UpsidePlayers: []
 --- !u!114 &2863402729114619351
 MonoBehaviour:
   m_ObjectHideFlags: 0

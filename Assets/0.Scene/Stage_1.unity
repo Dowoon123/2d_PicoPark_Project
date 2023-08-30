@@ -212,6 +212,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5944570384416325166, guid: b2222a749d2f7a04584eb2918d589aca, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7504417551117449015, guid: b2222a749d2f7a04584eb2918d589aca, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1144,6 +1148,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 2091257870}
-  sceneViewId: 2
+  sceneViewId: 4
   InstantiationId: 0
   isRuntimeInstantiated: 0

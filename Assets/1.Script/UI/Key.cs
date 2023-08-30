@@ -19,6 +19,7 @@ void Update()
             pos.y += 1f;
             
             transform.position = Vector3.Lerp(pos, transform.position, 0.9f);
+            
         }
     }
     public void OnTriggerEnter2D(Collider2D collision)

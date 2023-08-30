@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         State_move = new PlayerMoveState(this, stateMachine, "Move",STATE_INFO.MOVE);
         State_Jump = new PlayerJumpState(this, stateMachine, "Jump", STATE_INFO.JUMP);
         State_Air = new PlayerAirState(this, stateMachine, "Idle",STATE_INFO.AIR);
-        State_Push = new PlayerPushState(this, stateMachine, "Push",STATE_INFO.PUSH);
+        State_Push = new PlayerPushState    (this, stateMachine, "Push",STATE_INFO.PUSH);
        // State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
 
       

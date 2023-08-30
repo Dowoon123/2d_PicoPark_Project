@@ -28,7 +28,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
 
     [SerializeField] protected LayerMask whatIsGround;
 
-    [SerializeField] private bool isCheckPush = false;
+    [SerializeField] private bool isCheckPush;
     //수용인원 조건이 충족하는지 체크하는 bool값
     //TRUE면 엘레베이터 작동
 
@@ -81,15 +81,16 @@ public class MovedBlock : MonoBehaviourPunCallbacks
                 GetComponent<PhotonView>().RPC("CheckPush", RpcTarget.AllBuffered, true);
 
             }
-            else if ((CheckedPushAllPlayer - CheckedPushingP) == 0 && checkDirection2 == 0)
+            
+            if (CheckedPushAllPlayer == CheckedPushingP && checkDirection2 == 0)
             {
                 GetComponent<PhotonView>().RPC("CheckPush", RpcTarget.AllBuffered, true);
             }
 
-        }
-
-        if (CheckedPushAllPlayer != CheckedPushingP)
+        }else if (CheckedPushAllPlayer != CheckedPushingP)
             GetComponent<PhotonView>().RPC("CheckPush", RpcTarget.AllBuffered, false);
+
+        Debug.Log("isCheckPush : " +   isCheckPush);
 
 
 
@@ -97,9 +98,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
         {
             rb.velocity = new Vector2(moveX, 0);
             Debug.Log("왼쪽에서 밀리고 있음.");
-        }
-
-        if (isCheckPush && -(facingDirCheck) == CheckedPushAllPlayer)
+        }else if (isCheckPush && Mathf.Abs(-facingDirCheck) == CheckedPushAllPlayer)
         {
             rb.velocity = new Vector2(-moveX, 0);
             Debug.Log("오른쪽에서 밀리고 있음.");
@@ -154,7 +153,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
 
 
             }
-            else if (player.stateMachine.currentState == player.State_Push && player.facingDir < 0)
+            else if (player.currState == player.State_Push && player.facingDir < 0)
             {
                 check++;
                 Debug.Log("왼쪽에서 감지 되었소");

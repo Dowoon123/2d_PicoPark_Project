@@ -14,7 +14,7 @@ public class collideChecker : MonoBehaviour
 
     [SerializeField] LayerMask WhatIsUpper;
     [SerializeField] LayerMask WhatIsObstacle;
-    
+
     PlayerController player;
 
     public bool isObstacle;
@@ -24,9 +24,11 @@ public class collideChecker : MonoBehaviour
     public GameObject obstacleObject;
     public GameObject pushedObject;
 
+    public List<PlayerController> UpsidePlayers;
+
     private void OnCollisionStay2D(Collision2D collision)
     {
-        
+
     }
 
     private void Awake()
@@ -38,10 +40,41 @@ public class collideChecker : MonoBehaviour
 
     public void Update()
     {
-       // isObstacle = IsObstacleDetected();
+        // isObstacle = IsObstacleDetected();
         isPlayer = IsPlayerDetected();
-
+        IsUpsideDetected();
     }
+
+
+    public virtual void IsUpsideDetected()
+    {
+
+        var pos = transform.position;
+        pos.y += 2.0f;
+        var colBox = Physics2D.OverlapBoxAll(pos, new Vector2(0.5f, 4.0f), 0, WhatIsObstacle);
+        UpsidePlayers.Clear();
+
+        if (colBox.Length > 0)
+        {
+           for(int i=0; i< colBox.Length; ++i)
+            {
+                if (colBox[i].gameObject.layer == 6)
+                {
+                    var pc = colBox[i].gameObject.GetComponent<PlayerController>();
+                     
+                    if(pc.currState is PlayerGroundedState)
+                    {
+                        UpsidePlayers.Add(pc);
+                    }
+                     
+
+                }
+            }
+        
+        }
+
+
+    } 
     public virtual bool IsPlayerDetected()
     {
         // RaycastHit2D playerFind;

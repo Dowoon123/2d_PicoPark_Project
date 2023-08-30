@@ -13,12 +13,13 @@ public class ButtonAction : MonoBehaviour
     public GameObject targetMoveBlock;
     public Sprite imageOn;
     public Sprite imageOff;
-    public bool on = false; //스위치 상태(true: 눌린 상태 false: 눌리지 않은 상태)
 
+    public bool on = false; //스위치 상태(true: 눌린 상태 false: 눌리지 않은 상태)
 
     // Start is called before the first frame update
     void Start()
     {
+        on = true;
         if (on)
         {
             GetComponent<SpriteRenderer>().sprite = imageOn;
@@ -47,13 +48,12 @@ public class ButtonAction : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        if(col.gameObject.tag == "Player")
-        {
+      
             on = false;
             GetComponent<SpriteRenderer>().sprite = imageOn;
            // MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
           //  movBlock.Move();
-        }
+        
     }
 
 

@@ -18,6 +18,7 @@ public class BallSpawnManager : MonoBehaviour
         SpawnPlay();
     }
 
+
     void SpawnPlay()
     {
 

@@ -45,5 +45,10 @@ public class PlayerAirState : PlayerState
             }
 
         }
+
+
+        if (player.isGimmicked)
+            stateMachine.ChangeState(player.State_Hit);
+
     }
 }

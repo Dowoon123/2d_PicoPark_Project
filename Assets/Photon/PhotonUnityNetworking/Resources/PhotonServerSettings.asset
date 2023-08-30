@@ -57,6 +57,7 @@ MonoBehaviour:
   - SyncUpsidePlayerPosition
   - DeSetParents
   - SetParents
+  - CanBeStunned
   - Setvelocity_network
   - SetPlayerVelocity
   DisableAutoOpenWizard: 1

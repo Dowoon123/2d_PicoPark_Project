@@ -1,7 +1,4 @@
 using Photon.Pun;
-using Photon.Realtime;
-using System;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +9,7 @@ public enum STATE_INFO
     JUMP,
     AIR,
     PUSH,
+    HIT,
 }
 
 public class PlayerController : MonoBehaviourPunCallbacks
@@ -57,6 +55,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public PlayerAirState State_Air;
     public PlayerPushState State_Push;
     public PlayerAirPushState State_AirPush;
+    public PlayerHitState State_Hit;
     #endregion
 
     public int facingDir { get; set; } = 1;
@@ -72,6 +71,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     public bool isGround = false;
     public bool isUpperPlayer = false;
+    public bool isGimmicked = false; //8.30 기믹 패턴 작동 여부를 위해 추가하였음
     public GameObject downPlayer;
     public GameObject m_stateCanvas;
     public Text stateTxt;
@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         State_Jump = new PlayerJumpState(this, stateMachine, "Jump", STATE_INFO.JUMP);
         State_Air = new PlayerAirState(this, stateMachine, "Idle", STATE_INFO.AIR);
         State_Push = new PlayerPushState(this, stateMachine, "Push", STATE_INFO.PUSH);
+        State_Hit = new PlayerHitState(this, stateMachine, "Hit", STATE_INFO.HIT);
         // State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
 
 
@@ -122,6 +123,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
             case STATE_INFO.MOVE:
                 st = State_move;
                 break;
+            case STATE_INFO.HIT:
+                st = State_Hit;
+                break;
         }
 
         currState = st;
@@ -142,7 +146,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         }
 
-         
+        Debug.Log("isGimmicked : " + isGimmicked);
+
     }
 
     public void SetPlayerCharacter(GameObject obj)
@@ -259,25 +264,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
 
-    [PunRPC]
-    public void SetParents(int id)
-    {
-        PhotonView parentPhotonView = PhotonView.Find(id);
-
-        parentPhotonView.transform.parent = transform;
-    }
 
 
     [PunRPC]
-    public void DeSetParents(int id)
+    void SetPlayerVelocity(float xVelocity, float yVelocity)
     {
-
-        PhotonView parentPhotonView = PhotonView.Find(id);
-
-        parentPhotonView.transform.parent = null;
-
+        // 움직임 처리 로직
+        SetVelocity(xVelocity, yVelocity);
     }
-
 
 
 }

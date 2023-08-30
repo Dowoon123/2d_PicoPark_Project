@@ -64,30 +64,8 @@ public class PlayerGroundedState : PlayerState
 
             for (int i = 0; i < player._colChecker.UpsidePlayers.Count; i++)
             {
-                if (player._colChecker.UpsidePlayers[i].currState == player._colChecker.UpsidePlayers[i].State_idle )
-                {
-                    if (player._colChecker.UpsidePlayers[i].transform.parent != player.transform)
-                    {
-                        int pvId = player._colChecker.UpsidePlayers[i].GetComponent<PhotonView>().ViewID;
-                        player.GetComponent<PhotonView>().RPC("SetParents", RpcTarget.All, pvId);
-
-
-                    }
-                }
-                else
-                {
-                    int pvId = player._colChecker.UpsidePlayers[i].GetComponent<PhotonView>().ViewID;
-                    player.GetComponent<PhotonView>().RPC("DeSetParents", RpcTarget.All, pvId);
-                }
+               
             }
-
-
-        }
-
-
-
-
-
-
+        }  
     }
 }

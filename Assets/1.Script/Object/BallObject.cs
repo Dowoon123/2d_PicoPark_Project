@@ -9,12 +9,20 @@ public class BallObject : MonoBehaviour
 
     public Rigidbody2D rb;
     float randomX, randomY; // 방향 랜덤 값
-    bool isMoving = true; //공 이동 여부
+
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
+        rb.velocity = Vector3.zero;
+
+
+    }
+
+    private void BallMoving()
+    {
         randomX = Random.Range(-1f, 1);
         randomY = Random.Range(-1f, 1);
 
@@ -25,18 +33,17 @@ public class BallObject : MonoBehaviour
         rb.AddForce(dir * speed);
     }
 
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Brick"))
             collision.gameObject.SetActive(false);
 
         else if (collision.collider.CompareTag("Player"))
-            isMoving = true;
+            BallMoving();
 
-        //else if (collision.collider.CompareTag("Ground"))
-        //    Destroy(gameObject);
+        else if (collision.collider.CompareTag("Ground"))
+            Destroy(gameObject);
     }
+
 
 }

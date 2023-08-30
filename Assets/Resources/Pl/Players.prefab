@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6630134200958619588}
   - component: {fileID: 9164370304362069846}
   - component: {fileID: 7950411969290570545}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 960367816809233495}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: ObstacleChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ Transform:
   - {fileID: 3635651490026312510}
   - {fileID: 7215847655526618378}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3781255672908910089
 MonoBehaviour:
@@ -333,7 +333,7 @@ MonoBehaviour:
   currStateEnum: 0
   WhatIsGround:
     serializedVersion: 2
-    m_Bits: 896
+    m_Bits: 0
   GroundChecker: {fileID: 3635651490026312510}
   rb: {fileID: 0}
   _colChecker: {fileID: 0}
@@ -364,14 +364,15 @@ MonoBehaviour:
   BodyCollider: {fileID: 5298139786082308782}
   WhatIsUpper:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   WhatIsObstacle:
     serializedVersion: 2
-    m_Bits: 704
+    m_Bits: 0
   isObstacle: 0
   isPlayer: 0
   obstacleObject: {fileID: 0}
   pushedObject: {fileID: 0}
+  UpsidePlayers: []
 --- !u!114 &1348394173313278083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,7 +530,7 @@ GameObject:
   - component: {fileID: 8061749607763174260}
   - component: {fileID: 7688597742371528718}
   - component: {fileID: 4710438909019867559}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3635651490026312510}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1655565241886968851}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: PlayerChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

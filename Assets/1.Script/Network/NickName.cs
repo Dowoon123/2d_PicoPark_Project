@@ -36,8 +36,8 @@ public class NickName : MonoBehaviour
 
         //이름입력 패널 비활성화
         NameInputPanel.interactable = false;
-        NameInputPanel.blocksRaycasts = false;
-        NameInputPanel.alpha = 0.0f;
+    //    NameInputPanel.blocksRaycasts = false;
+    //    NameInputPanel.alpha = 0.0f;
 
         RoomOptions roomOptions = new RoomOptions(); // 새로운 룸옵션 할당
         roomOptions.MaxPlayers = 4;

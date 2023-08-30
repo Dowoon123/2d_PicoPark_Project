@@ -6,14 +6,16 @@ using Photon.Realtime;
 
 public class TestNetwork : MonoBehaviourPunCallbacks
 {
-    
+    [Header("자기 맵에 빈 오브젝트 생성 후 이 컴포넌트 넣고 아래 ServerName에 자기가원하는 이름넣기")]
+    [SerializeField] string ServerName;
 
     private void Awake()
     {
         PhotonNetwork.ConnectUsingSettings();
 
+        PhotonNetwork.SendRate = 100; // 초당 30번 데이터 전송
+        PhotonNetwork.SerializationRate = 100; // 직렬화된 데이터를 초당 30번 전송
 
-        
     }
 
     public override void OnConnectedToMaster()
@@ -25,7 +27,7 @@ public class TestNetwork : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("Pl/Players", new Vector3(1, 2, 0), Quaternion.identity);
+        PhotonNetwork.Instantiate("Pl/Test", new Vector3(1, 2, 0), Quaternion.identity);
     }
 
     public override void OnJoinedLobby()
@@ -34,6 +36,6 @@ public class TestNetwork : MonoBehaviourPunCallbacks
         roomOptions.MaxPlayers = 4;
         roomOptions.IsVisible = true;
 
-        PhotonNetwork.JoinOrCreateRoom("YunjuTest", roomOptions, TypedLobby.Default);
+        PhotonNetwork.JoinOrCreateRoom(ServerName, roomOptions, TypedLobby.Default);
     }
 }

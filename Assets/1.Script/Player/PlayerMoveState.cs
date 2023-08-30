@@ -29,7 +29,9 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.Update();
 
-       // if(!player._colChecker.isObstacle)
+        // if(!player._colChecker.isObstacle)
+
+      //  player.transform.Translate(xInput * Vector2.right * player.moveSpeed * Time.deltaTime);
         player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
 
         if (player._colChecker.IsFrontObject())

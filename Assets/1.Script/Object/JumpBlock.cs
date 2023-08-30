@@ -47,6 +47,7 @@ public class JumpBlock : MonoBehaviour
         return player.currState == player.State_idle ||
                player.currState == player.State_move ||
                player.currState == player.State_Air;
+       
     }
 
 

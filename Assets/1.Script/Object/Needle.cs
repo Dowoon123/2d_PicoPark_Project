@@ -1,19 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Needle : MonoBehaviour
 {
 
-    PlayerController player;
 
     [SerializeField] Vector3 CheckRect;
 
     [SerializeField] protected LayerMask IsPlayer;
+    public float jumpForce;
+ 
 
     private void Start()
     {
-        player = GetComponent<PlayerController>();
+
     }
 
 
@@ -37,15 +37,7 @@ public class Needle : MonoBehaviour
 
     private void Update()
     {
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, CheckRect, 0, IsPlayer);
 
-        for (int i = 0; i < colliders.Length; ++i)
-        {
-            var player = colliders[i].GetComponent<PlayerController>();
-          
-            player.isGimmicked = true;
-            
-        }
     }
 
     public void OnDrawGizmos()
@@ -55,20 +47,38 @@ public class Needle : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("Player"))
         {
-            Debug.Log("플레이어는 감지되었음");
+            Debug.Log("부딪힘");
 
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
 
-        
-              //  player.currState = player.State_Hit;
-            
+            if (CanJump(player))
+            {
+                Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
+
+                if (rb != null)
+                {
+
+                    player.stateMachine.ChangeState(player.State_Hit);
+                   
+             
+
+                }
+            }
+
 
         }
     }
-
+    private bool CanJump(PlayerController player)
+    {
+        return player.currState == player.State_idle ||
+               player.currState == player.State_move ||
+               player.currState == player.State_Air
+               || player.currState == player.State_Jump;
+    }
 
 
 }

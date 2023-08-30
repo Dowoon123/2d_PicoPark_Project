@@ -17,11 +17,9 @@ public class Needle : MonoBehaviour
             Rigidbody2D rigidbody2D = collision.transform.GetComponent<Rigidbody2D>();
             PlayerController player = collision.transform.GetComponent<PlayerController>();
 
-            rigidbody2D.AddForce(transform.right * MoveX * player.facingDir, ForceMode2D.Impulse);
+            rigidbody2D.AddForce(transform.right * MoveX * player.facingDir, ForceMode2D.Impulse); 
 
         }
     }
-
-
 
 }

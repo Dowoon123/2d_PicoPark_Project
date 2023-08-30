@@ -259,25 +259,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
 
-    [PunRPC]
-    public void SetParents(int id)
-    {
-        PhotonView parentPhotonView = PhotonView.Find(id);
-
-        parentPhotonView.transform.parent = transform;
-    }
 
 
     [PunRPC]
-    public void DeSetParents(int id)
+    void SetPlayerVelocity(float xVelocity, float yVelocity)
     {
-
-        PhotonView parentPhotonView = PhotonView.Find(id);
-
-        parentPhotonView.transform.parent = null;
-
+        // 框流烙 贸府 肺流
+        SetVelocity(xVelocity, yVelocity);
     }
-
 
 
 }

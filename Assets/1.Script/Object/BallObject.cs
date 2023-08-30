@@ -16,13 +16,15 @@ public class BallObject : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        rb.velocity = Vector3.zero;
+        // 스폰 하자마자 속도값 0으로 줘서 멈춰있게함
+        rb.velocity = Vector3.zero; 
 
 
     }
 
     private void BallMoving()
     {
+        //랜덤값으로 힘을 가함
         randomX = Random.Range(-1f, 1);
         randomY = Random.Range(-1f, 1);
 
@@ -35,12 +37,15 @@ public class BallObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //ball이 brick에 닿은 경우 brick 삭제
         if (collision.collider.CompareTag("Brick"))
             collision.gameObject.SetActive(false);
 
+        //ball이 플레이어에 닿은 경우 공이 움직임 
         else if (collision.collider.CompareTag("Player"))
             BallMoving();
 
+        //ball이 땅에 닿으면 ball 삭제
         else if (collision.collider.CompareTag("Ground"))
             Destroy(gameObject);
     }

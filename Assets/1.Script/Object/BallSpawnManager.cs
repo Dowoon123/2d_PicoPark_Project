@@ -24,7 +24,7 @@ public class BallSpawnManager : MonoBehaviour
 
         foreach (Transform spawnPoint in spawnPoints)
         {
-            if (ballCount < 4) //4c개의 공만 스폰
+            if (ballCount < 4) //4개의 공만 스폰
             {
                 Instantiate(ball, spawnPoint.position, Quaternion.identity);
                 ballCount++;

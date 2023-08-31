@@ -10,6 +10,7 @@ public enum STATE_INFO
     AIR,
     PUSH,
     HIT,
+    DEAD
 }
 
 public class PlayerController : MonoBehaviourPunCallbacks
@@ -56,6 +57,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public PlayerPushState State_Push;
     public PlayerAirPushState State_AirPush;
     public PlayerHitState State_Hit;
+    public PlayerDeadState State_Dead;
+    
     #endregion
 
     public int facingDir { get; set; } = 1;
@@ -94,6 +97,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         State_Air = new PlayerAirState(this, stateMachine, "Idle", STATE_INFO.AIR);
         State_Push = new PlayerPushState(this, stateMachine, "Push", STATE_INFO.PUSH);
         State_Hit = new PlayerHitState(this, stateMachine, "Hit", STATE_INFO.HIT);
+        State_Dead = new PlayerDeadState(this, stateMachine, "Dead", STATE_INFO.DEAD);
         // State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
 
 

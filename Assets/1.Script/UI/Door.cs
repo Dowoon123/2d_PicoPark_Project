@@ -5,39 +5,30 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Door : MonoBehaviour
 {
-    public GameObject door;
-    PlayerController player;
+    public GameObject closedoor;
+    public GameObject opendoor;
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.opendoor.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (door.tag == "Player")
-        {
-          
-        }
+       
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Item"))
 
-            if (player ==Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                Debug.Log("¹®");
-                NextStageReady();
-            }
-        this.door.SetActive(false);
+        {
+            this.closedoor.SetActive(false);
+            this.opendoor.SetActive(true);
+        }
     }
-    private void NextStageReady()
-    {
-          // Destroy(gameObject);
-    }
-
+   
 
 
 

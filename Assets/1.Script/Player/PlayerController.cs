@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public PlayerAirPushState State_AirPush;
     public PlayerHitState State_Hit;
     public PlayerDeadState State_Dead;
-    
+
     #endregion
 
 
@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public GameObject downPlayer;
     public GameObject m_stateCanvas;
     public Text stateTxt;
+    public GameObject nextstage;
 
     public PhotonView pv;
     // Start is called before the first frame update
@@ -104,11 +105,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
 
-       //if( PhotonNetwork.IsMasterClient)
-       //{
-       //     GetComponent<PhotonView>().RPC("testSetCube", RpcTarget.All);
-         
-       //}
+        //if( PhotonNetwork.IsMasterClient)
+        //{
+        //     GetComponent<PhotonView>().RPC("testSetCube", RpcTarget.All);
+
+        //}
 
     }
 
@@ -156,157 +157,207 @@ public class PlayerController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+
+
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            NextStage();
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            ComeBackStage();
+        }
+
+
         if (GetComponent<PhotonView>().IsMine)
         {
             stateMachine.currentState.Update();
 
         }
 
+
         Debug.Log("isGimmicked : " + isGimmicked);
 
     }
 
-    public void SetPlayerCharacter(GameObject obj)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerAbleCharacter = obj;
-    }
-    public GameObject GetPlayerCharacter()
-    {
-        return PlayerAbleCharacter;
-    }
 
-
-    public void SetPlayerNickName(string nick)
-    {
-        nickname = nick;
-    }
-    public string GetPlayerNickName()
-    {
-        return nickname;
-    }
-
-    public void SetPlayerNickNameText(GameObject nick)
-    {
-        NicknameText = nick;
-    }
-    public GameObject GetPlayerNickNameText()
-    {
-        return NicknameText;
-    }
-
-    [PunRPC]
-    public void Flip()
-    {
-        facingDir = facingDir * -1;
-        facingRight = !facingRight;
-
-
-        var flip = GetComponentInChildren<SpriteRenderer>().flipX == true ? false : true;
-        GetComponentInChildren<SpriteRenderer>().flipX = flip;
-
-        if (!flip)
-            _colChecker.playerChecker.transform.localPosition = new Vector2(-0.5f, 0f);
-        else
-            _colChecker.playerChecker.transform.localPosition = new Vector2(0.5f, 0f);
-
-        Debug.Log(facingDir + " " + facingRight);
-    }
-
-
-
-    public void FlipController(float _x)
-    {
-        if (_x > 0 && !facingRight)
+        if (collision.gameObject.CompareTag("Door"))
         {
-            GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
-
-
+            nextstage = collision.gameObject;
         }
-        else if (_x < 0 && facingRight)
+    }
+    public void NextStage()
+    {
+        if (!nextstage)
         {
-            GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
+            Debug.Log("대기");
+        }
+        else if (nextstage)
+        {
+            Debug.Log("스테이지클리어");
+            Time.timeScale = 0;
+            transform.localScale = new Vector3(0, 0, 0);
 
         }
     }
-
-    public bool IsGroundDetected()
+    public void ComeBackStage()
     {
-        // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, WhatIsGround);
-
-
-        var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
-
-        if (box)
+        if (!nextstage)
         {
-            if (box.gameObject.layer == 7)
+            Debug.Log("대기");
+        }
+        else if (nextstage)
+        {
+            Debug.Log("스테이지복귀");
+            Time.timeScale = 1;
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+
+    }
+        public void SetPlayerCharacter(GameObject obj)
+        {
+            PlayerAbleCharacter = obj;
+        }
+        public GameObject GetPlayerCharacter()
+        {
+            return PlayerAbleCharacter;
+        }
+
+
+        public void SetPlayerNickName(string nick)
+        {
+            nickname = nick;
+        }
+        public string GetPlayerNickName()
+        {
+            return nickname;
+        }
+
+        public void SetPlayerNickNameText(GameObject nick)
+        {
+            NicknameText = nick;
+        }
+        public GameObject GetPlayerNickNameText()
+        {
+            return NicknameText;
+        }
+
+        [PunRPC]
+        public void Flip()
+        {
+            facingDir = facingDir * -1;
+            facingRight = !facingRight;
+
+
+            var flip = GetComponentInChildren<SpriteRenderer>().flipX == true ? false : true;
+            GetComponentInChildren<SpriteRenderer>().flipX = flip;
+
+            if (!flip)
+                _colChecker.playerChecker.transform.localPosition = new Vector2(-0.5f, 0f);
+            else
+                _colChecker.playerChecker.transform.localPosition = new Vector2(0.5f, 0f);
+
+            Debug.Log(facingDir + " " + facingRight);
+        }
+
+
+
+        public void FlipController(float _x)
+        {
+            if (_x > 0 && !facingRight)
             {
-                isGround = false;
-                isUpperPlayer = true;
-                downPlayer = box.gameObject;
+                GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
 
 
+            }
+            else if (_x < 0 && facingRight)
+            {
+                GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
+
+            }
+        }
+
+        public bool IsGroundDetected()
+        {
+            // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, WhatIsGround);
+
+
+            var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
+
+            if (box)
+            {
+                if (box.gameObject.layer == 7)
+                {
+                    isGround = false;
+                    isUpperPlayer = true;
+                    downPlayer = box.gameObject;
+
+
+                }
+                else
+                {
+                    isUpperPlayer = false;
+                    downPlayer = null;
+                    isGround = true;
+
+                }
+
+                return true;
             }
             else
+
             {
+
                 isUpperPlayer = false;
                 downPlayer = null;
-                isGround = true;
+                isGround = false;
+                return false;
 
             }
 
-            return true;
         }
-        else
 
+
+        public void ZeroVelocity() => rb.velocity = Vector2.zero;
+
+        public void SetVelocity(float _xVelocity, float _yVelocity)
         {
+            rb.velocity = new Vector2(_xVelocity, _yVelocity);
+            FlipController(_xVelocity);
+        }
 
-            isUpperPlayer = false;
-            downPlayer = null;
-            isGround = false;
-            return false;
+
+
+
+        [PunRPC]
+        public void SetNetPos(int id, Vector2 offset)
+        {
+            GameObject foundObject = PhotonView.Find(id)?.gameObject;
+
+            Vector2 pos = transform.position;
+            pos += offset;
+
+
+            Debug.Log("offset : " + offset + " pos :" + pos);
+            foundObject.transform.position = pos;
+
 
         }
 
-    }
 
 
-    public void ZeroVelocity() => rb.velocity = Vector2.zero;
-
-    public void SetVelocity(float _xVelocity, float _yVelocity)
-    {
-        rb.velocity = new Vector2(_xVelocity, _yVelocity);
-        FlipController(_xVelocity);
-    }
-
-
-
-
-    [PunRPC]
-    public void SetNetPos(int id, Vector2 offset)
-    {
-        GameObject foundObject = PhotonView.Find(id)?.gameObject;
-
-        Vector2 pos = transform.position;
-        pos += offset;
-
-
-        Debug.Log("offset : " + offset + " pos :" + pos);
-        foundObject.transform.position = pos;
+        [PunRPC]
+        void SetPlayerVelocity(float xVelocity, float yVelocity)
+        {
+            // 움직임 처리 로직
+            SetVelocity(xVelocity, yVelocity);
+        }
 
 
     }
-
-
-
-    [PunRPC]
-    void SetPlayerVelocity(float xVelocity, float yVelocity)
-    {
-        // 움직임 처리 로직
-        SetVelocity(xVelocity, yVelocity);
-    }
-
-
-}
 
 
 

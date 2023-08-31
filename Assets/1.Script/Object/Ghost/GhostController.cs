@@ -1,15 +1,19 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class Ghost : MonoBehaviour
+public class GhostController : MonoBehaviour
 {
-    //유령 오브젝트 스크립트
-    //플레이어를 바라보는 수가 0일경우 플레이어들을 향해 달려올것임.
-    //단, 플레이어가 1명이라고 바라볼 경우, 움직일 수 없음.
-    //움직이는 모습과 움직이지 않는 모습을 구현하여 SetActive로 구현할 것임.
-
+   
     //일단 중단, ghost도 플립 구현해야됨.
     //동시에, 플레이어의 방향값도 가져와야됨 
+
+    //스테이트 머신과 컨트롤러가 필요해졌음.\
+    //스테이트 머신은 두개로만 사용할 거임.
+    //IDLE, TRACE 단 두개로만 사용
+    //동시에 플레이어의 상태와 방향값을 모두 체크할거임.
+    //플레이어의 방향값이 유령이 바라보는 방향값과 같다면, 추적할 것이고
+    //같지 않아면. 추적하지 않을 거임.
+    //
 
     Rigidbody2D rb;
 

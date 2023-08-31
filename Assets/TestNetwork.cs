@@ -13,8 +13,8 @@ public class TestNetwork : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.ConnectUsingSettings();
 
-        PhotonNetwork.SendRate = 60; // 초당 30번 데이터 전송
-        PhotonNetwork.SerializationRate = 60; // 직렬화된 데이터를 초당 30번 전송
+        PhotonNetwork.SendRate = 100; // 초당 30번 데이터 전송
+        PhotonNetwork.SerializationRate = 100; // 직렬화된 데이터를 초당 30번 전송
 
     }
 

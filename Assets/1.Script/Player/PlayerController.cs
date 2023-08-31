@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public PlayerHitState State_Hit;
     #endregion
 
+
     public int facingDir { get; set; } = 1;
     protected bool facingRight = false;
 
@@ -76,11 +77,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public GameObject m_stateCanvas;
     public Text stateTxt;
 
+    public PhotonView pv;
     // Start is called before the first frame update
     void Awake()
     {
 
-
+        pv = GetComponent<PhotonView>();
         rb = GetComponent<Rigidbody2D>();
         _colChecker = GetComponent<collideChecker>();
         anim = GetComponentInChildren<Animator>();
@@ -98,9 +100,19 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
 
+       //if( PhotonNetwork.IsMasterClient)
+       //{
+       //     GetComponent<PhotonView>().RPC("testSetCube", RpcTarget.All);
+         
+       //}
 
     }
 
+    //[PunRPC]
+    //public void testSetCube()
+    //{
+    //    testCube = GameObject.Find("cube");
+    //}
 
     [PunRPC]
     public void SetCurrState(STATE_INFO _State)
@@ -263,6 +275,22 @@ public class PlayerController : MonoBehaviourPunCallbacks
     }
 
 
+
+
+    [PunRPC]
+    public void SetNetPos(int id, Vector2 offset)
+    {
+        GameObject foundObject = PhotonView.Find(id)?.gameObject;
+
+        Vector2 pos = transform.position;
+        pos += offset;
+
+
+        Debug.Log("offset : " + offset + " pos :" + pos);
+        foundObject.transform.position = pos;
+
+
+    }
 
 
 

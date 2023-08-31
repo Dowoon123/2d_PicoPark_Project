@@ -72,6 +72,7 @@ MonoBehaviour:
   downPlayer: {fileID: 0}
   m_stateCanvas: {fileID: 6830420126521348273}
   stateTxt: {fileID: 4381767187221874521}
+  pv: {fileID: 0}
 --- !u!114 &7231762172251750450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +101,7 @@ MonoBehaviour:
   obstacleObject: {fileID: 0}
   pushedObject: {fileID: 0}
   UpsidePlayers: []
+  upPosition: []
 --- !u!114 &7903635664497791704
 MonoBehaviour:
   m_ObjectHideFlags: 0

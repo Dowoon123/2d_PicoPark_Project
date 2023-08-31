@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UIElements;
 
 public class collideChecker : MonoBehaviour
 {
@@ -25,8 +25,8 @@ public class collideChecker : MonoBehaviour
     public GameObject obstacleObject;
     public GameObject pushedObject;
 
-    public List<PlayerController> UpsidePlayers;
-
+    public List<PlayerController> UpsidePlayers = new List<PlayerController>(); 
+    public List<Vector2> upPosition = new List<Vector2>();
     private void OnCollisionStay2D(Collision2D collision)
     {
 
@@ -64,7 +64,7 @@ public class collideChecker : MonoBehaviour
         var colBox = Physics2D.OverlapBoxAll(pos, new Vector2(0.8f, 10.0f), 0, WhatIsObstacle);
         Debug.Log(colBox.Length);
         UpsidePlayers.Clear();
-
+        upPosition.Clear();
         if (colBox.Length > 0)
         {
            for(int i=0; i< colBox.Length; ++i)
@@ -74,10 +74,15 @@ public class collideChecker : MonoBehaviour
                     var pc = colBox[i].gameObject.GetComponent<PlayerController>();
                      
 
-                    if(pc.currState is PlayerGroundedState)
+                    if(pc.currState is PlayerIdleState)
                     {
-                        if(pc != player)
-                        UpsidePlayers.Add(pc);
+                        if (pc != player)
+                        {
+                            UpsidePlayers.Add(pc);
+                    
+                            upPosition.Add(new Vector2(pc.transform.position.x - player.transform.position.x,
+                                pc.transform.position.y - player.transform.position.y));
+                        }
                     }
                      
 

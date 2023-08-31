@@ -59,13 +59,17 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.State_Jump);
         }
 
-        if (player._colChecker.UpsidePlayers.Count > 0)
-        {
 
+
+        if (player._colChecker.UpsidePlayers.Count > 0 && xInput != 0)
+        {
             for (int i = 0; i < player._colChecker.UpsidePlayers.Count; i++)
             {
-               
+                    int view = player._colChecker.UpsidePlayers[i].pv.ViewID;
+                    player.pv.RPC("SetNetPos", RpcTarget.All,
+                      view, player._colChecker.upPosition[i]);
+                
             }
-        }  
+        }
     }
 }

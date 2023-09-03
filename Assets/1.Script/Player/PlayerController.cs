@@ -165,10 +165,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
 
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                NextStage();
-            }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            NextStage();
+        }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             ComeBackStage();
@@ -188,38 +189,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     }
 
-
-
-    public void SetPlayerCharacter(GameObject obj)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
 
-
-        Debug.Log("isGimmicked : " + isGimmicked);
-
+        if (collision.gameObject.CompareTag("Door"))
+        {
+            nextstage = collision.gameObject;
+        }
     }
-
-
-    public void SetPlayerNickName(string nick)
-    {
-        nickname = nick;
-    }
-    public string GetPlayerNickName()
-    {
-        return nickname;
-    }
-
-    public void SetPlayerNickNameText(GameObject nick)
-    {
-        NicknameText = nick;
-    }
-    public GameObject GetPlayerNickNameText()
-    {
-        return NicknameText;
-    }
-
-
-
-
     public void NextStage()
     {
         if (!nextstage)
@@ -248,102 +225,117 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
 
     }
-
-    [PunRPC]
-    public void Flip()
-    {
-        facingDir = facingDir * -1;
-        facingRight = !facingRight;
-
-
-        var flip = GetComponentInChildren<SpriteRenderer>().flipX == true ? false : true;
-        GetComponentInChildren<SpriteRenderer>().flipX = flip;
-
-        if (!flip)
-            _colChecker.playerChecker.transform.localPosition = new Vector2(-0.5f, 0f);
-        else
-            _colChecker.playerChecker.transform.localPosition = new Vector2(0.5f, 0f);
-
-        Debug.Log(facingDir + " " + facingRight);
-    }
-
-
-
-    public void FlipController(float _x)
-    {
-        if (_x > 0 && !facingRight)
+        public void SetPlayerCharacter(GameObject obj)
         {
-
-            isGround = false;
-            isUpperPlayer = true;
-          //  downPlayer = box.transform.parent.gameObject;
-
-            GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
-
-
+            PlayerAbleCharacter = obj;
         }
-        else if (_x < 0 && facingRight)
+        public GameObject GetPlayerCharacter()
         {
-            GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
-
+            return PlayerAbleCharacter;
         }
-    }
-
-    public bool IsGroundDetected()
-    {
-        // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, WhatIsGround);
 
 
-        var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
-
-        if (box)
+        public void SetPlayerNickName(string nick)
         {
-            if (box.gameObject.layer == 7)
+            nickname = nick;
+        }
+        public string GetPlayerNickName()
+        {
+            return nickname;
+        }
+
+        public void SetPlayerNickNameText(GameObject nick)
+        {
+            NicknameText = nick;
+        }
+        public GameObject GetPlayerNickNameText()
+        {
+            return NicknameText;
+        }
+
+        [PunRPC]
+        public void Flip()
+        {
+            facingDir = facingDir * -1;
+            facingRight = !facingRight;
+
+
+            var flip = GetComponentInChildren<SpriteRenderer>().flipX == true ? false : true;
+            GetComponentInChildren<SpriteRenderer>().flipX = flip;
+
+            if (!flip)
+                _colChecker.playerChecker.transform.localPosition = new Vector2(-0.5f, 0f);
+            else
+                _colChecker.playerChecker.transform.localPosition = new Vector2(0.5f, 0f);
+
+            Debug.Log(facingDir + " " + facingRight);
+        }
+
+
+
+        public void FlipController(float _x)
+        {
+            if (_x > 0 && !facingRight)
             {
-                isGround = false;
-                isUpperPlayer = true;
-                downPlayer = box.gameObject;
+                GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
 
 
+            }
+            else if (_x < 0 && facingRight)
+            {
+                GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
+
+            }
+        }
+
+        public bool IsGroundDetected()
+        {
+            // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDist, WhatIsGround);
+
+
+            var box = Physics2D.OverlapBox(GroundChecker.position, new Vector2(0.49f, 0.15f), 0, WhatIsGround);
+
+            if (box)
+            {
+                if (box.gameObject.layer == 7)
+                {
+                    isGround = false;
+                    isUpperPlayer = true;
+                    downPlayer = box.gameObject;
+
+
+                }
+                else
+                {
+                    isUpperPlayer = false;
+                    downPlayer = null;
+                    isGround = true;
+
+                }
+
+                return true;
             }
             else
+
             {
+
                 isUpperPlayer = false;
                 downPlayer = null;
-                isGround = true;
+                isGround = false;
+                return false;
 
             }
 
-            return true;
         }
-        else
 
+
+        public void ZeroVelocity() => rb.velocity = Vector2.zero;
+
+        public void SetVelocity(float _xVelocity, float _yVelocity)
         {
-
-            isUpperPlayer = false;
-            downPlayer = null;
-            isGround = false;
-            return false;
-
+            rb.velocity = new Vector2(_xVelocity, _yVelocity);
+            FlipController(_xVelocity);
         }
-
-    }
-
-
-
-
-
-
-
-
-
-    public void ZeroVelocity() => rb.velocity = Vector2.zero;
-
-    public void SetVelocity(float _xVelocity, float _yVelocity)
-    {
-        rb.velocity = new Vector2(_xVelocity, _yVelocity);
-        FlipController(_xVelocity);
-    }
 
 
 
@@ -387,7 +379,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     }
 
-}
+    }
 
 
 

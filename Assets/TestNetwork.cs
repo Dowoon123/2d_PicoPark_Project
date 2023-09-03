@@ -27,7 +27,7 @@ public class TestNetwork : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("Pl/Test", new Vector3(1, 2, 0), Quaternion.identity);
+        PhotonNetwork.Instantiate("Pl/Players", new Vector3(1, 2, 0), Quaternion.identity);
     }
 
     public override void OnJoinedLobby()

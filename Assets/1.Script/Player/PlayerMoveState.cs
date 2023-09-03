@@ -36,7 +36,15 @@ public class PlayerMoveState : PlayerGroundedState
         //  player.transform.Translate(xInput * Vector2.right * player.moveSpeed * Time.deltaTime);
         //   player.SetVelocity(, );
 
-         // player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
+
+
+
+       //   player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
+
+          
+
+
+
         player.pv.RPC("SetPlayerVelocity", RpcTarget.All, xInput * player.moveSpeed, rb.velocity.y);
 
         if (player._colChecker.IsFrontObject())

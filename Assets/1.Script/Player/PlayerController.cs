@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +29,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public PhotonView pv;
     public int prevId;
     public bool isTransfer;
+    public Vector2[] offsetArray = new Vector2[4];
+    public PlayerController[] upsideArray = new PlayerController[4];
+    public int arrayLength = 0;
+    public int offsetIndex = 10;
     #endregion
 
 
@@ -88,7 +93,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public bool isGround = false;
     public bool isUpperPlayer = false;
     public bool isGimmicked = false; //8.30 ï¿½ï¿½ï¿?ï¿½ï¿½ï¿½ï¿½ ï¿½Ûµï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½
-    public GameObject downPlayer;
+    public PlayerController downPlayer;
     public GameObject m_stateCanvas;
     public Text stateTxt;
     public GameObject nextstage;
@@ -211,7 +216,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         }
     }
-    public void ComeBackStage()
+         public void ComeBackStage()
     {
         if (!nextstage)
         {
@@ -301,7 +306,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
                 {
                     isGround = false;
                     isUpperPlayer = true;
-                    downPlayer = box.gameObject;
+                     downPlayer = box.gameObject.GetComponentInParent<PlayerController>();
 
 
                 }
@@ -335,6 +340,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
         {
             rb.velocity = new Vector2(_xVelocity, _yVelocity);
             FlipController(_xVelocity);
+
+        
         }
 
 
@@ -356,7 +363,57 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     }
 
+    [PunRPC]
+    public void SetOffset(int viewID , Vector2 offset)
+    {
+       // ¸ÕÀú »ó´ë¿¡°Ô offSetList¸¦ Áà¾ßÇÏ°í ±× offSetList¸¦ ºñ±³ÇØ¼­
+       // ¸¸¾à°Å±â ³»¿ø·¡ ÁÂÇ¥°¡ÀÖ¾ú´Ù¸é ±×°É ¾ø¾Ö°í ³»²¬³Ö´Â´Ù. 
 
+
+        var player = PhotonView.Find(viewID);
+        var pcl = player.GetComponent<PlayerController>();
+
+        if (offsetIndex == 10)
+        {
+            for (int i = 0; i < pcl.offsetArray.Length; ++i)
+            {
+
+                if (pcl.offsetArray[i] == Vector2.zero)
+                {
+                    pcl.offsetArray[i] = offset;
+                    offsetIndex = i;
+                    pcl.upsideArray[i] = this;
+
+                    Debug.Log("¿ÀÇÁ¼Â :" + i + " ¹øÂ°¿¡ " + pcl.offsetArray[i] + " Àû¿ë");
+                    pcl.arrayLength += 1;
+                    return;
+                }
+            }
+        }
+        else
+        {
+            pcl.offsetArray[offsetIndex] = offset;
+            pcl.arrayLength += 1;
+            pcl.upsideArray[offsetIndex] = this;
+            Debug.Log("¿ÀÇÁ¼Â :" + offsetIndex + " ¹øÂ°¿¡ " + pcl.offsetArray[offsetIndex] + " Àû¿ë , ÀÌ¹Ì ÀÖÀ»¶§");
+
+        }
+
+    }
+    [PunRPC]
+    public void DeSetOffset(int viewID)
+    {
+
+
+        var player = PhotonView.Find(viewID);
+        var pcl = player.GetComponent<PlayerController>();
+
+        pcl.offsetArray[offsetIndex] = Vector2.zero;
+        pcl.upsideArray[offsetIndex] = null;
+        offsetIndex = 10;
+        pcl.arrayLength -= 1;
+
+    }
 
 
     [PunRPC]
@@ -364,7 +421,23 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
 
         SetVelocity(xVelocity, yVelocity);
-        Debug.Log("player: " + pv.ViewID);
+
+
+        if (arrayLength > 0)
+        {
+            for (int i = 0; i < upsideArray.Length; i++)
+            {
+                if (upsideArray[i] != null)
+                {
+                    Vector2 targetPos = transform.position;
+                    targetPos += offsetArray[upsideArray[i].offsetIndex];
+                    upsideArray[i].transform.position = targetPos;
+                }
+
+            }
+
+        }
+
     }
 
 

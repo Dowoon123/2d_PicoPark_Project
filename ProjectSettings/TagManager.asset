@@ -9,6 +9,8 @@ TagManager:
   - Brick
   - Ground
   - Wall
+  - Door
+  - Item
   layers:
   - Default
   - TransparentFX

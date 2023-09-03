@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class PlayerJumpState : PlayerState
         rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
 
         //player._colChecker.JumpCollider(true);
-        Debug.Log("점프진입");
+        //Debug.Log("점프진입");
            
     }
 
@@ -38,11 +39,15 @@ public class PlayerJumpState : PlayerState
         if (player._colChecker.IsFrontObject())
         {
             player.SetVelocity(0, player.rb.velocity.y);
+            //player.pv.RPC("SetPlayerVelocity", RpcTarget.All, 0, player.rb.velocity.y);
         }
         else
         {
             if (xInput != 0)
+            {
                 player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
+               // player.pv.RPC("SetPlayerVelocity", RpcTarget.All, player.moveSpeed * 0.8f * xInput , player.rb.velocity.y);
+            }
         }
 
         if (player.isGimmicked)

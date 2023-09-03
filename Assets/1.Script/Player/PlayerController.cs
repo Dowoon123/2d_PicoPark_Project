@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,16 +11,24 @@ public enum STATE_INFO
     AIR,
     PUSH,
     HIT,
-    DEAD
+    DEAD,
+    STAIR,
+
 }
 
 public class PlayerController : MonoBehaviourPunCallbacks
 {
     public STATE_INFO currStateEnum = STATE_INFO.IDLE;
-    // ÇÃ·¹ÀÌ¾îÀÇ Á¤º¸¸¦ ´ã°í ÀÖ´Ù. ÀÌ Á¤º¸´Â
-    // ´Ð³×ÀÓ, ´Ð³×ÀÓ UI Text , ±×¸®°í Player°¡ º¸À¯ÇÑ Á¶ÀÛ°¡´ÉÇÑ ¿ÀºêÁ§Æ®¸¦ °¡Áö°í ÀÖ´Ù. 
 
 
+    #region network
+    private Vector2 networkPostion;
+    private Vector2 networkVelocity;
+    private float serverTime;
+    public PhotonView pv;
+    public int prevId;
+    public bool isTransfer;
+    #endregion
 
 
     #region collision
@@ -58,7 +67,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public PlayerAirPushState State_AirPush;
     public PlayerHitState State_Hit;
     public PlayerDeadState State_Dead;
-    
+    public PlayerStairState State_Stair;
+
+
+
     #endregion
 
 
@@ -75,12 +87,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     public bool isGround = false;
     public bool isUpperPlayer = false;
-    public bool isGimmicked = false; //8.30 ±â¹Í ÆÐÅÏ ÀÛµ¿ ¿©ºÎ¸¦ À§ÇØ Ãß°¡ÇÏ¿´À½
+    public bool isGimmicked = false; //8.30 ï¿½ï¿½ï¿?ï¿½ï¿½ï¿½ï¿½ ï¿½Ûµï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½
     public GameObject downPlayer;
     public GameObject m_stateCanvas;
     public Text stateTxt;
+    public GameObject nextstage;
 
-    public PhotonView pv;
     // Start is called before the first frame update
     void Awake()
     {
@@ -100,23 +112,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
         State_Push = new PlayerPushState(this, stateMachine, "Push", STATE_INFO.PUSH);
         State_Hit = new PlayerHitState(this, stateMachine, "Hit", STATE_INFO.HIT);
         State_Dead = new PlayerDeadState(this, stateMachine, "Dead", STATE_INFO.DEAD);
+        State_Stair = new PlayerStairState(this, stateMachine, "Idle", STATE_INFO.STAIR);
         // State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
 
 
 
-       //if( PhotonNetwork.IsMasterClient)
-       //{
-       //     GetComponent<PhotonView>().RPC("testSetCube", RpcTarget.All);
-         
-       //}
+
 
     }
 
-    //[PunRPC]
-    //public void testSetCube()
-    //{
-    //    testCube = GameObject.Find("cube");
-    //}
 
     [PunRPC]
     public void SetCurrState(STATE_INFO _State)
@@ -142,6 +146,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
             case STATE_INFO.HIT:
                 st = State_Hit;
                 break;
+            case STATE_INFO.STAIR:
+                st = State_Stair;
+                break;
         }
 
         currState = st;
@@ -156,23 +163,39 @@ public class PlayerController : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<PhotonView>().IsMine)
+
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                NextStage();
+            }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
+            ComeBackStage();
+        }
+
+
+        if (GetComponent<PhotonView>().IsMine)
+
+        {
+
             stateMachine.currentState.Update();
 
         }
 
-        Debug.Log("isGimmicked : " + isGimmicked);
+
+
 
     }
+
+
 
     public void SetPlayerCharacter(GameObject obj)
     {
-        PlayerAbleCharacter = obj;
-    }
-    public GameObject GetPlayerCharacter()
-    {
-        return PlayerAbleCharacter;
+
+
+        Debug.Log("isGimmicked : " + isGimmicked);
+
     }
 
 
@@ -192,6 +215,38 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public GameObject GetPlayerNickNameText()
     {
         return NicknameText;
+    }
+
+
+
+
+    public void NextStage()
+    {
+        if (!nextstage)
+        {
+            Debug.Log("´ë±â");
+        }
+        else if (nextstage)
+        {
+            Debug.Log("½ºÅ×ÀÌÁöÅ¬¸®¾î");
+            Time.timeScale = 0;
+            transform.localScale = new Vector3(0, 0, 0);
+
+        }
+    }
+    public void ComeBackStage()
+    {
+        if (!nextstage)
+        {
+            Debug.Log("´ë±â");
+        }
+        else if (nextstage)
+        {
+            Debug.Log("½ºÅ×ÀÌÁöº¹±Í");
+            Time.timeScale = 1;
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+
     }
 
     [PunRPC]
@@ -218,6 +273,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         if (_x > 0 && !facingRight)
         {
+
+            isGround = false;
+            isUpperPlayer = true;
+          //  downPlayer = box.transform.parent.gameObject;
+
             GetComponent<PhotonView>().RPC("Flip", RpcTarget.All);
 
 
@@ -270,6 +330,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
     }
 
 
+
+
+
+
+
+
+
     public void ZeroVelocity() => rb.velocity = Vector2.zero;
 
     public void SetVelocity(float _xVelocity, float _yVelocity)
@@ -282,35 +349,51 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
     [PunRPC]
-    public void SetNetPos(int id, Vector2 offset)
+    public void SetTransform(Vector2 target)
     {
-        GameObject foundObject = PhotonView.Find(id)?.gameObject;
+        transform.position = target;
 
-        Vector2 pos = transform.position;
-        pos += offset;
+        [PunRPC]
+        void SetPlayerVelocity(float xVelocity, float yVelocity)
+        {
+            // ¿òÁ÷ÀÓ Ã³¸® ·ÎÁ÷
+            SetVelocity(xVelocity, yVelocity);
+        }
 
-
-        Debug.Log("offset : " + offset + " pos :" + pos);
-        foundObject.transform.position = pos;
 
 
     }
+
 
 
 
     [PunRPC]
     void SetPlayerVelocity(float xVelocity, float yVelocity)
     {
-        // ¿òÁ÷ÀÓ Ã³¸® ·ÎÁ÷
+
         SetVelocity(xVelocity, yVelocity);
+        Debug.Log("player: " + pv.ViewID);
     }
 
+
+
+    [PunRPC]
+    void SendOwner(int viewId)
+    {
+
+        pv.TransferOwnership(viewId);
+        isTransfer = true;
+
+
+    }
 
 }
 
 
 
+
 // ÇÃ·¹ÀÌ¾î°¡ °ø¿¡ ´êÀ¸¸é Æ¨°ÜÁö´Â ºÎºÐ ±¸ÇöÁß
+
 //private void OnCollisionEnter2D(Collision2D collision)
 //{
 //    float[] arrAngles = { -75, -60, -45, -30, -15, 0, 15, 30, 45, 60, 75 };

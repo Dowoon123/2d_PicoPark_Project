@@ -33,11 +33,11 @@ public class PlayerMoveState : PlayerGroundedState
 
         // if(!player._colChecker.isObstacle)
 
-      //  player.transform.Translate(xInput * Vector2.right * player.moveSpeed * Time.deltaTime);
-     //   player.SetVelocity(, );
+        //  player.transform.Translate(xInput * Vector2.right * player.moveSpeed * Time.deltaTime);
+        //   player.SetVelocity(, );
 
-        
-       player.GetComponent<PhotonView>().RPC("SetPlayerVelocity", RpcTarget.All, xInput * player.moveSpeed, rb.velocity.y);
+         // player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
+        player.pv.RPC("SetPlayerVelocity", RpcTarget.All, xInput * player.moveSpeed, rb.velocity.y);
 
         if (player._colChecker.IsFrontObject())
         {
@@ -65,9 +65,16 @@ public class PlayerMoveState : PlayerGroundedState
                 }
             }
         }
-        
+
         if (xInput == 0)
+        {
+            if(player.isGround)
             stateMachine.ChangeState(player.State_idle);
+            else if ( player.isUpperPlayer)
+            stateMachine.ChangeState(player.State_Stair);
+
+        }
+
 
         if (player.isGimmicked)
             stateMachine.ChangeState(player.State_Hit);

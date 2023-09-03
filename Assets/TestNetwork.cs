@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Realtime;
 
-public class TestNetwork : MonoBehaviourPunCallbacks
+public class TestNetwork : MonoBehaviourPunCallbacks 
 {
     [Header("자기 맵에 빈 오브젝트 생성 후 이 컴포넌트 넣고 아래 ServerName에 자기가원하는 이름넣기")]
     [SerializeField] string ServerName;
@@ -13,8 +13,8 @@ public class TestNetwork : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.ConnectUsingSettings();
 
-        PhotonNetwork.SendRate = 60; // 초당 30번 데이터 전송
-        PhotonNetwork.SerializationRate = 60; // 직렬화된 데이터를 초당 30번 전송
+        PhotonNetwork.SendRate = 422; // 초당 30번 데이터 전송
+        PhotonNetwork.SerializationRate = 222; // 직렬화된 데이터를 초당 30번 전송
 
     }
 
@@ -27,7 +27,7 @@ public class TestNetwork : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("Pl/Test", new Vector3(1, 2, 0), Quaternion.identity);
+        PhotonNetwork.Instantiate("Pl/Players", new Vector3(1, 2, 0), Quaternion.identity);
     }
 
     public override void OnJoinedLobby()

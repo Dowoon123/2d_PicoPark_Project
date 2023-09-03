@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UIElements;
 
 public class collideChecker : MonoBehaviour
 {
@@ -25,8 +25,8 @@ public class collideChecker : MonoBehaviour
     public GameObject obstacleObject;
     public GameObject pushedObject;
 
-    public List<PlayerController> UpsidePlayers;
-
+    public List<PlayerController> UpsidePlayers = new List<PlayerController>(); 
+    public List<Vector2> upPosition = new List<Vector2>();
     private void OnCollisionStay2D(Collision2D collision)
     {
 
@@ -43,7 +43,7 @@ public class collideChecker : MonoBehaviour
     {
       //   isObstacle = IsObstacleDetected();
         isPlayer = IsFrontObject();
-        IsUpsideDetected();
+      //  IsUpsideDetected();
 
        
     }
@@ -55,39 +55,44 @@ public class collideChecker : MonoBehaviour
         Gizmos.DrawCube(pos, new Vector3(1, 10, 0));
         // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
     }
-    public virtual void IsUpsideDetected()
-    {
+    //public virtual void IsUpsideDetected()
+    //{
 
-        var pos = transform.position;
-        pos.y += 5.0f;
+    //    var pos = transform.position;
+    //    pos.y += 5.0f;
         
-        var colBox = Physics2D.OverlapBoxAll(pos, new Vector2(0.8f, 10.0f), 0, WhatIsObstacle);
-        Debug.Log(colBox.Length);
-        UpsidePlayers.Clear();
-
-        if (colBox.Length > 0)
-        {
-           for(int i=0; i< colBox.Length; ++i)
-            {
-                if (colBox[i].gameObject.layer == 6)
-                {
-                    var pc = colBox[i].gameObject.GetComponent<PlayerController>();
+    //    var colBox = Physics2D.OverlapBoxAll(pos, new Vector2(0.8f, 10.0f), 0, WhatIsObstacle);
+    //  //  Debug.Log(colBox.Length);
+    //    UpsidePlayers.Clear();
+    //    upPosition.Clear();
+    //    if (colBox.Length > 0)
+    //    {
+    //       for(int i=0; i< colBox.Length; ++i)
+    //        {
+    //            if (colBox[i].gameObject.layer == 6)
+    //            {
+    //                var pc = colBox[i].gameObject.GetComponent<PlayerController>();
                      
 
-                    if(pc.currState is PlayerGroundedState)
-                    {
-                        if(pc != player)
-                        UpsidePlayers.Add(pc);
-                    }
+    //                if(pc.currState is PlayerIdleState)
+    //                {
+    //                    if (pc != player)
+    //                    {
+    //                        UpsidePlayers.Add(pc);
+                    
+    //                        upPosition.Add(new Vector2(pc.transform.position.x - player.transform.position.x,
+    //                            pc.transform.position.y - player.transform.position.y));
+    //                    }
+    //                }
                      
 
-                }
-            }
+    //            }
+    //        }
         
-        }
+    //    }
 
 
-    }
+    //}
     
     public virtual bool IsFrontObject()
     {

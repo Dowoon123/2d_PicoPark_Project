@@ -21,7 +21,7 @@ public class PlayerGroundedState : PlayerState
     {
         base.Enter();
 
-        Debug.Log(" 그라운드 상태 진입");
+    //    Debug.Log(" 그라운드 상태 진입");
         player.SetVelocity(player.rb.velocity.x, 0);
   
     }
@@ -54,18 +54,14 @@ public class PlayerGroundedState : PlayerState
 
         if (Input.GetKeyDown(KeyCode.Space) && (player.isUpperPlayer || player.isGround))
         {
-
-
             stateMachine.ChangeState(player.State_Jump);
         }
 
-        if (player._colChecker.UpsidePlayers.Count > 0)
-        {
 
-            for (int i = 0; i < player._colChecker.UpsidePlayers.Count; i++)
-            {
-               
-            }
-        }  
+
+
+        if (player.isGimmicked)
+            stateMachine.ChangeState(player.State_Hit);
+
     }
 }

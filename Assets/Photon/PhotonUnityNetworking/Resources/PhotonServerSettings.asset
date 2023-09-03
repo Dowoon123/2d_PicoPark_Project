@@ -60,6 +60,19 @@ MonoBehaviour:
   - CanBeStunned
   - Setvelocity_network
   - SetPlayerVelocity
+  - SetOtherVelocity
+  - testSetCube
+  - SetNetPos
+  - SetV
+  - SetTransform
+  - SendOwner
+  - Test
+  - takeOver
+  - <SetTransform>g__SetPlayerVelocity|62_0
+  - <SetTransform>g__SetPlayerVelocity|64_0
+  - DeSetOffset
+  - SetOffset
+  - <SetTransform>g__SetPlayerVelocity|66_0
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

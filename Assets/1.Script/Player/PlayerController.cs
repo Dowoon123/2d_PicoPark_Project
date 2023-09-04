@@ -159,15 +159,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
 
 
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            NextStage();
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            ComeBackStage();
-        }
+        // 이부분 Groun
+      
 
 
         if (GetComponent<PhotonView>().IsMine)
@@ -181,42 +174,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-
-        if (collision.gameObject.CompareTag("Door"))
-        {
-            nextstage = collision.gameObject;
-        }
-    }
-    public void NextStage()
-    {
-        if (!nextstage)
-        {
-            Debug.Log("대기");
-        }
-        else if (nextstage)
-        {
-            Debug.Log("스테이지클리어");
-            Time.timeScale = 0;
-            transform.localScale = new Vector3(0, 0, 0);
-
-        }
-    }
-    public void ComeBackStage()
-    {
-        if (!nextstage)
-        {
-            Debug.Log("대기");
-        }
-        else if (nextstage)
-        {
-            Debug.Log("스테이지복귀");
-            Time.timeScale = 1;
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-
-    }
+   
         public void SetPlayerCharacter(GameObject obj)
         {
             PlayerAbleCharacter = obj;
@@ -357,7 +315,24 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
 
 
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        // State 객체는 컬라이더를 가지고 있지않아서 OnTriggerEnter2D가 작동하지않습니다.
+        // 제가보기엔 이 충돌체크는 문에서 처리해야할거같아요 : Class Door
+
+        // 문에서 충돌체크를하면 collision.gameObject.Getcomponent<PlayerController>().nextStage = this.gameobject; 
+        Debug.Log("콜리젼체크시도 ");
+        if (collision.gameObject.CompareTag("Door"))
+        {
+            nextstage = collision.gameObject;
+            Debug.Log("콜리젼체크 " + nextstage);
+        }
+     
     }
+
+}
+
 
 
 

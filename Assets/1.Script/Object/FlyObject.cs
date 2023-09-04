@@ -37,9 +37,16 @@ public class FlyObject : MonoBehaviour
         if (collision.gameObject.tag == "Wall")
         {
             Destroy(gameObject);
-            anim.SetBool("Die", true);
+            GameOver();
         }
     }
 
+    private void GameOver()
+    {
+        anim.SetBool("Die", true);
+        
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody.velocity = Vector3.zero;
 
+    }
 }

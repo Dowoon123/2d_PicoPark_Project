@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4580050226671395541}
   - component: {fileID: 3827287259633228723}
   m_Layer: 6
-  m_Name: Players
+  m_Name: Players 1
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ Transform:
   - {fileID: 5760213522512054422}
   - {fileID: 8778650977284812276}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2757447035617570045
 MonoBehaviour:
@@ -76,8 +76,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 896
   GroundChecker: {fileID: 5760213522512054422}
-  rb: {fileID: 7843777958636402597}
-  _colChecker: {fileID: 1412438795355307788}
+  rb: {fileID: 0}
+  _colChecker: {fileID: 0}
   anim: {fileID: 0}
   jumpForce: 25
   moveSpeed: 7.5
@@ -657,7 +657,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1971215315, guid: 5816ef42d50cbb146be4c30d687368dd, type: 3}
+  m_Sprite: {fileID: -998349764, guid: 4c4e4c5e2cac3a141a90c1f2af6db2bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -714,7 +714,7 @@ Animator:
   m_GameObject: {fileID: 6111835562836215029}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 21f2d625d732c6d44aa5c45c6696355a, type: 2}
+  m_Controller: {fileID: 9100000, guid: d7a56844f6069a04fbd92206e8d258cc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

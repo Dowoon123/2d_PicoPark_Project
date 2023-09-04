@@ -15552,6 +15552,26 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5760213522512054422, guid: 69648a41c65e6e54d8d851f3bc4012c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5760213522512054422, guid: 69648a41c65e6e54d8d851f3bc4012c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 6206053477117673521, guid: 69648a41c65e6e54d8d851f3bc4012c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.445
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675113131215433105, guid: 69648a41c65e6e54d8d851f3bc4012c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.046
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675113131215433105, guid: 69648a41c65e6e54d8d851f3bc4012c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

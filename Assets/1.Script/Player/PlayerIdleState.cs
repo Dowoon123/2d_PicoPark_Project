@@ -14,7 +14,7 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Enter();
 
-        Debug.Log(" Idle 상태 진입");
+       // Debug.Log(" Idle 상태 진입");
         player._colChecker.JumpCollider(false);
 
         player.SetVelocity(0, rb.velocity.y);

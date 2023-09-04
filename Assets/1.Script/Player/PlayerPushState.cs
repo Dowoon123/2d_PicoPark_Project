@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,10 +39,14 @@ public class PlayerPushState : PlayerGroundedState
             Debug.Log(player._colChecker.obstacleObject);
 
             if (!box.isCheckPush)
-                player.SetVelocity(0, player.rb.velocity.y);
+            {
+                 player.SetVelocity(0, player.rb.velocity.y);
+                //player.pv.RPC("SetPlayerVelocity", RpcTarget.All,0, player.rb.velocity.y);
+            }
             else
             {
-                player.SetVelocity(xInput * player.moveSpeed * 0.4f, 0);
+                 player.SetVelocity(xInput * player.moveSpeed * 0.4f, 0);
+                //player.pv.RPC("SetPlayerVelocity", RpcTarget.All, xInput * player.moveSpeed * 0.4f, 0);
                 box.gameObject.GetComponent<Rigidbody2D>().velocity = player.rb.velocity;
             }
         }

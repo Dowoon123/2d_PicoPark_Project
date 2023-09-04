@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle
+  m_Name: GreenJump
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,15 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 847218384, guid: a2bdaa1555554494e9c52ee9783fcc33, type: 3}
+      value: {fileID: 1372021228, guid: 01f9de4a84b4bee4490dbcf30d0bb411, type: 3}
+    - time: 0.06666667
+      value: {fileID: 1372021228, guid: 01f9de4a84b4bee4490dbcf30d0bb411, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
     flags: 2
-  m_SampleRate: 12
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -44,7 +46,8 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 847218384, guid: a2bdaa1555554494e9c52ee9783fcc33, type: 3}
+    - {fileID: 1372021228, guid: 01f9de4a84b4bee4490dbcf30d0bb411, type: 3}
+    - {fileID: 1372021228, guid: 01f9de4a84b4bee4490dbcf30d0bb411, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

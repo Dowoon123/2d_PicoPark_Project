@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class PlayerAirState : PlayerState
         base.Enter();
 
 
-        Debug.Log("에어진입");
+       // Debug.Log("에어진입");
 
         player._colChecker.JumpCollider(false);
     }
@@ -30,16 +31,27 @@ public class PlayerAirState : PlayerState
         base.Update();
 
         if (player.IsGroundDetected())
-            stateMachine.ChangeState(player.State_idle);
+        {
+
+            if(player.isUpperPlayer)
+            stateMachine.ChangeState(player.State_Stair);
+            else if(player.isGround)
+             stateMachine.ChangeState(player.State_idle);
+
+        }
 
 
         if (player._colChecker.IsFrontObject())
+        {
             player.SetVelocity(0, player.rb.velocity.y);
+            //player.pv.RPC("SetPlayerVelocity", RpcTarget.All, 0, rb.velocity.y);
+        }
         else
         {
             if (xInput != 0)
             {
                 player.SetVelocity(player.moveSpeed * 0.8f * xInput, rb.velocity.y);
+             //   player.pv.RPC("SetPlayerVelocity", RpcTarget.All, player.moveSpeed * 0.8f * xInput, rb.velocity.y);
 
 
             }

@@ -19,7 +19,7 @@ public class PlayerGroundedState : PlayerState
     {
         base.Enter();
 
-        Debug.Log(" 그라운드 상태 진입");
+    //    Debug.Log(" 그라운드 상태 진입");
         player.SetVelocity(player.rb.velocity.x, 0);
 
     }

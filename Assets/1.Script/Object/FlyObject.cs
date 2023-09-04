@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-//플레이어의 움직임에따라 비행기가 어떻게 움직일지 결정됨
+
 public class FlyObject : MonoBehaviour
 {
     public float Speed;
@@ -37,12 +37,16 @@ public class FlyObject : MonoBehaviour
         if (collision.gameObject.tag == "Wall")
         {
             Destroy(gameObject);
-            Die();
+            GameOver();
         }
     }
 
-    private void Die()
+    private void GameOver()
     {
-        anim.SetTrigger("Die");
+        anim.SetBool("Die", true);
+        
+        Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody.velocity = Vector3.zero;
+
     }
 }

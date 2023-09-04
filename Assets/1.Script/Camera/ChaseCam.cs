@@ -24,6 +24,8 @@ public class ChaseCam : MonoBehaviourPunCallbacks
 
         CheckIsEdge();
 
+        if(LeftPlayer && RightPlayer)
+        CaemraMoveToCenter();
         if (Edge_LeftPlayer || Edge_RightPlayer)
         {
 
@@ -56,7 +58,7 @@ public class ChaseCam : MonoBehaviourPunCallbacks
             }
 
             if (rightPos.x >= 0.9f)
-                Edge_RightPlayer = LeftPlayer;
+                Edge_RightPlayer = RightPlayer;
             else if (rightPos.x < 0.9f)
             {
                 Edge_RightPlayer = null;
@@ -74,10 +76,13 @@ public class ChaseCam : MonoBehaviourPunCallbacks
         int maxIndex = 0;
         for(int i=0; i <Players.Length; ++i)
         {
-           if(Players[i].transform.position.x <= minX && Players[i] != null)
+            if (Players[i] != null)
             {
-                minX = Players[i].transform.position.x;
-                minIndex = i;
+                if (Players[i].transform.position.x <= minX)
+                {
+                    minX = Players[i].transform.position.x;
+                    minIndex = i;
+                }
             }
            
 
@@ -85,19 +90,21 @@ public class ChaseCam : MonoBehaviourPunCallbacks
   
         for (int i = 0; i < Players.Length; ++i)
         {
-            if (Players[i].transform.position.x >= maxX)
+            if (Players[i] != null)
             {
-                maxX = Players[i].transform.position.x;
-                maxIndex = i;
+                if (Players[i].transform.position.x >= maxX)
+                {
+                    maxX = Players[i].transform.position.x;
+                    maxIndex = i;
+                }
             }
-
 
         }
 
 
         LeftPlayer = Players[minIndex];
 
-        RightPlayer = Players[minIndex];
+        RightPlayer = Players[maxIndex];
     }
 
     [PunRPC]
@@ -126,10 +133,10 @@ public class ChaseCam : MonoBehaviourPunCallbacks
         var leftX = LeftPlayer.transform.position.x;
         var rightX = RightPlayer.transform.position.x;
 
-        var center =new Vector2((leftX + rightX) / 2, transform.position.y);
+        var center =new Vector3((leftX + rightX) / 2,0,-10);
 
 
-        transform.position = Vector2.Lerp(transform.position, center, 0.1f);
+        transform.position = Vector3.Lerp(transform.position, center, 0.1f);
     }
    
 }

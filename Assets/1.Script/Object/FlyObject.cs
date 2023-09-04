@@ -1,21 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
+using Photon.Realtime;
 
 
-public class FlyObject : MonoBehaviour
+public class FlyObject : MonoBehaviourPunCallbacks
 {
     public float Speed;
-    public Animator anim;
+    Animator anim;
+    Transform trans;
 
     float h;
     float v;
 
     Rigidbody2D rb;
+    PhotonView pv;
     private void Start()
     {
+        pv = GetComponent<PhotonView>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
@@ -23,8 +28,12 @@ public class FlyObject : MonoBehaviour
 
     private void Update()
     {
-        h = Input.GetAxisRaw("Horizontal");
-        v = Input.GetAxisRaw("Vertical");
+
+        if (pv.IsMine)
+        {
+            h = Input.GetAxisRaw("Horizontal");
+            v = Input.GetAxisRaw("Vertical");
+        }
 
     }
     private void FixedUpdate()
@@ -36,10 +45,17 @@ public class FlyObject : MonoBehaviour
     {
         if (collision.gameObject.tag == "Wall")
         {
-            Destroy(gameObject);
-            anim.SetBool("Die", true);
+            GameOver();
         }
     }
 
+    private void GameOver()
+    {
 
+        anim.SetTrigger("Die");
+
+        rb.velocity = Vector3.zero;
+        transform.localScale = new Vector3(3.61999989f, 3.61999989f, 3.61999989f);
+
+    }
 }

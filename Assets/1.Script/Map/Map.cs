@@ -22,6 +22,10 @@ public class Map : MonoBehaviourPunCallbacks
     public string Map_name = "테스트 맵";
     public string Map_subTitle = "테스트";
 
+
+    public bool isSelectOption; // 체크해두면 스폰을 진행하지않음.
+
+
     Vector2[] playerPosition = new Vector2[4];
     public virtual void SetMapInfo(string SceneName, string MapName, string MapSubName,
         Vector2 player1_pos, Vector2 player2_pos, Vector2 player3_pos, Vector2 player4_pos)
@@ -53,7 +57,8 @@ public class Map : MonoBehaviourPunCallbacks
    
     public virtual void Start()
     {
-       // SpawnPlayer();
+        if(isSelectOption)
+       SpawnPlayer();
     }
 
    public virtual void Update()

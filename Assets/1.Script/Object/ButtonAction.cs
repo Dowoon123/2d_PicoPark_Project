@@ -41,8 +41,11 @@ public class ButtonAction : MonoBehaviour
                 targetMoveBlock.GetComponent<InteractableObject>().OnAction();
                 // MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
                 //  movBlock.Stop();
-            
-          
+        }
+        else if(col.gameObject.tag =="Obstacle")
+        {
+            GetComponent<SpriteRenderer>().sprite = imageOff;
+            targetMoveBlock.GetComponent<InteractableObject>().OnAction();
         }
     }
 

@@ -76,6 +76,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 896
   GroundChecker: {fileID: 5760213522512054422}
+  isNearDoor: 0
   rb: {fileID: 0}
   _colChecker: {fileID: 0}
   anim: {fileID: 0}

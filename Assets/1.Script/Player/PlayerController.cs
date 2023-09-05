@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
     }
 
+    public bool isDead = false;
     public bool isGround = false;
     public bool isUpperPlayer = false;
     public bool isGimmicked = false; //8.30 ï¿½ï¿½ï¿?ï¿½ï¿½ï¿½ï¿½ ï¿½Ûµï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½
@@ -153,6 +154,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
                 break;
             case STATE_INFO.STAIR:
                 st = State_Stair;
+                break;
+            case STATE_INFO.DEAD:
+                st = State_Hit;
                 break;
         }
 
@@ -412,6 +416,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
             nextstage = collision.gameObject;
             Debug.Log("ÄÝ¸®Á¯Ã¼Å© " + nextstage);
         }
+
+
      
     }
 

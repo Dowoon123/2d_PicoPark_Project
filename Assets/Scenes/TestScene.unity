@@ -425,7 +425,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1159172194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,8 +441,10 @@ MonoBehaviour:
   idleGhost: {fileID: 0}
   TraceGhost: {fileID: 0}
   target: {fileID: 0}
-  moveSpeed: 3
   detectionRange: 5
+  rb: {fileID: 0}
+  moveSpeed: 3
+  pv: {fileID: 0}
 --- !u!4 &1159172195
 Transform:
   m_ObjectHideFlags: 0

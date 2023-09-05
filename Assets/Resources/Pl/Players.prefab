@@ -81,6 +81,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   jumpForce: 25
   moveSpeed: 7.5
+  isDead: 0
   isGround: 0
   isUpperPlayer: 0
   isGimmicked: 0

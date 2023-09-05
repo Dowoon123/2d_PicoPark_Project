@@ -15,6 +15,10 @@ public class PlayerDeadState : PlayerState
         base.Enter();
         player.ZeroVelocity();
         
+      
+        
+        
+
     }
 
     public override void Exit()
@@ -26,4 +30,6 @@ public class PlayerDeadState : PlayerState
     {
         base.Update();
     }
+
+   
 }

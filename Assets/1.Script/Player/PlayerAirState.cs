@@ -61,6 +61,10 @@ public class PlayerAirState : PlayerState
 
         if (player.isGimmicked)
             stateMachine.ChangeState(player.State_Hit);
+        if (player.isDead)
+        {
+            stateMachine.ChangeState(player.State_Dead);
+        }
 
     }
 }

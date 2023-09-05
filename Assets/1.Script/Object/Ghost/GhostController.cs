@@ -1,31 +1,82 @@
 using Photon.Pun;
+using Unity.VisualScripting;
 using UnityEngine;
+
+public enum gSTATE_INFO
+{
+    IDLE,
+    TRACE
+}
 
 public class GhostController : MonoBehaviour
 {
-   
-    //일단 중단, ghost도 플립 구현해야됨.
-    //동시에, 플레이어의 방향값도 가져와야됨 
-
-    //스테이트 머신과 컨트롤러가 필요해졌음.\
-    //스테이트 머신은 두개로만 사용할 거임.
-    //IDLE, TRACE 단 두개로만 사용
-    //동시에 플레이어의 상태와 방향값을 모두 체크할거임.
-    //플레이어의 방향값이 유령이 바라보는 방향값과 같다면, 추적할 것이고
-    //같지 않아면. 추적하지 않을 거임.
-    //
-
-    Rigidbody2D rb;
 
     public GameObject idleGhost;
     public GameObject TraceGhost;
 
     public Transform target; // 추적할 대상
-    public float moveSpeed = 3f; // 이동 속도
     public float detectionRange = 5f; // 감지 범위
 
     private Vector2 currentVelocity; // 현재 속도
     private bool isBeingWatched = false; // 대상을 바라보고 있는지 여부
+
+    #region Components
+    public Rigidbody2D rb;
+    public PlayerState currState;
+    public GhostStateMachine stateMachine;
+    #endregion
+
+    #region  moveInfo
+    public float moveSpeed = 5.5f;
+
+    GameObject PlayerAbleCharacter;
+    string nickname;
+    GameObject NicknameText;
+    #endregion
+
+    #region states
+    public GhostIdleState State_idle;
+    public GhostTraceState State_trace;
+    #endregion
+
+    public int facingDir { get; set; } = 1;
+    protected bool facingRight = false;
+
+    int _actorNumber;
+    public int actorNumber
+    {
+        get { return _actorNumber; }
+        set { _actorNumber = value; }
+
+    }
+
+    public PhotonView pv;
+
+    void Awake()
+    {
+
+        pv = GetComponent<PhotonView>();
+        rb = GetComponent<Rigidbody2D>();
+      //  _colChecker = GetComponent<collideChecker>();
+      //  anim = GetComponentInChildren<Animator>();
+
+        stateMachine = new GhostStateMachine();
+        stateMachine.ghost = this;
+
+        State_idle = new GhostIdleState(this, stateMachine, "Idle", STATE_INFO.IDLE);
+        State_trace = new GhostTraceState(this, stateMachine, "Trace", STATE_INFO.MOVE);
+
+        // State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
+
+
+
+        //if( PhotonNetwork.IsMasterClient)
+        //{
+        //     GetComponent<PhotonView>().RPC("testSetCube", RpcTarget.All);
+
+        //}
+
+    }
 
     private void Start()
     {

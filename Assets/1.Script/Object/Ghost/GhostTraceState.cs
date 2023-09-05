@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GhostTraceState : MonoBehaviour
+public class GhostTraceState : GhostState
 {
-    // Start is called before the first frame update
-    void Start()
+    public GhostTraceState(GhostController _ghostController, GhostStateMachine _stateMachine, string _animBoolName, STATE_INFO _info) : base(_ghostController, _stateMachine, _animBoolName, _info)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
-        
+        base.Enter();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
+    public override void Update()
+    {
+        base.Update();
     }
 }

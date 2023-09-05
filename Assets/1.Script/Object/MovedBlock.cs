@@ -25,6 +25,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
     [SerializeField] private Vector3 CheckRect;
     private Rigidbody2D rb;
 
+    [Header("체크시 감지되는 범위를 기즈모로 볼 수 있음!")]
     [SerializeField] private bool isDraw;
 
 
@@ -80,7 +81,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
 
         CheckPlayerZone();
 
-        CheckedPushAllPlayer = PhotonNetwork.CountOfPlayers;
+        CheckedPushAllPlayer = PhotonNetwork.CurrentRoom.PlayerCount;
 
         var checkDirection = CheckedPushAllPlayer - facingDirCheck;
         var checkDirection2 = CheckedPushAllPlayer - Mathf.Abs(facingDirCheck);

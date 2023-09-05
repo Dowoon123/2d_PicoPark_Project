@@ -76,6 +76,7 @@ MonoBehaviour:
   - <SetTransform>g__SetPlayerVelocity|63_0
   - AddPlayer
   - <SetTransform>g__SetPlayerVelocity|65_0
+  - <SetTransform>g__SetPlayerVelocity|67_0
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

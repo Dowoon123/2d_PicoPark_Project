@@ -33,13 +33,15 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public PlayerController[] upsideArray = new PlayerController[4];
     public int arrayLength = 0;
     public int offsetIndex = 10;
+    public bool isLeftEdge = false;
+    public bool isRightEdge = false;
     #endregion
 
 
     #region collision
     [SerializeField] LayerMask WhatIsGround;
     [SerializeField] Transform GroundChecker;
-    public bool isNearDoor;
+    public bool isNearDoor = false;
     #endregion
 
     #region Components

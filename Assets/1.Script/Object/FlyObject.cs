@@ -18,6 +18,7 @@ public class FlyObject : MonoBehaviourPunCallbacks
 
     Rigidbody2D rb;
     PhotonView pv;
+
     private void Start()
     {
         pv = GetComponent<PhotonView>();
@@ -41,7 +42,7 @@ public class FlyObject : MonoBehaviourPunCallbacks
         rb.velocity = new Vector2(h * Speed, v * Speed);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Wall")
         {
@@ -51,11 +52,16 @@ public class FlyObject : MonoBehaviourPunCallbacks
 
     private void GameOver()
     {
-
         anim.SetTrigger("Die");
-
-        rb.velocity = Vector3.zero;
         transform.localScale = new Vector3(3.61999989f, 3.61999989f, 3.61999989f);
 
+        //정지
+        rb.constraints = RigidbodyConstraints2D.FreezePosition;
+
+        //플레이어를 위로 튀어 오르게 하는 연출
+        rb.AddForce(new Vector2(0, 5), ForceMode2D.Impulse);
+
     }
+
+
 }

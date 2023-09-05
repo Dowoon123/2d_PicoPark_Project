@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Realtime;
 
-public class TestNetwork : MonoBehaviourPunCallbacks 
+public class TestNetwork : MonoBehaviourPunCallbacks
 {
     [Header("자기 맵에 빈 오브젝트 생성 후 이 컴포넌트 넣고 아래 ServerName에 자기가원하는 이름넣기")]
     [SerializeField] string ServerName;
@@ -22,7 +22,7 @@ public class TestNetwork : MonoBehaviourPunCallbacks
     {
 
         PhotonNetwork.JoinLobby();
-       
+
     }
 
     public override void OnJoinedRoom()
@@ -30,8 +30,9 @@ public class TestNetwork : MonoBehaviourPunCallbacks
        var player = PhotonNetwork.Instantiate("Pl/TestPlayer_DonotTouch", new Vector3(1, 2, 0), Quaternion.identity);
         int id = player.GetPhotonView().ViewID;
 
-        if(Camera.main.GetComponent<PhotonView>())
-        Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
+
+        if (Camera.main.GetComponent<PhotonView>())
+            Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
     }
 
     public override void OnJoinedLobby()

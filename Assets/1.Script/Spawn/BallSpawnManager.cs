@@ -20,7 +20,7 @@ public class BallSpawnManager : MonoBehaviourPunCallbacks
     }
 
 
-    void SpawnPlay()
+    void PlayerSpawn()
     {
 
         foreach (Transform spawnPoint in spawnPoints)
@@ -39,7 +39,7 @@ public class BallSpawnManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        SpawnPlay();
+        PlayerSpawn();
     }
 }
 

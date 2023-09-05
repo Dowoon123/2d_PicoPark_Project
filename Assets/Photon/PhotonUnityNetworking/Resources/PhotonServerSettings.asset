@@ -75,8 +75,8 @@ MonoBehaviour:
   - <SetTransform>g__SetPlayerVelocity|66_0
   - <SetTransform>g__SetPlayerVelocity|63_0
   - AddPlayer
+  - <SetTransform>g__SetPlayerVelocity|65_0
   - <SetTransform>g__SetPlayerVelocity|67_0
-  - SetPlayerName
   - <SetTransform>g__SetPlayerVelocity|68_0
   - SetNickName
   - Set

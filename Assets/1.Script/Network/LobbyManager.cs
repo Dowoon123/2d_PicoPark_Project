@@ -13,6 +13,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject RoomCreatePanel;
     public GameObject RoomPanel;
     public GameObject RoomPanelPrefab;
+    public GameObject RoomListPanel;
     public List<GameObject> RoomUi_List = new List<GameObject>();
     public List<RoomInfo> RoomList = new List<RoomInfo>();
     public Transform panelPos;
@@ -25,6 +26,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public string sceneName;
     void Start()
     {
+        
         Screen.SetResolution(960, 600, false);
         PhotonNetwork.ConnectUsingSettings();  // 포톤클라우드와 연결을 시작하는 메서드 
 
@@ -59,7 +61,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         RoomCreatePanel.SetActive(false);
         GameCreate.GetComponent<Button>().interactable = false;
         GameJoin.GetComponent<Button>().interactable = false;
-        
+        RoomListPanel.SetActive(true);
+
+
         for (int i = 0; i < RoomUi_List.Count; i++)
         {
             RoomUi_List[i].SetActive(true);
@@ -73,6 +77,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         GameJoin.GetComponent<Button>().interactable = true;
         isShowRoomList = false;
         RoomCreatePanel.SetActive(false);
+        RoomListPanel.SetActive(false);
+
         for (int i = 0; i < RoomUi_List.Count; i++)
         {
             RoomUi_List[i].SetActive(false);
@@ -117,41 +123,32 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         if (scene.name == "RoomScene")
         {
-            PhotonNetwork.JoinRoom(currentRoomName);
+            Invoke("goingToRoom", 2f);
+          //  PhotonNetwork.JoinRoom(currentRoomName);
 
         }
+    }
+
+    public void goingToRoom()
+    {
+        if(!PhotonNetwork.InRoom)
+        PhotonNetwork.JoinRoom(currentRoomName);
     }
     public override void OnJoinedRoom()
     {
       
-        PlayerController _player = null;
-        GameObject GOplayer;
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
-        { 
-
-            GOplayer = PhotonNetwork.Instantiate("Pl/Players", new Vector2(-4, -2.5f), Quaternion.identity);
+        //PlayerController _player = null;
+        //GameObject GOplayer;
+    
+        //    GOplayer = PhotonNetwork.Instantiate("Pl/TestPlayer_DonotTouch", new Vector2(-4, -2.5f), Quaternion.identity);
 
 
-            _player = GOplayer.GetComponent<PlayerController>();
+        //    _player = GOplayer.GetComponent<PlayerController>();
 
-            Debug.Log("첫 플레이어 생성");
-        }
-        else
-        {
-
-            GOplayer = PhotonNetwork.Instantiate("Pl/Players", new Vector2(4, -2.5f), Quaternion.identity);
-            _player = GOplayer.GetComponent<PlayerController>();
-            Debug.Log("두번째 플레이어 생성 ");
-
-
-        }
-        if (_player)
-        {
-            int actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-            _player.gameObject.GetPhotonView().TransferOwnership(actorNumber);
-            _player.actorNumber = actorNumber;
-
-        }
+        //    Debug.Log("첫 플레이어 생성");
+        
+      
+      
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -167,14 +164,18 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         for(int i=0; i<roomList.Count; i++)
         {
             var panelObj = Instantiate(RoomPanelPrefab,canvas.transform);
-
+             
+           
+             
+            panelObj.transform.parent = RoomListPanel.transform;
             var pos = panelPos.position;
-            pos.y -= i * 100;
+            pos.y -= i * 94 ;
             panelObj.transform.position = pos;
             var panel = panelObj.GetComponent<RoomPanel>();
-
-            panel.Map_Name.text = "Stage 1-1";
-            panel.Map_subTitle.text = "normal";
+            panel.Room_currentPlayerCount.text = roomList[i].PlayerCount.ToString() + "/ 4";
+          
+           // panel.Map_Name.text = "Stage 1-1";
+           // panel.Map_subTitle.text = "normal";
             panel.Room_Title.text = roomList[i].Name;
             panel.LM = this;
             bool active = isShowRoomList == true ? true : false;

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4580050226671395541}
   - component: {fileID: 3827287259633228723}
   m_Layer: 6
-  m_Name: TestPlayer_DonotTouch
+  m_Name: Player_Red
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,6 +74,7 @@ MonoBehaviour:
   offsetIndex: 10
   isLeftEdge: 0
   isRightEdge: 0
+  NickName: 
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 896

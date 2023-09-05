@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public int offsetIndex = 10;
     public bool isLeftEdge = false;
     public bool isRightEdge = false;
+    public string NickName;
     #endregion
 
 
@@ -163,12 +164,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
 
         currState = st;
-        stateTxt.text = currState.ToString();
+       // stateTxt.text = currState.ToString();
 
     }
     private void Start()
     {
         stateMachine.Initialize(State_idle);
+
+        stateTxt.text = PhotonNetwork.LocalPlayer.NickName;
 
     }
     // Update is called once per frame
@@ -326,6 +329,14 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
     }
+
+
+    [PunRPC]
+    public void SetNickName(string text)
+    {
+        stateTxt.text = text;
+    }
+
 
     [PunRPC]
     public void SetOffset(int viewID , Vector2 offset)

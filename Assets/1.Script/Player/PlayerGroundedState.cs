@@ -93,6 +93,7 @@ public class PlayerGroundedState : PlayerState
     {
 
         if (player.isNearDoor)
+
         {
             if (isInDoor)
             {

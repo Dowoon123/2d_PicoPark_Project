@@ -1,6 +1,8 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ElevatorUpFinite : MonoBehaviour
 {
@@ -27,6 +29,13 @@ public class ElevatorUpFinite : MonoBehaviour
 
     [SerializeField] protected LayerMask whatIsGround;
 
+    [Header("체크시 감지되는 범위를 기즈모로 볼 수 있음!")]
+    [SerializeField] private bool isDraw;
+
+
+    public Text condition;
+    private string conditionText;
+    private int number_remaining;
 
     //x축 이동거리
     public float moveX = 0.0f;
@@ -71,7 +80,14 @@ public class ElevatorUpFinite : MonoBehaviour
 
     private void Update()
     {
+
+       intake = PhotonNetwork.CurrentRoom.PlayerCount;
+
         CheckPlayerZone();
+
+        number_remaining = intake - CheckedIntake;
+        conditionText = number_remaining.ToString();
+        condition.GetComponent<Text>().text = conditionText;
     }
 
     private void FixedUpdate()
@@ -116,6 +132,7 @@ public class ElevatorUpFinite : MonoBehaviour
     }
     public void OnDrawGizmos()
     {
+        if(isDraw)
         Gizmos.DrawCube(transform.position + new Vector3(0, 2, 0), CheckRect);
         // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
     }

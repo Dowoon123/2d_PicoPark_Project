@@ -10,54 +10,33 @@ public class ButtonToggle : MonoBehaviour
     /// 해당 스크립트를 통해서 벽의 통과 여부를 사용할 것임.
     /// </summary>
 
-    public GameObject Interaction;
-    public Sprite imageOn;
-    public Sprite imageOff;
-
-    public bool on = false; //스위치 상태(true: 눌린 상태 false: 눌리지 않은 상태)
+    public GameObject targetMoveBlock;
 
     // Start is called before the first frame update
     void Start()
     {
-        on = true;
-        if (on)
-        {
-            GetComponent<SpriteRenderer>().sprite = imageOn;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().sprite = imageOff;
-        }
+      
     }
 
     //충돌
-    private void OnTriggerStay2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Obstacle")
         {
-       
-                GetComponent<SpriteRenderer>().sprite = imageOff;
 
-                   Interaction.GetComponent<InteractableObject>().OnAction();
-                // MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
-                //  movBlock.Stop();
-            
-          
+            targetMoveBlock.GetComponent<InteractableObject>().OnAction();
+            targetMoveBlock.GetComponent<InteractableObject>().isAction = true;
+            //MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
+            //  movBlock.Stop();
         }
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
-      
-            on = false;
-            GetComponent<SpriteRenderer>().sprite = imageOn;
 
-          
-         
+        // MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
+        //  movBlock.Move();
 
-           // MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
-          //  movBlock.Move();
-        
     }
 
 

@@ -10,6 +10,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     [SerializeField] Text playerCountText;
     public int currentPlayerCount = 0;
+    public GameObject NickNamePanel;
+    public InputField field = null;
 
 
     public void Update()
@@ -35,7 +37,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         GetComponent<PhotonView>().RPC("RefreshCurrentPlayer", RpcTarget.AllBuffered, 1);
 
-        Debug.Log("룸 입장");
+        Debug.Log("룸 입장" + PhotonNetwork.LocalPlayer.ActorNumber + " 번 ");
+
+
+
+
+
+    
+
     }
 
     public override void OnLeftRoom()
@@ -46,6 +55,58 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
 
 
+
+    public void SetNickname()
+    {
+        if (field.text.Length <= 0 || field.text.Length > 8)
+        {
+            Debug.Log("ㅁㄴㄻ");
+            return;
+        }
+          
+
+         PhotonNetwork.LocalPlayer.NickName = field.text;
+
+        Debug.Log("입력된 텍스트 값  :" + field.text);
+
+        string objName = "";
+
+       switch(PhotonNetwork.LocalPlayer.ActorNumber)
+        {
+            case 1:
+                objName = "Pl/Player_Red";
+
+                break;
+            case 2:
+                objName = "Pl/Player_Blue";
+                break;
+            case 3:
+                objName = "Pl/Player_Green";
+                break;
+            case 4:
+                objName = "Pl/Player_Purple";
+                break;
+            default:
+                break;
+        }
+
+   
+
+         var obj =  PhotonNetwork.Instantiate(objName, new Vector3(0, 0, 0), Quaternion.identity);
+
+            obj.GetComponent<PlayerController>().pv.RPC("SetNickName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
+        
+
+
+
+        NickNamePanel.SetActive(false);
+    }
+
+
+    public void onChangeInputField()
+    {
+
+    }
 
 
 

@@ -34,62 +34,35 @@ public class Door : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponentInChildren<PlayerController>().nextstage = null;
+            collision.gameObject.GetComponent<PlayerController>().isNearDoor = false; // isNearDoor 는 플레이어가 문근처에있는지 체크하는 변수 이게 true일때 방향키 입력시 클리어 가능. 
         }
     }
 
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Item"))
         {
 
             sr.sprite = openSprite;
-         
+      
             isOpen = true;
             Destroy(collision.gameObject);
         }
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            player = collision.gameObject.GetComponent<PlayerController>();
-            collision.gameObject.GetComponent<PlayerController>().nextstage = this.gameObject;
+            if(isOpen)
+            collision.gameObject.GetComponent<PlayerController>().isNearDoor = true;
+           
         }
 
 
     }
 
-    public void NextStage()
-    {
-        if (!player.nextstage)
-        {
-            Debug.Log("대기");
-        }
-        else if (player.nextstage)
-        {
-            if (isOpen)
-            {
-                Debug.Log("스테이지클리어");
-                Time.timeScale = 0;
-                player.GetComponentInChildren<SpriteRenderer>().enabled = false;
-            }
-        }
-    }
-    public void ComeBackStage()
-    {
-        if (!player.nextstage)
-        {
-            Debug.Log("대기");
-        }
-        else if (player.nextstage)
-        {
-            Debug.Log("스테이지복귀");
-            Time.timeScale = 1;
-            player.GetComponentInChildren<SpriteRenderer>().enabled = true;
-
-        }
-
-    }
 
 
-}
+ }
+
+
+

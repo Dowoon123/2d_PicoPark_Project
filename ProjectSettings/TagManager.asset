@@ -12,6 +12,7 @@ TagManager:
   - Door
   - Item
   - DeadZone
+  - Obstacle
   layers:
   - Default
   - TransparentFX

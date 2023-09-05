@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class MovedBlock : MonoBehaviourPunCallbacks
@@ -18,16 +19,21 @@ public class MovedBlock : MonoBehaviourPunCallbacks
     [SerializeField] private int CheckedPushAllPlayer;
  
     [SerializeField] private int facingDirCheck;
+    private int number_remaining;
+
     [SerializeField] private List<GameObject> PushPlayer;
     [SerializeField] private Vector3 CheckRect;
     private Rigidbody2D rb;
 
-
+    [Header("체크시 감지되는 범위를 기즈모로 볼 수 있음!")]
+    [SerializeField] private bool isDraw;
 
 
 
     [SerializeField] protected LayerMask whatIsGround;
 
+    public Text condition;
+    private string conditionText;
     public bool isCheckPush;
     //수용인원 조건이 충족하는지 체크하는 bool값
     //TRUE면 엘레베이터 작동
@@ -65,6 +71,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
     {
         // OnDrawGizmos();
         rb = GetComponent<Rigidbody2D>();
+       
         
     }
 
@@ -73,6 +80,8 @@ public class MovedBlock : MonoBehaviourPunCallbacks
     {
 
         CheckPlayerZone();
+
+        CheckedPushAllPlayer = PhotonNetwork.CurrentRoom.PlayerCount;
 
         var checkDirection = CheckedPushAllPlayer - facingDirCheck;
         var checkDirection2 = CheckedPushAllPlayer - Mathf.Abs(facingDirCheck);
@@ -96,6 +105,10 @@ public class MovedBlock : MonoBehaviourPunCallbacks
             GetComponent<PhotonView>().RPC("CheckPush", RpcTarget.AllBuffered, false);
 
         Debug.Log("isCheckPush : " +   isCheckPush);
+
+        number_remaining = CheckedPushAllPlayer - CheckedPushingP;
+        conditionText = number_remaining.ToString();
+        condition.GetComponent<Text>().text = conditionText;
 
         /*
 
@@ -121,6 +134,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
 
     public void OnDrawGizmos()
     {
+        if(isDraw)
         Gizmos.DrawCube(transform.position - new Vector3(0, 0, 0), CheckRect);
         // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
     }
@@ -192,7 +206,7 @@ public class MovedBlock : MonoBehaviourPunCallbacks
         //colliders의 리스트 값이 없을때. colliders.[0] 이 할당 한번이라도 받으면 1이니까.
         //CheckedIntake의 값을 0으로 초기화
 
-
+       
 
         //Collider2D[] collidersR = Physics2D.OverlapBoxAll(transform.position, CheckRect, 0, whatIsGround);
     }

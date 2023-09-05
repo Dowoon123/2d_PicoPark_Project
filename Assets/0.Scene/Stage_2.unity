@@ -204,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PushedBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 1530400154654022765, guid: b2222a749d2f7a04584eb2918d589aca, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2737193786283857600, guid: b2222a749d2f7a04584eb2918d589aca, type: 3}
       propertyPath: CheckedPushAllPlayer
       value: 2
@@ -211,6 +215,10 @@ PrefabInstance:
     - target: {fileID: 3157661448994235887, guid: b2222a749d2f7a04584eb2918d589aca, type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5944570384416325166, guid: b2222a749d2f7a04584eb2918d589aca, type: 3}
+      propertyPath: sceneViewId
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7504417551117449015, guid: b2222a749d2f7a04584eb2918d589aca, type: 3}
       propertyPath: m_RootOrder

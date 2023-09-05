@@ -67,6 +67,7 @@ public class PlayerGroundedState : PlayerState
 
         if (player.isGimmicked)
             stateMachine.ChangeState(player.State_Hit);
+//<<<<<<< HEAD
 
         //  if (!player.IsGroundDetected())
         //    stateMachine.ChangeState(player.airState);
@@ -108,6 +109,12 @@ public class PlayerGroundedState : PlayerState
 
             }
          
+        }
+
+
+        if (player.isDead)
+        {
+            stateMachine.ChangeState(player.State_Dead);
         }
 
     }

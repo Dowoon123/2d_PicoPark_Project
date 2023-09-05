@@ -26,10 +26,16 @@ public class ChaseCam : MonoBehaviourPunCallbacks
 
         if(LeftPlayer && RightPlayer)
         CaemraMoveToCenter();
-        if (Edge_LeftPlayer || Edge_RightPlayer)
+        if (Edge_LeftPlayer)
         {
 
         }
+        if (Edge_RightPlayer)
+        {
+
+        }
+
+
 
         else if (Edge_LeftPlayer && Edge_RightPlayer)
         {

@@ -1,26 +1,32 @@
 using Photon.Pun;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerGroundedState : PlayerState
 {
 
-    Door door;
+    bool isInDoor; // 현재 문안에 들어있는지 체크하는불 변수 
+
     PlayerController player;
-    public GameObject nextstage;
+
     private List<Vector3> upsidePlayerTargetPositions = new List<Vector3>();
     public PlayerGroundedState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName, STATE_INFO _info) : base(_player, _stateMachine, _animBoolName, _info)
     {
         player = _player;
-        
+
     }
-  
+
+
+
+
+
     public override void Enter()
     {
         base.Enter();
 
-    //    Debug.Log(" 그라운드 상태 진입");
+        //    Debug.Log(" 그라운드 상태 진입");
         player.SetVelocity(player.rb.velocity.x, 0);
 
     }
@@ -35,7 +41,7 @@ public class PlayerGroundedState : PlayerState
         base.Update();
         player.IsGroundDetected();
 
-      
+
 
         if (player.isGround)
         {
@@ -47,36 +53,7 @@ public class PlayerGroundedState : PlayerState
 
         }
 
-        //  if (!player.IsGroundDetected())
-        //    stateMachine.ChangeState(player.airState);
-
-
-        if (Input.GetKeyDown(KeyCode.Space) && (player.isUpperPlayer || player.isGround))
-        {
-            
-            stateMachine.ChangeState(player.State_Jump);
-        }
-
-       
-
-        {
-            if (player.nextstage)
-            {
-                if (Input.GetKeyDown(KeyCode.UpArrow))
-                {
-
-                   door.NextStage();
-                }
-                if (Input.GetKeyDown(KeyCode.DownArrow))
-                {
-                    door.ComeBackStage();
-                }
-            }
-        }
-
-
-
-            if (player._colChecker.UpsidePlayers.Count > 0 && xInput != 0)
+        if (player._colChecker.UpsidePlayers.Count > 0 && xInput != 0)
         {
             for (int i = 0; i < player._colChecker.UpsidePlayers.Count; i++)
             {
@@ -90,13 +67,58 @@ public class PlayerGroundedState : PlayerState
 
         if (player.isGimmicked)
             stateMachine.ChangeState(player.State_Hit);
+//<<<<<<< HEAD
+
+        //  if (!player.IsGroundDetected())
+        //    stateMachine.ChangeState(player.airState);
+
+
+        if (Input.GetKeyDown(KeyCode.Space) && (player.isUpperPlayer || player.isGround))
+        {
+
+            stateMachine.ChangeState(player.State_Jump);
+        }
+
+                if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W ))
+                {
+
+                         DoorEnter();
+                }
+                
+       }
+         
+
+
+    public void DoorEnter()
+    {
+
+        if (player.isNearDoor)
+        {
+            if (isInDoor)
+            {
+                Time.timeScale = 1;
+                player.GetComponentInChildren<SpriteRenderer>().enabled = true;
+                isInDoor = false;
+
+            }
+            else
+            {
+                Time.timeScale = 0;
+                player.GetComponentInChildren<SpriteRenderer>().enabled = false;
+                isInDoor = true;
+
+            }
+         
+        }
+
+
         if (player.isDead)
         {
             stateMachine.ChangeState(player.State_Dead);
         }
+
     }
-    
-   
+
 }
 
 

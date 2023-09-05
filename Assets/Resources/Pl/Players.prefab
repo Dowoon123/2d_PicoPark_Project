@@ -76,8 +76,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 896
   GroundChecker: {fileID: 5760213522512054422}
+<<<<<<< HEAD
+  isNearDoor: 0
+  rb: {fileID: 7843777958636402597}
+  _colChecker: {fileID: 1412438795355307788}
+=======
   rb: {fileID: 0}
   _colChecker: {fileID: 0}
+>>>>>>> e2eb51b7f9717ae943cf52c13a183c77cd614e2a
   anim: {fileID: 0}
   jumpForce: 25
   moveSpeed: 7.5

@@ -27,7 +27,7 @@ public class Cannon : MonoBehaviour
         {
             Shot();
         }
-        else
+        else if(KeyBottle.GetComponent<KeyBottle>() == null)
             return;
       
     }

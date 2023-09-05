@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StretchWall : InteractableObject
+public class StretchWallTrue : InteractableObject
 {
-    [SerializeField] private bool isActives;
+    
     public enum Direction
     {
         LEFT,
@@ -17,15 +17,12 @@ public class StretchWall : InteractableObject
     private void Start()
     {
 
-        gameObject.SetActive(false);
+      
     }
 
     private void Update()
     {
-        if(isActives) 
-        {
-            gameObject.SetActive(true);
-        }
+       
     }
 
     public Direction direction = Direction.LEFT;

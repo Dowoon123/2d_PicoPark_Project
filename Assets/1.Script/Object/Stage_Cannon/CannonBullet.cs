@@ -42,12 +42,13 @@ public class CannonBullet : MonoBehaviour
             Destroy(transform.gameObject);
             KeyBottle.GetComponent<KeyBottle>().Hp = 3;
         }
-        else if(collision.gameObject.CompareTag("KeyBottle"))
+        else if(collision.gameObject.CompareTag("KeyBottle") || collision.gameObject.CompareTag("Ground"))
         {
             
             //Destroy(collision.gameObject);
             Destroy(transform.gameObject);
             
         }
+     
     }
 }

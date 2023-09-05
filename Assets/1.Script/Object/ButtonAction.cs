@@ -28,46 +28,55 @@ public class ButtonAction : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = imageOff;
         }
+
     }
+
+   
 
     //Ãæµ¹
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Obstacle")
         {
-       
-                GetComponent<SpriteRenderer>().sprite = imageOff;
+            on = false;
+            GetComponent<SpriteRenderer>().sprite = imageOff;
 
-                targetMoveBlock.GetComponent<InteractableObject>().OnAction();
+            targetMoveBlock.GetComponent<InteractableObject>().OnAction();
+          
+            targetMoveBlock.GetComponent<InteractableObject>().isAction = true;
                 //MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
                 //  movBlock.Stop();
         }
-        else if(col.gameObject.tag =="Obstacle")
-        {
-            GetComponent<SpriteRenderer>().sprite = imageOff;
-            targetMoveBlock.GetComponent<InteractableObject>().OnAction();
-        }
+        
     }
 
     private void OnTriggerExit2D(Collider2D col)
     {
       
-            on = false;
+            on = true;
             GetComponent<SpriteRenderer>().sprite = imageOn;
+            targetMoveBlock.GetComponent<InteractableObject>().OnAction();
+            targetMoveBlock.GetComponent<InteractableObject>().isAction = false;
 
-          
-         
 
-           // MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
-          //  movBlock.Move();
-        
+
+        // MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
+        //  movBlock.Move();
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-
+        if (on)
+        {
+            GetComponent<SpriteRenderer>().sprite = imageOn;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sprite = imageOff;
+        }
     }
 }
 

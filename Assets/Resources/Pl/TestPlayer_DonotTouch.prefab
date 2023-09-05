@@ -72,6 +72,8 @@ MonoBehaviour:
   - {fileID: 0}
   arrayLength: 0
   offsetIndex: 10
+  isLeftEdge: 0
+  isRightEdge: 0
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 896

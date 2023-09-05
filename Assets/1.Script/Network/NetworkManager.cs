@@ -16,7 +16,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     // 필요한 매니저들 
     //public Lobby lobbyManager;
     public PlayerManager playerM;
-
+     
+    
 
     // 닉네임표시
     public GameObject NicknameText;
@@ -53,8 +54,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("서버접속");
         PhotonNetwork.JoinLobby();
-    
-      
+
+     
         //  SetPlayerNickName();
 
 

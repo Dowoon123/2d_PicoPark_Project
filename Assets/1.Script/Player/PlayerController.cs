@@ -171,7 +171,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         stateMachine.Initialize(State_idle);
 
-        stateTxt.text = PhotonNetwork.LocalPlayer.NickName;
+        if (pv.IsMine)
+        {
+            string str = PhotonNetwork.LocalPlayer.NickName;
+            pv.RPC("SetNickName", RpcTarget.AllBuffered,str);
+        }
 
     }
     // Update is called once per frame
@@ -332,9 +336,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
     [PunRPC]
-    public void SetNickName(string text)
+    public void SetNickName(string str)
     {
-        stateTxt.text = text;
+        stateTxt.text = str;
     }
 
 

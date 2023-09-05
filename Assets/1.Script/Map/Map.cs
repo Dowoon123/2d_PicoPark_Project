@@ -53,7 +53,7 @@ public class Map : MonoBehaviourPunCallbacks
    
     public virtual void Start()
     {
-        SpawnPlayer();
+       // SpawnPlayer();
     }
 
    public virtual void Update()

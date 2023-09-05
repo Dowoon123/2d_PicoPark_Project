@@ -7,9 +7,11 @@ using Photon.Realtime;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using Photon.Pun.Demo.Cockpit;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
+    public GameObject WholeRoomPanel;
     public GameObject RoomCreatePanel;
     public GameObject RoomPanel;
     public GameObject RoomPanelPrefab;
@@ -24,6 +26,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Button GameCreate;
     public Button GameBack;
     public string sceneName;
+
+    public GameObject nicknamePanel;
+    public InputField nicknameField;
     void Start()
     {
         
@@ -32,6 +37,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+
+        PhotonNetwork.SendRate = 200; // 초당 30번 데이터 전송
+        PhotonNetwork.SerializationRate = 100; // 직렬화된 데이터를 초당 30번 전송
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
 
@@ -150,7 +160,19 @@ public class LobbyManager : MonoBehaviourPunCallbacks
       
       
     }
+    public void SetNickName()
+    {
+        if (nicknameField.text.Length <= 0 || nicknameField.text.Length > 8)
+            return;
 
+        PhotonNetwork.LocalPlayer.NickName = nicknameField.text;
+
+        nicknamePanel.SetActive(false);
+
+        WholeRoomPanel.GetComponent<CanvasGroup>().alpha = 1.0f;
+        WholeRoomPanel.GetComponent<CanvasGroup>().interactable = true;
+
+    }
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
        

@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - Door
   - Item
+  - DeadZone
   layers:
   - Default
   - TransparentFX

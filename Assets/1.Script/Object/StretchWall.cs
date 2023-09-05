@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,9 +18,15 @@ public class StretchWall : InteractableObject
     public float moveLength;
     public override void OnAction()
     {
+    
+
+
+        if(!isAction)
+        StartCoroutine(MoveToDirection());
+
         isAction = true;
 
-        StartCoroutine(MoveToDirection());
+        
     }
 
     public IEnumerator MoveToDirection()

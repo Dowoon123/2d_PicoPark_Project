@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using Unity.Properties;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class BallSpawnManager : MonoBehaviour
+public class BallSpawnManager : MonoBehaviourPunCallbacks
 {
     public Transform[] spawnPoints;
     public GameObject ball;
@@ -15,7 +16,7 @@ public class BallSpawnManager : MonoBehaviour
 
     private void Update()
     {
-        SpawnPlay();
+       // SpawnPlay();
     }
 
 
@@ -26,7 +27,8 @@ public class BallSpawnManager : MonoBehaviour
         {
             if (ballCount < 4) //4개의 공만 스폰
             {
-                Instantiate(ball, spawnPoint.position, Quaternion.identity);
+
+                PhotonNetwork.Instantiate("Object/ball", spawnPoint.position, Quaternion.identity);
                 ballCount++;
             }
             else
@@ -35,5 +37,9 @@ public class BallSpawnManager : MonoBehaviour
 
     }
 
+    public override void OnJoinedRoom()
+    {
+        SpawnPlay();
+    }
 }
 

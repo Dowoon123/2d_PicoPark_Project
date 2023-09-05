@@ -35,13 +35,13 @@ public class ButtonAction : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            if (!on)
-            {
-                on = true;
+       
                 GetComponent<SpriteRenderer>().sprite = imageOff;
-               // MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
-              //  movBlock.Stop();
-            }
+
+                targetMoveBlock.GetComponent<InteractableObject>().OnAction();
+                // MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
+                //  movBlock.Stop();
+            
           
         }
     }
@@ -51,6 +51,10 @@ public class ButtonAction : MonoBehaviour
       
             on = false;
             GetComponent<SpriteRenderer>().sprite = imageOn;
+
+          
+         
+
            // MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
           //  movBlock.Move();
         
@@ -63,3 +67,4 @@ public class ButtonAction : MonoBehaviour
 
     }
 }
+

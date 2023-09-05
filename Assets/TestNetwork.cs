@@ -27,7 +27,11 @@ public class TestNetwork : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("Pl/Players", new Vector3(1, 2, 0), Quaternion.identity);
+       var player = PhotonNetwork.Instantiate("Pl/Players", new Vector3(1, 2, 0), Quaternion.identity);
+        int id = player.GetPhotonView().ViewID;
+
+
+        Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
     }
 
     public override void OnJoinedLobby()

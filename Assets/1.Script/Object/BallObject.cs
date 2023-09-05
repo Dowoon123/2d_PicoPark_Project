@@ -8,7 +8,8 @@ public class BallObject : MonoBehaviour
     [SerializeField][Range(20f, 50f)] float speed = 25f; //ball 이동속도 
 
     public Rigidbody2D rb;
-    float randomX, randomY; // 방향 랜덤 값
+    float X = 3f;
+    float Y = 3f;// 방향 값
 
 
 
@@ -17,20 +18,16 @@ public class BallObject : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         // 스폰 하자마자 속도값 0으로 줘서 멈춰있게함
-        rb.velocity = Vector3.zero; 
+        rb.velocity = Vector3.zero;
 
 
     }
 
     private void BallMoving()
     {
-        //랜덤값으로 힘을 가함
-        randomX = Random.Range(-1f, 1);
-        randomY = Random.Range(-1f, 1);
-
 
         //방향 * 스피드로 힘을 가함
-        Vector2 dir = new Vector2(randomX, randomY).normalized;
+        Vector2 dir = new Vector2(X, Y).normalized;
 
         rb.AddForce(dir * speed);
     }

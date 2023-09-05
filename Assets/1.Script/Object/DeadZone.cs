@@ -23,11 +23,12 @@ public class DeadZone : MonoBehaviour
     //말만 WhatIsGround지 Player체크 해야됨
 
     [SerializeField] float CoolTime;
+    public GameObject safezone;
 
 
     void Start()
     {
-     
+       
     }
 
    
@@ -80,7 +81,7 @@ public class DeadZone : MonoBehaviour
 
             if (!isDeadZone)
             {
-                player.transform.position = MovePlayer;//아닐 경우 닿기만 한다면.
+                player.transform.position = safezone.transform.position;//아닐 경우 닿기만 한다면.
             }
             else if(isDeadZone)
             {

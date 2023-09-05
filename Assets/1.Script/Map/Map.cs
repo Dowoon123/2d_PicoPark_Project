@@ -86,10 +86,14 @@ public class Map : MonoBehaviourPunCallbacks
         //Timer_Text.text = "Time / "+ MinutesStr + " : " + SecondsStr;
         
 
+        if(Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            SpawnPlayer();
+        }
     }
 
 
-    public void SpawnPlayer()
+    public virtual void SpawnPlayer()
     {
         var pl = PhotonNetwork.PlayerList;
 

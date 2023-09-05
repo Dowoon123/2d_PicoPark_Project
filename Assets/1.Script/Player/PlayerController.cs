@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     #region collision
     [SerializeField] LayerMask WhatIsGround;
     [SerializeField] Transform GroundChecker;
-
+    public bool isNearDoor;
     #endregion
 
     #region Components

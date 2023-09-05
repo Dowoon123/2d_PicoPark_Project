@@ -30,7 +30,7 @@ public class TestNetwork : MonoBehaviourPunCallbacks
        var player = PhotonNetwork.Instantiate("Pl/Players", new Vector3(1, 2, 0), Quaternion.identity);
         int id = player.GetPhotonView().ViewID;
 
-
+        if(Camera.main.GetComponent<PhotonView>())
         Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
     }
 

@@ -10,17 +10,16 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     [SerializeField] Text playerCountText;
     public int currentPlayerCount = 0;
-    public GameObject NickNamePanel;
-    public InputField field = null;
-
+    public List<GameObject> Player = new List<GameObject>();
+    public Text StartText;
 
     public void Update()
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                PhotonNetwork.LoadLevel("LobbyScene");
+                PhotonNetwork.LoadLevel("StageSelectScene");
             }
         }
     }
@@ -36,7 +35,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         GetComponent<PhotonView>().RPC("RefreshCurrentPlayer", RpcTarget.AllBuffered, 1);
-
+        UpdatePlayer();
         Debug.Log("룸 입장" + PhotonNetwork.LocalPlayer.ActorNumber + " 번 ");
 
 
@@ -56,18 +55,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
 
 
-    public void SetNickname()
+    public void UpdatePlayer()
     {
-        if (field.text.Length <= 0 || field.text.Length > 8)
-        {
-            Debug.Log("ㅁㄴㄻ");
-            return;
-        }
-          
-
-         PhotonNetwork.LocalPlayer.NickName = field.text;
-
-        Debug.Log("입력된 텍스트 값  :" + field.text);
+     
 
         string objName = "";
 
@@ -92,20 +82,46 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
    
 
-         var obj =  PhotonNetwork.Instantiate(objName, new Vector3(0, 0, 0), Quaternion.identity);
-
-            obj.GetComponent<PlayerController>().pv.RPC("SetNickName", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.NickName);
-        
+    var p =  PhotonNetwork.Instantiate(objName, new Vector3(0, 0, 0), Quaternion.identity);
 
 
+        GetComponent<PhotonView>().RPC("SetArray", RpcTarget.AllBufferedViaServer, p.GetComponent<PhotonView>().ViewID);
 
-        NickNamePanel.SetActive(false);
+        if (PhotonNetwork.IsMasterClient)
+            StartText.gameObject.SetActive(true);
+
+       // GetComponent<PhotonView>().RPC("SetNick", RpcTarget.All);
     }
 
 
-    public void onChangeInputField()
+    [PunRPC]
+    public void SetArray(int view)
     {
+        var p = PhotonView.Find(view);
 
+        Player.Add(p.gameObject);
+
+       
+
+    }
+
+    [PunRPC] 
+    public void SetNick()
+    {
+        if (Player.Count > 0)
+        {
+            for (int i = 0; i < Player.Count; ++i)
+            {
+                if (Player[i] != null)
+                {
+                    var Pc = Player[i].GetComponent<PlayerController>();
+                    Debug.Log("플레이어 " + i + "번째  "+ Pc.pv.Owner.NickName);
+                    Pc.stateTxt.text = Pc.pv.Owner.NickName;
+                }
+
+
+            }
+        }
     }
 
 

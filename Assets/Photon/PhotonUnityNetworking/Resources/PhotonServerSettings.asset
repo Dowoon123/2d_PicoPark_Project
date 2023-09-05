@@ -79,6 +79,10 @@ MonoBehaviour:
   - <SetTransform>g__SetPlayerVelocity|67_0
   - <SetTransform>g__SetPlayerVelocity|68_0
   - SetNickName
+  - Set
+  - SetArray
+  - SetNick
+  - ChangeBox
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

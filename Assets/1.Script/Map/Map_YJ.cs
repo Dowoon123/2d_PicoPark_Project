@@ -6,7 +6,6 @@ using UnityEngine;
 public class Map_YJ : Map
 {
     [SerializeField] Vector2[] playerPosition = new Vector2[4];
-    [SerializeField] GameObject[] playerPrefabs;
 
     public override void SetMapInfo(string SceneName, string MapName, string MapSubName, Vector2 player1_pos, Vector2 player2_pos, Vector2 player3_pos, Vector2 player4_pos)
     {
@@ -27,7 +26,7 @@ public class Map_YJ : Map
         base.Start();
     }
 
-    public void SpawnPlayer()
+    public override void SpawnPlayer()
     {
         var pl = PhotonNetwork.PlayerList;
 
@@ -37,16 +36,10 @@ public class Map_YJ : Map
             if (pl[i].IsLocal)
             {
                 Debug.Log("플레이어 스폰 시도" + pl[i].UserId + " " + i);
-
-                GameObject playerObject = PhotonNetwork.Instantiate(playerPrefabs[i].name, playerPosition[i], Quaternion.identity);
-                PhotonView photonView = playerObject.GetComponent<PhotonView>();
-
-                PhotonNetwork.Instantiate("planeBlue", playerPosition[i], Quaternion.identity);
-                PhotonNetwork.Instantiate("planeRed", playerPosition[i], Quaternion.identity);
-                PhotonNetwork.Instantiate("planeGreen", playerPosition[i], Quaternion.identity);
-                PhotonNetwork.Instantiate("planePurple", playerPosition[i], Quaternion.identity);
-
-                photonView.TransferOwnership(pl[i]);
+                PhotonNetwork.Instantiate("Pl/planeBlue", playerPosition[i], Quaternion.identity);
+                PhotonNetwork.Instantiate("Pl/planeRed", playerPosition[i], Quaternion.identity);
+                PhotonNetwork.Instantiate("Pl/planeGreen", playerPosition[i], Quaternion.identity);
+                PhotonNetwork.Instantiate("Pl/planePurple", playerPosition[i], Quaternion.identity);
 
             }
         }

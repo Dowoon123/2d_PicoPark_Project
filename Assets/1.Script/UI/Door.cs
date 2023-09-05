@@ -4,15 +4,15 @@ public class Door : MonoBehaviour
 {
 
     // 스프라이트를 변경하는 방식 오브젝트는 냅두고
-   
-    
+
+
     PlayerController player;
     public Sprite openSprite;
     public Sprite closeSprite;
-    Key  key;
     SpriteRenderer sr;
 
     int count = 0;
+    bool isOpen = false;
 
     private void Awake()
     {
@@ -20,41 +20,33 @@ public class Door : MonoBehaviour
     }
     void Start()
     {
-        sr.sprite = closeSprite; 
+        sr.sprite = closeSprite;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            
-            NextStage();
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            ComeBackStage();
-        }
-    }
+    
+     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.GetComponent<PlayerController>().nextstage = null;
-        
+            collision.gameObject.GetComponentInChildren<PlayerController>().nextstage = null;
         }
-
-            
-      }
+    }
 
 
-            public void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Item"))
         {
-         
+
             sr.sprite = openSprite;
+         
+            isOpen = true;
             Destroy(collision.gameObject);
         }
 
@@ -64,7 +56,7 @@ public class Door : MonoBehaviour
             collision.gameObject.GetComponent<PlayerController>().nextstage = this.gameObject;
         }
 
-        
+
     }
 
     public void NextStage()
@@ -75,10 +67,12 @@ public class Door : MonoBehaviour
         }
         else if (player.nextstage)
         {
-            Debug.Log("스테이지클리어");
-            Time.timeScale = 0;
-            player.transform.localScale = new Vector3(0, 0, 0);
-          
+            if (isOpen)
+            {
+                Debug.Log("스테이지클리어");
+                Time.timeScale = 0;
+                player.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            }
         }
     }
     public void ComeBackStage()
@@ -91,8 +85,8 @@ public class Door : MonoBehaviour
         {
             Debug.Log("스테이지복귀");
             Time.timeScale = 1;
-            player.transform.localScale = new Vector3(1, 1, 1);
-        
+            player.GetComponentInChildren<SpriteRenderer>().enabled = true;
+
         }
 
     }

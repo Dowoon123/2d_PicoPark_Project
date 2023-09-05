@@ -6,15 +6,16 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class PlayerGroundedState : PlayerState
 {
 
-
+    Door door;
     PlayerController player;
     public GameObject nextstage;
     private List<Vector3> upsidePlayerTargetPositions = new List<Vector3>();
     public PlayerGroundedState(PlayerController _player, PlayerStateMachine _stateMachine, string _animBoolName, STATE_INFO _info) : base(_player, _stateMachine, _animBoolName, _info)
     {
         player = _player;
+        
     }
-
+  
     public override void Enter()
     {
         base.Enter();
@@ -55,12 +56,27 @@ public class PlayerGroundedState : PlayerState
             
             stateMachine.ChangeState(player.State_Jump);
         }
+
        
 
+        {
+            if (player.nextstage)
+            {
+                if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+
+                   door.NextStage();
+                }
+                if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+                    door.ComeBackStage();
+                }
+            }
+        }
 
 
 
-        if (player._colChecker.UpsidePlayers.Count > 0 && xInput != 0)
+            if (player._colChecker.UpsidePlayers.Count > 0 && xInput != 0)
         {
             for (int i = 0; i < player._colChecker.UpsidePlayers.Count; i++)
             {

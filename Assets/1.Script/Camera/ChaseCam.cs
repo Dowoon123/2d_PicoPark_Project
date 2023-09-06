@@ -24,7 +24,7 @@ public class ChaseCam : MonoBehaviourPunCallbacks
 
         CheckIsEdge();
 
-        if(LeftPlayer && RightPlayer)
+        if(LeftPlayer!= null && RightPlayer !=null)
         CaemraMoveToCenter();
         if (Edge_LeftPlayer)
         {
@@ -50,7 +50,7 @@ public class ChaseCam : MonoBehaviourPunCallbacks
 
     public void CheckIsEdge()
     {
-        if(LeftPlayer && RightPlayer)
+        if(LeftPlayer != null && RightPlayer != null)
         {
           
             var leftPos = Camera.main.WorldToViewportPoint(LeftPlayer.transform.position);
@@ -132,7 +132,21 @@ public class ChaseCam : MonoBehaviourPunCallbacks
 
     }
 
-    
+    [PunRPC]
+    public void ResetPlayer()
+    {
+       for(int i=0; i< Players.Length; i++)
+        {
+            Players[i] = null;
+        }
+        LeftPlayer = null;
+        RightPlayer = null;
+        Edge_LeftPlayer = null;
+        Edge_RightPlayer = null;
+       
+    }
+
+
 
     public void CaemraMoveToCenter()
     {

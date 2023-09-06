@@ -13,6 +13,8 @@ public class Map : MonoBehaviourPunCallbacks
 {
     public float mapTimer;
 
+    public List<GameObject> playerList = new List<GameObject>();
+
     public Text Timer_Text;
     public GameObject canvasPrefab;
     public GameObject canvas;  
@@ -138,6 +140,8 @@ public class Map : MonoBehaviourPunCallbacks
 
 
         var player = PhotonNetwork.Instantiate(objName, playerPosition[actorNum-1], Quaternion.identity);
+
+        playerList.Add(player);
 
         int id = player.GetPhotonView().ViewID;
 

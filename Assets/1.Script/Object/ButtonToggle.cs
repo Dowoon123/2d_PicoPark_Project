@@ -21,14 +21,16 @@ public class ButtonToggle : MonoBehaviour
     //충돌
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player" || col.gameObject.tag == "Obstacle")
+        if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("Obstacle"))
         {
-
+            Debug.Log("버튼은 눌렸음");
             targetMoveBlock.GetComponent<InteractableObject>().OnAction();
             targetMoveBlock.GetComponent<InteractableObject>().isAction = true;
             //MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
             //  movBlock.Stop();
         }
+
+        
     }
 
     private void OnTriggerExit2D(Collider2D col)

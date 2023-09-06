@@ -74,6 +74,7 @@ MonoBehaviour:
   offsetIndex: 10
   isLeftEdge: 0
   isRightEdge: 0
+  NickName: 
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 896

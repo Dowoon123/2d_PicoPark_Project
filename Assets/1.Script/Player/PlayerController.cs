@@ -323,18 +323,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         transform.position = target;
 
-        [PunRPC]
-        void SetPlayerVelocity(float xVelocity, float yVelocity)
-        {
-            // 框流烙 贸府 肺流
-            SetVelocity(xVelocity, yVelocity);
-        }
-
+  
 
 
     }
 
-
+ 
     [PunRPC]
     public void SetNickName(string str)
     {

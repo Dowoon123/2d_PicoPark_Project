@@ -51,10 +51,10 @@ public class PlayerMoveState : PlayerGroundedState
         {
             GameObject targetObject = null;
 
-            if (player.GetComponent<collideChecker>().pushedObject != null)
+            if (player.GetComponent<collideChecker>().pushedObject != null && player.GetComponent<collideChecker>().pushedObject.layer != 8)
                 targetObject = player.GetComponent<collideChecker>().pushedObject;
 
-            if (player.GetComponent<collideChecker>().obstacleObject != null)
+            if (player.GetComponent<collideChecker>().obstacleObject != null && player.GetComponent<collideChecker>().pushedObject.layer != 8)
                 targetObject = player.GetComponent<collideChecker>().obstacleObject;
 
 

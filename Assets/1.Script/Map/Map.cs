@@ -11,11 +11,10 @@ using Photon.Realtime;
 
 public class Map : MonoBehaviourPunCallbacks
 {
-    public float Timer;
+    public float mapTimer;
 
     public Text Timer_Text;
     public GameObject canvasPrefab;
-
     public GameObject canvas;  
 
     public string Scene_name = "TestScene";
@@ -26,8 +25,8 @@ public class Map : MonoBehaviourPunCallbacks
     public bool isSelectOption; // 체크해두면 스폰을 진행하지않음.
 
 
-    Vector2[] playerPosition = new Vector2[4];
-    public virtual void SetMapInfo(string SceneName, string MapName, string MapSubName,
+   public Vector2[] playerPosition = new Vector2[4];
+    public  void SetMapInfo(string SceneName, string MapName, string MapSubName,
         Vector2 player1_pos, Vector2 player2_pos, Vector2 player3_pos, Vector2 player4_pos)
     {
         this.Scene_name = SceneName;
@@ -54,44 +53,58 @@ public class Map : MonoBehaviourPunCallbacks
         
 
     }
+    public virtual void SpawnTimer()
+    {
+      canvas = Instantiate(canvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        Timer_Text = canvas.GetComponentInChildren<Text>();
+    }
    
     public virtual void Start()
     {
-        if(isSelectOption)
-       SpawnPlayer();
+        if (!isSelectOption)
+        {
+            SpawnPlayer();
+
+
+
+
+
+        }
     }
 
    public virtual void Update()
     {
-        //Timer += Time.deltaTime;
+        if (Timer_Text)
+        {
+            mapTimer += Time.deltaTime;
 
 
-        //int minutes = (int)(Timer / 60);
-        //int seconds = (int)(Timer % 60);
+            int minutes = (int)(mapTimer / 60);
+            int seconds = (int)(mapTimer % 60);
 
-        //string MinutesStr = "";
-        //string SecondsStr = "";
+            string minutesstr = "";
+            string secondsstr = "";
 
-        //if (minutes < 10)
-        //{
-        //    MinutesStr = "0" + minutes;
+            if (minutes < 10)
+            {
+                minutesstr = "0" + minutes;
 
-        //}
-        //else
-        //    MinutesStr = minutes.ToString();
+            }
+            else
+                minutesstr = minutes.ToString();
 
-        //if (seconds < 10)
-        //{
-        //    SecondsStr = "0" + seconds;
-        //}
-        //else
-        //    SecondsStr = seconds.ToString();
+            if (seconds < 10)
+            {
+                secondsstr = "0" + seconds;
+            }
+            else
+                secondsstr = seconds.ToString();
 
 
-        //Timer_Text.text = "Time / "+ MinutesStr + " : " + SecondsStr;
-        
+            Timer_Text.text = "time / " + minutesstr + " : " + secondsstr;
+        }
 
-        if(Input.GetKeyDown(KeyCode.LeftAlt))
+        if (Input.GetKeyDown(KeyCode.LeftAlt))
         {
             SpawnPlayer();
         }
@@ -100,19 +113,35 @@ public class Map : MonoBehaviourPunCallbacks
 
     public virtual void SpawnPlayer()
     {
-        var pl = PhotonNetwork.PlayerList;
+        var actorNum = PhotonNetwork.LocalPlayer.ActorNumber;
+        string objName = "";
 
-        Debug.Log("스폰플레이어 실행됨");
-        for(int i=0; i< pl.Length; ++i)
+        switch (PhotonNetwork.LocalPlayer.ActorNumber)
         {
-            if (pl[i].IsLocal)
-            {
-                Debug.Log("플레이어 스폰 시도" + pl[i].UserId +" " +  i);
-                PhotonNetwork.Instantiate("Pl/Players", playerPosition[i], Quaternion.identity);
+            case 1:
+                objName = "Pl/Player_Red";
 
-            }
+                break;
+            case 2:
+                objName = "Pl/Player_Blue";
+                break;
+            case 3:
+                objName = "Pl/Player_Green";
+                break;
+            case 4:
+                objName = "Pl/Player_Purple";
+                break;
+            default:
+                break;
         }
-        
+
+
+
+        var p = PhotonNetwork.Instantiate(objName, playerPosition[actorNum-1], Quaternion.identity);
+
+
+
+
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)

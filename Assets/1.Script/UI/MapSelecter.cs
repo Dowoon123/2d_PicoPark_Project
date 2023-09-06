@@ -68,6 +68,13 @@ public class MapSelecter : MonoBehaviourPunCallbacks
 
                 pv.RPC("ChangeBox", RpcTarget.All, currentIndex);
             }
+
+
+
+            if(Input.GetKeyDown(KeyCode.E)  || Input.GetKeyDown(KeyCode.Space))
+            {
+                PhotonNetwork.LoadLevel(Maps[currentIndex].Scene_name);
+            }
         }
         
     }

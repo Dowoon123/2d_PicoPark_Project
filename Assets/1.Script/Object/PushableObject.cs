@@ -44,10 +44,13 @@ public class PushableObject :MonoBehaviourPunCallbacks
         CheckBox();
 
         if(isPushAble)
-        {  
-            for(int i=0; i<players.Count; ++i)
+        {
+
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+
+            for (int i=0; i<players.Count; ++i)
             {
-                players[i].SetVelocity(speed, 0f);
+                players[i].transform.Translate(Vector2.right * speed * Time.deltaTime);
             }
         }
     }
@@ -56,8 +59,10 @@ public class PushableObject :MonoBehaviourPunCallbacks
 
     public void CheckBox()
     {
-        var box = Physics2D.OverlapBoxAll(transform.position, col.bounds.size,0, whatIsPlayer);
-
+        var size = col.bounds.size;
+        size.x += 7f;
+        var box = Physics2D.OverlapBoxAll(transform.position, size,0, whatIsPlayer);
+        Debug.Log(col.bounds.size);
 
         players.Clear();
         isLeftPusher.Clear();
@@ -92,13 +97,13 @@ public class PushableObject :MonoBehaviourPunCallbacks
 
          if(isLeftPusher.Count > isRightPusher.Count)
          {
-            speed = 1.4f;
+            speed = -1.4f;
             pv.RPC("SetCurrPushInt", RpcTarget.AllBuffered, isLeftPusher.Count);
 
          }
          else if (isRightPusher.Count > isLeftPusher.Count)
          {
-            speed = -1.4f;
+            speed = 1.4f;
             pv.RPC("SetCurrPushInt", RpcTarget.AllBuffered, isRightPusher.Count);
          }
          else if (isRightPusher == isLeftPusher)
@@ -107,6 +112,12 @@ public class PushableObject :MonoBehaviourPunCallbacks
             pv.RPC("SetCurrPushInt", RpcTarget.AllBuffered, isLeftPusher.Count);
  
          }
+
+         if(isLeftPusher.Count == 0 && isRightPusher.Count ==0)
+        {
+            speed = 0f;
+            pv.RPC("SetCurrPushInt", RpcTarget.AllBuffered, 0);
+        }
 
     }
 

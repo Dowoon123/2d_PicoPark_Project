@@ -44,12 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3ca570707095c44be691672c3c44d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timer: 0
+  mapTimer: 0
   Timer_Text: {fileID: 0}
   canvasPrefab: {fileID: 0}
   canvas: {fileID: 0}
-  Scene_name: Stage_3Test
+  Scene_name: Stage_3
   Map_name: 1. HELLO PIKO PARK
   Map_subTitle: Test
-  isSelectOption: 1
+  isSelectOption: 0
+  playerPosition:
+  - {x: -4, y: 3}
+  - {x: -2, y: 3}
+  - {x: 0, y: 3}
+  - {x: 2, y: 3}
   timeLimit: 30

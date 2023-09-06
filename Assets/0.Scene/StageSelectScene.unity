@@ -253,14 +253,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3ca570707095c44be691672c3c44d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timer: 0
+  mapTimer: 0
   Timer_Text: {fileID: 0}
   canvasPrefab: {fileID: 0}
   canvas: {fileID: 0}
-  Scene_name: Stage_3Test
+  Scene_name: Stage_3
   Map_name: 1. HELLO PIKO PARK
   Map_subTitle: Test
   isSelectOption: 1
+  playerPosition:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
   timeLimit: 30
 --- !u!1 &118681898
 GameObject:
@@ -456,14 +461,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3ca570707095c44be691672c3c44d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timer: 0
+  mapTimer: 0
   Timer_Text: {fileID: 0}
   canvasPrefab: {fileID: 0}
   canvas: {fileID: 0}
-  Scene_name: TestScene
+  Scene_name: Stage_3
   Map_name: 3. Test1
   Map_subTitle: Test3
   isSelectOption: 1
+  playerPosition:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
   timeLimit: 30
 --- !u!1 &965667919
 GameObject:
@@ -857,14 +867,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3ca570707095c44be691672c3c44d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timer: 0
+  mapTimer: 0
   Timer_Text: {fileID: 0}
   canvasPrefab: {fileID: 0}
   canvas: {fileID: 0}
-  Scene_name: TestScene
+  Scene_name: Stage_3
   Map_name: 2. Dowoon
   Map_subTitle: Test2
   isSelectOption: 1
+  playerPosition:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
   timeLimit: 30
 --- !u!1 &1399223761
 GameObject:
@@ -1180,14 +1195,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee3ca570707095c44be691672c3c44d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Timer: 0
+  mapTimer: 0
   Timer_Text: {fileID: 0}
   canvasPrefab: {fileID: 0}
   canvas: {fileID: 0}
-  Scene_name: TestScene
+  Scene_name: Stage_3
   Map_name: 4.Test 2
   Map_subTitle: Test4
   isSelectOption: 1
+  playerPosition:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
   timeLimit: 30
 --- !u!224 &1950286255
 RectTransform:

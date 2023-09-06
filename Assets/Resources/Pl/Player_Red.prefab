@@ -705,7 +705,7 @@ MonoBehaviour:
     Name: yVelocity
   - Type: 9
     SynchronizeType: 0
-    Name: Die
+    Name: Dead
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0

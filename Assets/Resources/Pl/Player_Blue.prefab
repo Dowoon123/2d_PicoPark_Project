@@ -119,7 +119,7 @@ MonoBehaviour:
   isObstacle: 0
   isPlayer: 0
   obstacleObject: {fileID: 0}
-  pushedObject: {fileID: 0}
+  PushedPlayer: {fileID: 0}
   UpsidePlayers: []
   upPosition: []
 --- !u!114 &5631247468460075448

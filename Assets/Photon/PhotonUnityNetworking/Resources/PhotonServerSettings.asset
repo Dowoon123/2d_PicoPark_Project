@@ -84,6 +84,9 @@ MonoBehaviour:
   - SetNick
   - ChangeBox
   - ResetPlayer
+  - AddPusher
+  - RemovePusher
+  - SetCurrPushInt
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

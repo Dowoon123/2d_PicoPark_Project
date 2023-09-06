@@ -12,8 +12,8 @@ public class PlayerPushState : PlayerGroundedState
     public override void Enter()
     {
         base.Enter();
-        player.ZeroVelocity();
-        
+        player.SetVelocity(0, player.rb.velocity.y);
+
         Debug.Log("푸쉬");
         Debug.Log(" Push 상태 진입");
     }
@@ -47,14 +47,4 @@ public class PlayerPushState : PlayerGroundedState
     }
 
 
-    public PlayerController CheckPlayer(PlayerController pc)
-    {
-        if (pc._colChecker.PushedPlayer)
-        {
-            return CheckPlayer(pc._colChecker.PushedPlayer.GetComponent<PlayerController>());
-        }
-        else
-            return pc;
-
-    }
 }

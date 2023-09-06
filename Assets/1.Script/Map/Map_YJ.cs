@@ -5,21 +5,9 @@ using UnityEngine;
 
 public class Map_YJ : Map
 {
-    [SerializeField] Vector2[] playerPosition = new Vector2[4];
+  
 
-    public override void SetMapInfo(string SceneName, string MapName, string MapSubName, Vector2 player1_pos, Vector2 player2_pos, Vector2 player3_pos, Vector2 player4_pos)
-    {
-        base.SetMapInfo(SceneName, MapName, MapSubName, player1_pos, player2_pos, player3_pos, player4_pos);
-
-        this.Scene_name = SceneName;
-        this.Map_name = MapName;
-        this.Map_subTitle = MapSubName;
-
-        playerPosition[0] = player1_pos;
-        playerPosition[1] = player2_pos;
-        playerPosition[2] = player3_pos;
-        playerPosition[3] = player4_pos;
-    }
+ 
 
     public override void Start()
     {

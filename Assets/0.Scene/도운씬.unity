@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPushAble: 0
-  NeedPlayers: 1
+  NeedPlayers: 2
   currPushPlayers: 0
   speed: 0
   isLeftPusher: []

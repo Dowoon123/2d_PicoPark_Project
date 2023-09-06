@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingObject : MonoBehaviour
+public class MovingObjectL : MonoBehaviour
 {
     /// <summary>
     /// 해당 스크립트는 블록에 대한 이동에 관련된 스크립트임 
@@ -30,6 +30,7 @@ public class MovingObject : MonoBehaviour
     //초기 위치
     Vector3 defPos;
     //반전여부
+    [SerializeField] Vector3 arrPos;
    
 
 
@@ -61,7 +62,7 @@ public class MovingObject : MonoBehaviour
                 //블록 이동
                 Vector3 v = new Vector3(perDX, perDY, defPos.z);
                 transform.Translate(v);
-                if (defPos.x > transform.position.x)
+                if (arrPos.x > transform.position.x)
                   isCanMove = false;
             }
             

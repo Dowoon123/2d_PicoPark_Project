@@ -23,7 +23,7 @@ public class SwitchActionR : MonoBehaviour
     //Ãæµ¹
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.CompareTag("Player") || col.gameObject.CompareTag("Obstacle"))
         {
             on = true;
             GetComponent<SpriteRenderer>().sprite = imageOn;

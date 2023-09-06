@@ -129,9 +129,6 @@ public class ElevatorUpFinite : MonoBehaviour
             //블록 이동
             rb.velocity = v;
 
-
-
-
         }
     }
     public void OnDrawGizmos()

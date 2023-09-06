@@ -106,10 +106,10 @@ public class Map : MonoBehaviourPunCallbacks
             Timer_Text.text = "time / " + minutesstr + " : " + secondsstr;
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SpawnPlayer();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    SpawnPlayer();
+        //}
     }
 
 

@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 5555844188924754647}
   - component: {fileID: 5356757346331990561}
-  - component: {fileID: 8322735730419077730}
   - component: {fileID: 710097593623373168}
   - component: {fileID: -2277557839488140805}
   - component: {fileID: -1866976797482907286}
+  - component: {fileID: 4615221398522113888}
   m_Layer: 0
-  m_Name: Button
+  m_Name: ButtonL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5356757346331990561
 SpriteRenderer:
@@ -88,22 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8322735730419077730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9142185064287508336}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d46c4d9ba7958a34a8e8e38558c0775a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetMoveBlock: {fileID: 0}
-  imageOn: {fileID: 1993671463, guid: e6efbec4429b37645863622842a48fdf, type: 3}
-  imageOff: {fileID: -1270555510, guid: e6efbec4429b37645863622842a48fdf, type: 3}
-  on: 0
 --- !u!61 &710097593623373168
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -188,3 +172,19 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &4615221398522113888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9142185064287508336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b605dad6ec0ffde4199dd333b8354709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetMoveBlock: {fileID: 0}
+  imageOn: {fileID: -1270555510, guid: e6efbec4429b37645863622842a48fdf, type: 3}
+  imageOff: {fileID: 1993671463, guid: e6efbec4429b37645863622842a48fdf, type: 3}
+  on: 0

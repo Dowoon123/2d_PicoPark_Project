@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingObject : MonoBehaviour
+public class MovingObjectL : MonoBehaviour
 {
     /// <summary>
     /// 해당 스크립트는 블록에 대한 이동에 관련된 스크립트임 

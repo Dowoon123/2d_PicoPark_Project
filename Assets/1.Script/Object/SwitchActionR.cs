@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchAction : MonoBehaviour
+public class SwitchActionR : MonoBehaviour
 {
     /// <summary>
     /// 이 스크립트는 레버 스크립트로 누르면 On 다시 누르면 Off임.
@@ -27,7 +27,7 @@ public class SwitchAction : MonoBehaviour
         {
             on = true;
             GetComponent<SpriteRenderer>().sprite = imageOn;
-            MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
+            MovingObjectR movBlock = targetMoveBlock.GetComponent<MovingObjectR>();
             movBlock.isSwitch = true;
             
             movBlock.Move();
@@ -42,7 +42,7 @@ public class SwitchAction : MonoBehaviour
 
         on = false;
         GetComponent<SpriteRenderer>().sprite = imageOff;
-        MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
+        MovingObjectR movBlock = targetMoveBlock.GetComponent<MovingObjectR>();
         movBlock.isSwitch = false;
         movBlock.Stop();
 

@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public bool isDead = false;
     public bool isGround = false;
     public bool isUpperPlayer = false;
-    public bool isGimmicked = false; //8.30 ���?���� �۵� ���θ� ���� �߰��Ͽ���
+    public bool isGimmicked = false; //
     public PlayerController downPlayer;
     public GameObject m_stateCanvas;
     public Text stateTxt;

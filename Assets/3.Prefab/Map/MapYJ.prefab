@@ -54,10 +54,10 @@ MonoBehaviour:
   Map_subTitle: "\uD14C\uC2A4\uD2B8"
   isSelectOption: 0
   playerPosition:
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
+  - {x: 60, y: 0}
+  - {x: 60, y: 0}
+  - {x: 60, y: 0}
+  - {x: 60, y: 0}
   isChange: 0
   ChangeComplete: 0
   spawnPoints:

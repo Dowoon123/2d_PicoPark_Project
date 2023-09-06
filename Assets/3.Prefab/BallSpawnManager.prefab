@@ -102,6 +102,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3462471280996091211}
+  - component: {fileID: 2163842988565925714}
   m_Layer: 8
   m_Name: BallSpawnManager
   m_TagString: Untagged
@@ -128,6 +129,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2163842988565925714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6369436677261259396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b71ddf97532154f9ff655dac26d5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoints:
+  - {fileID: 2697386990008767408}
+  - {fileID: 693975049903703673}
+  - {fileID: 4531576943429151211}
+  - {fileID: 2513661388771581853}
+  ball: {fileID: 2352631885819310822, guid: f903a70506babac489fb531dff2a59ad, type: 3}
+  ballCount: 0
 --- !u!1 &8034706376120989496
 GameObject:
   m_ObjectHideFlags: 0

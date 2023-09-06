@@ -115,7 +115,7 @@ MonoBehaviour:
     m_Bits: 128
   WhatIsObstacle:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 832
   isObstacle: 0
   isPlayer: 0
   obstacleObject: {fileID: 0}

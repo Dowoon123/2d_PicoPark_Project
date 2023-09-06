@@ -70,7 +70,7 @@ public class DeadZone : MonoBehaviour
             IEnumerator Death()
             {
                 yield return new WaitForSeconds(0.1f);
-                player.rb.AddForce(Vector2.up * 45, ForceMode2D.Impulse);
+                player.rb.AddForce(Vector2.up * 40, ForceMode2D.Impulse);
                 CoolTime = 1f;
                
 

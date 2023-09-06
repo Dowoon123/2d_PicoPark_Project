@@ -25,7 +25,9 @@ public class Map : MonoBehaviourPunCallbacks
 
 
     public bool isSelectOption; // 체크해두면 스폰을 진행하지않음.
+    public bool isSpawnEnd; // 스폰여부 체크 
 
+    public PhotonView pv;
 
    public Vector2[] playerPosition = new Vector2[4];
     public  void SetMapInfo(string SceneName, string MapName, string MapSubName,
@@ -52,7 +54,16 @@ public class Map : MonoBehaviourPunCallbacks
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
-        
+        if (PhotonNetwork.IsMasterClient)
+        {
+         
+            if (GetComponent<PhotonView>())
+            {
+                pv = GetComponent<PhotonView>();
+              
+                
+            }
+        }
 
     }
     public virtual void SpawnTimer()
@@ -140,10 +151,11 @@ public class Map : MonoBehaviourPunCallbacks
 
 
         var player = PhotonNetwork.Instantiate(objName, playerPosition[actorNum-1], Quaternion.identity);
-
-        playerList.Add(player);
-
         int id = player.GetPhotonView().ViewID;
+        GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
+       
+
+     
 
 
         if (Camera.main.GetComponent<PhotonView>())
@@ -156,9 +168,21 @@ public class Map : MonoBehaviourPunCallbacks
     {
         Debug.Log("OnSceneLoaded: " + scene.name);
 
-         
-     
+
+
     }
+
+    [PunRPC]
+    public void AddPlayer(int viewID)
+    {
+        var player = PhotonView.Find(viewID);
+        playerList.Add(player.gameObject);
+
+        if (playerList.Count == PhotonNetwork.CurrentRoom.PlayerCount)
+            isSpawnEnd = true;
+    }
+
+
 
 
 }

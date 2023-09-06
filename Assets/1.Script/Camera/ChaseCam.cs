@@ -84,7 +84,7 @@ public class ChaseCam : MonoBehaviourPunCallbacks
         {
             if (Players[i] != null)
             {
-                if (Players[i].transform.position.x <= minX)
+                if (Players[i].transform.position.x <= minX) 
                 {
                     minX = Players[i].transform.position.x;
                     minIndex = i;

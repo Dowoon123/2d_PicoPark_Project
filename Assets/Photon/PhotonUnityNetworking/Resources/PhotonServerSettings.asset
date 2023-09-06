@@ -87,6 +87,8 @@ MonoBehaviour:
   - AddPusher
   - RemovePusher
   - SetCurrPushInt
+  - SetJoint
+  - SpawnEnd
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

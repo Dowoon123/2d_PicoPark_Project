@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7692331107502435663}
   - component: {fileID: 4050930201072404951}
+  - component: {fileID: 4058733977894253144}
   m_Layer: 0
   m_Name: Map_Dowoon
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4050930201072404951
 MonoBehaviour:
@@ -53,8 +54,32 @@ MonoBehaviour:
   Map_name: 3.Dowoon
   Map_subTitle: test
   isSelectOption: 0
+  isSpawnEnd: 0
   playerPosition:
   - {x: -4, y: 3}
   - {x: 0, y: 3}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
+  RopePrefab: {fileID: 5570402432585634054, guid: 72a5936df6de75b4a93d1f52dda21828, type: 3}
+--- !u!114 &4058733977894253144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348222028349234256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

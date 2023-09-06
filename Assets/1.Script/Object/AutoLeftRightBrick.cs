@@ -17,7 +17,7 @@ public class AutoLeftRightBrick : MonoBehaviour
     void Update()
     {
         Vector3 v = pos;
-       // v.x += in * Mathf.Sin(Time.time * speed);
+        v.x += inputX * Mathf.Sin(Time.time * speed);
         transform.position = v;
     }
 }

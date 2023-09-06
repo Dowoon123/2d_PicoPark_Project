@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 5305962417172439117}
   - component: {fileID: 6174449968750039911}
   - component: {fileID: 7445777751862250063}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: planePurple
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

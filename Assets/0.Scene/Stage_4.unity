@@ -874,6 +874,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
+    - target: {fileID: 3889063213295496290, guid: f903a70506babac489fb531dff2a59ad, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8145530670346705795, guid: f903a70506babac489fb531dff2a59ad, type: 3}
       propertyPath: m_RootOrder
       value: 2

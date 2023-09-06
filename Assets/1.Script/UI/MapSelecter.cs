@@ -15,11 +15,15 @@ public class MapSelecter : MonoBehaviourPunCallbacks
     public Text MapTitle;
     public Text MapSubTitle;
 
+    public AudioSource bounds;
+
     private void Awake()
     {
         pv = GetComponent<PhotonView>();
 
         StartCoroutine(ReSizeBox());
+
+        bounds.Play();
         
     }
 

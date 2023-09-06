@@ -23,7 +23,7 @@ public class collideChecker : MonoBehaviour
 
 
     public GameObject obstacleObject;
-    public GameObject pushedObject;
+    public GameObject PushedPlayer;
 
     public List<PlayerController> UpsidePlayers = new List<PlayerController>(); 
     public List<Vector2> upPosition = new List<Vector2>();
@@ -108,7 +108,7 @@ public class collideChecker : MonoBehaviour
         if (colBox)
         {
             if (colBox.gameObject.layer == 6)
-                pushedObject = colBox.gameObject;
+                PushedPlayer = colBox.gameObject;
             else if (colBox.gameObject.layer == 9)
                 obstacleObject = colBox.gameObject;
             
@@ -119,7 +119,7 @@ public class collideChecker : MonoBehaviour
         }
         else
         {
-            pushedObject = null;
+            PushedPlayer = null;
             obstacleObject = null;
             return false;
         }

@@ -13,11 +13,12 @@ public class SwitchActionR : MonoBehaviour
     public Sprite imageOff;
     public bool on = false; //스위치 상태(true: 눌린 상태 false: 눌리지 않은 상태)
 
+    Collider2D col;
 
     // Start is called before the first frame update
     void Start()
     {
-   
+ 
     }
 
     //충돌

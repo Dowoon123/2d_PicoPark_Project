@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,11 +11,11 @@ public class Map_YJ : Map
     public bool ChangeComplete;
 
     [Header("Ball Spawn")]
-    public Transform[] spawnPoints;
+    public Vector2[] spawnPoints = new Vector2[4];
     public GameObject ball;
     public int ballCount = 0;  //생성된 공 저장 
 
-
+    public Vector2[] planePos = new Vector2[4];
 
     public override void Awake()
     {
@@ -24,6 +25,7 @@ public class Map_YJ : Map
     public override void Start()
     {
         base.Start();
+        BallSpawn();
 
     }
 
@@ -42,7 +44,33 @@ public class Map_YJ : Map
             isChange = false;
             ChangeComplete = true;
         }
+
+        
     }
+
+    //공 스폰
+    void BallSpawn()
+    {
+
+        for (int i = 0; i < spawnPoints.Length; ++i)
+        {
+            if (ballCount < 4) //4개의 공만 스폰
+            {
+                Debug.Log("공 생성");
+                PhotonNetwork.Instantiate("Object/Ball", spawnPoints[i], Quaternion.identity);
+                ballCount++;
+            }
+            else
+                break; // 4개의 공이 생성되면 반복문 종료
+        }
+
+    }
+
+    public override void OnJoinedRoom()
+    {
+        BallSpawn();
+    }
+
     public void Playerplane()
     {
         var actorNum = PhotonNetwork.LocalPlayer.ActorNumber;
@@ -68,10 +96,12 @@ public class Map_YJ : Map
         }
 
 
-
-        var player = PhotonNetwork.Instantiate(objName, playerPosition[actorNum - 1], Quaternion.identity);
+        var player = PhotonNetwork.Instantiate(objName, planePos[actorNum - 1], Quaternion.identity);
 
         int id = player.GetPhotonView().ViewID;
+
+        
+
 
         //카메라가 쫓아가게끔
         if (Camera.main.GetComponent<PhotonView>())
@@ -111,26 +141,5 @@ public class Map_YJ : Map
 
     }
 
-    //공 스폰
-    void BallSpawn()
-    {
-
-        foreach (Transform spawnPoint in spawnPoints)
-        {
-            if (ballCount < 4) //4개의 공만 스폰
-            {
-
-                PhotonNetwork.Instantiate("Object/ball", spawnPoint.position, Quaternion.identity);
-                ballCount++;
-            }
-            else
-                break; // 4개의 공이 생성되면 반복문 종료
-        }
-
-    }
-
-    public override void OnJoinedRoom()
-    {
-        BallSpawn();
-    }
+    
 }

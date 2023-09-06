@@ -54,16 +54,21 @@ MonoBehaviour:
   Map_subTitle: "\uD14C\uC2A4\uD2B8"
   isSelectOption: 0
   playerPosition:
-  - {x: 60, y: 0}
-  - {x: 60, y: 0}
-  - {x: 60, y: 0}
-  - {x: 60, y: 0}
+  - {x: 0, y: 0}
+  - {x: 5, y: 0}
+  - {x: 10.4, y: 0}
+  - {x: 15.6, y: 0}
   isChange: 0
   ChangeComplete: 0
   spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {x: -17, y: -1.74}
+  - {x: -13.32, y: -1.74}
+  - {x: -9.04, y: -1.74}
+  - {x: -4.760004, y: -1.74}
   ball: {fileID: 2352631885819310822, guid: f903a70506babac489fb531dff2a59ad, type: 3}
   ballCount: 0
+  planePos:
+  - {x: 70, y: 5.64}
+  - {x: 70, y: 2.36}
+  - {x: 70, y: -2.28}
+  - {x: 70, y: -6.12}

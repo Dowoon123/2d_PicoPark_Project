@@ -149,3 +149,4 @@ MonoBehaviour:
   weight: 1
   isCanMove: 1
   isSwitch: 0
+  arrPos: {x: 15, y: 0, z: 0}

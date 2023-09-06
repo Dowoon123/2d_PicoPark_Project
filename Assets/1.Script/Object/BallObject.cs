@@ -40,6 +40,8 @@ public class BallObject : MonoBehaviourPunCallbacks
         //    Debug.Log("들어왔음");
         //    PhotonNetwork.Destroy(gameObject);
         //}
+
+
         //ball이 brick에 닿은 경우 brick 삭제
         if (collision.collider.CompareTag("Brick"))
             PhotonNetwork.Destroy(collision.gameObject);

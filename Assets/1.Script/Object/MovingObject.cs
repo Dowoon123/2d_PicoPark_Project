@@ -19,11 +19,10 @@ public class MovingObject : MonoBehaviour
     //정지시간
     public float weight = 0.0f;
 
-    //올라갔을때 움직이기
-    public bool isMoveWhenOn = false;
 
     //움직임
-    public bool isCanMove = true;
+    public bool isCanMove = false;
+    public bool isSwitch = false;
     //1프레임당 X 이동 값
     float perDX;
     //1프레임당 Y 이동 값
@@ -31,7 +30,7 @@ public class MovingObject : MonoBehaviour
     //초기 위치
     Vector3 defPos;
     //반전여부
-    bool isReverse = false;
+   
 
 
 
@@ -46,79 +45,42 @@ public class MovingObject : MonoBehaviour
         //1프레임의 Y 이동 값
         perDY = moveY / (1.0f / timestep * times);
 
-        if (isMoveWhenOn)
-        {
-            //처음에는 움직이지 않고 올라가면 움직이기 시작
-            isCanMove = false;
-        }
+
     }
 
 
     void FixedUpdate()
     {
-        if (isCanMove)
-        {
-            //이동중
-            float x = transform.position.x;
-            float y = transform.position.y;
-            bool endX = false;
-            bool endY = false;
-            if (isReverse)
-            {
-                //반대방향 이동
-                //이동량이 양수고 이동 위치가 초기 위치보다 작거나
-                //이동량이 음수고 이동 위치가 초기 위치보다 큰경우
-                if ((perDX >= 0.0f && x <= defPos.x) || (perDX < 0.0f && x >= defPos.x))
-                {
-                    //이동량이 +
-                    endX = true; //X방향 이동 종료
-                }
-                if ((perDY >= 0.0f && y <= defPos.y) || (perDY < 0.0f && y >= defPos.y))
-                {
-                    endY = true; //Y방향 이동 종료
-                }
-                //블록 이동
-                transform.Translate(new Vector3(-perDX, -perDY, defPos.z));
 
-            }
-            else
+        if (isSwitch)
+        {
+
+            if (isCanMove)
             {
-                //정방향이동
-                //이동량이 양수고 이동 위치가 초기 위치보다 크거나
-                //이동량이 음수고 이동 위치가 초기 위치보다 작은경우
-                if ((perDX >= 0.0f && x >= defPos.x + moveX) || (perDX < 0.0f && x < defPos.x + moveX))
-                {
-                    endX = true; //X방향 이동 종료
-                }
-                if ((perDY >= 0.0f && y >= defPos.y + moveY) || (perDY < 0.0f && x < defPos.y + moveY))
-                {
-                    endY = true; //X방향 이동 종료
-                }
+               
                 //블록 이동
                 Vector3 v = new Vector3(perDX, perDY, defPos.z);
                 transform.Translate(v);
+                if (defPos.x > transform.position.x)
+                  isCanMove = false;
             }
-
-            if (endX && endY)
+            
+        }
+        else if(!isSwitch)
+        {
+            if (!isCanMove)
             {
-                //이동 종료
-                if (isReverse)
-                {
-                    //위치가 어긋나는 것을 방지하고자 정면 방향 이동으로 돌아가기 전에 
-                    //초기 위치로 돌리기
+
+                if (defPos.x < transform.position.x)
                     transform.position = defPos;
-                }
-                isReverse = !isReverse; //값을 반전시키기
-                isCanMove = false;  //이동 가능 값을 false
-                if (isMoveWhenOn == false)
-                {
-                    //올라갔을 때  움직이는 값이 꺼진 경우
-                    Invoke("Move", weight); //weight만큼 지연 후 다시 이동
-                }
+                //내려가는 최소 높이는 = 기존에 있던 위치임.
+
+                //블록 이동
+                transform.Translate(new Vector3(-perDX, -perDY, defPos.z));
             }
         }
-    }
 
+    }
     //이동하게 만들기  
     public void Move()
     {
@@ -131,7 +93,33 @@ public class MovingObject : MonoBehaviour
     {
         isCanMove = false;
     }
+    /*
+    if (endX && endY)
+    {
+        //이동 종료
+        if (isReverse)
+        {
+            //위치가 어긋나는 것을 방지하고자 정면 방향 이동으로 돌아가기 전에 
+            //초기 위치로 돌리기
+            transform.position = defPos;
+        }
+        isReverse = !isReverse; //값을 반전시키기
+       // isCanMove = false;  //이동 가능 값을 false
 
+
+        if (isMoveWhenOn == false)
+        {
+            //올라갔을 때  움직이는 값이 꺼진 경우
+            Invoke("Move", weight); //weight만큼 지연 후 다시 이동
+        }
+    }*/
+
+
+
+
+
+
+    /*
     //충돌
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -157,5 +145,7 @@ public class MovingObject : MonoBehaviour
         }
     }
 
-
+    */
 }
+
+

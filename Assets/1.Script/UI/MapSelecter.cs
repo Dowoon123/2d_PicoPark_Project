@@ -33,7 +33,7 @@ public class MapSelecter : MonoBehaviourPunCallbacks
                 if (currentIndex > Maps.Length - 1)
                     currentIndex = 0;
 
-                pv.RPC("ChangeBox", RpcTarget.All);
+                pv.RPC("ChangeBox", RpcTarget.All,currentIndex);
             }
             else if (Input.GetKeyDown(KeyCode.A))
             {
@@ -42,7 +42,7 @@ public class MapSelecter : MonoBehaviourPunCallbacks
                     currentIndex = Maps.Length - 1;
 
 
-                pv.RPC("ChangeBox", RpcTarget.All);
+                pv.RPC("ChangeBox", RpcTarget.All, currentIndex);
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
@@ -53,7 +53,7 @@ public class MapSelecter : MonoBehaviourPunCallbacks
                     currentIndex -= Maps.Length;
                 }
 
-                pv.RPC("ChangeBox", RpcTarget.All);
+                pv.RPC("ChangeBox", RpcTarget.All, currentIndex);
 
             }
             else if (Input.GetKeyDown(KeyCode.W))
@@ -66,19 +66,28 @@ public class MapSelecter : MonoBehaviourPunCallbacks
                     currentIndex += Maps.Length;
                 }
 
-                pv.RPC("ChangeBox", RpcTarget.All);
+                pv.RPC("ChangeBox", RpcTarget.All, currentIndex);
+            }
+
+
+
+            if(Input.GetKeyDown(KeyCode.E)  || Input.GetKeyDown(KeyCode.Space))
+            {
+                PhotonNetwork.LoadLevel(Maps[currentIndex].Scene_name);
             }
         }
         
     }
 
-    [PunRPC]
-    public void ChangeBox()
-    {
-        SelectBox.transform.position = Maps[currentIndex].transform.position;
 
-        MapTitle.text = Maps[currentIndex].GetComponent<Map>().Map_name;
-        MapSubTitle.text = Maps[currentIndex].GetComponent<Map>().Map_subTitle;
+
+    [PunRPC]
+    public void ChangeBox(int curr)
+    {
+        SelectBox.transform.position = Maps[curr].transform.position;
+
+        MapTitle.text = Maps[curr].GetComponent<Map>().Map_name;
+        MapSubTitle.text = Maps[curr].GetComponent<Map>().Map_subTitle;
     }
 
 

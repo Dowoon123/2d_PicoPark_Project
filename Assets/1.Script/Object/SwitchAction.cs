@@ -17,6 +17,45 @@ public class SwitchAction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+   
+    }
+
+    //충돌
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            on = true;
+            GetComponent<SpriteRenderer>().sprite = imageOn;
+            MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
+            movBlock.isSwitch = true;
+            
+            movBlock.Move();
+
+
+        }
+    }
+    private void OnTriggerExit2D(Collider2D col)
+    {
+
+      
+
+        on = false;
+        GetComponent<SpriteRenderer>().sprite = imageOff;
+        MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
+        movBlock.isSwitch = false;
+        movBlock.Stop();
+
+        // MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
+        //  movBlock.Move();
+
+    }
+
+
+
+    // Update is called once per frame
+    void Update()
+    {
         if (on)
         {
             GetComponent<SpriteRenderer>().sprite = imageOn;
@@ -25,35 +64,5 @@ public class SwitchAction : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = imageOff;
         }
-    }
-
-    //충돌
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Player")
-        {
-            if (on)
-            {
-                on = false;
-                GetComponent<SpriteRenderer>().sprite = imageOff;
-                MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
-                movBlock.Stop();
-            }
-            else
-            {
-                on = true;
-                GetComponent<SpriteRenderer>().sprite = imageOn;
-                MovingObject movBlock = targetMoveBlock.GetComponent<MovingObject>();
-                movBlock.Move();
-            }
-        }
-    }
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

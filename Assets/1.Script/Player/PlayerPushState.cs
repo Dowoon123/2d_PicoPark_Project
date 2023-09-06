@@ -29,27 +29,7 @@ public class PlayerPushState : PlayerGroundedState
     {
         base.Update();
 
-        if (player._colChecker.obstacleObject)
-        {
-
-
-
-            var box = player._colChecker.obstacleObject.GetComponent<MovedBlock>();
-
-            Debug.Log(player._colChecker.obstacleObject);
-
-            if (!box.isCheckPush)
-            {
-                 player.SetVelocity(0, player.rb.velocity.y);
-                //player.pv.RPC("SetPlayerVelocity", RpcTarget.All,0, player.rb.velocity.y);
-            }
-            else
-            {
-                 player.SetVelocity(xInput * player.moveSpeed * 0.4f, 0);
-                //player.pv.RPC("SetPlayerVelocity", RpcTarget.All, xInput * player.moveSpeed * 0.4f, 0);
-                box.gameObject.GetComponent<Rigidbody2D>().velocity = player.rb.velocity;
-            }
-        }
+        player.SetVelocity(0, player.rb.velocity.y);
 
 
         if (xInput == 0)
@@ -64,5 +44,17 @@ public class PlayerPushState : PlayerGroundedState
          player.stateMachine.ChangeState(player.State_idle);
        
         
+    }
+
+
+    public PlayerController CheckPlayer(PlayerController pc)
+    {
+        if (pc._colChecker.PushedPlayer)
+        {
+            return CheckPlayer(pc._colChecker.PushedPlayer.GetComponent<PlayerController>());
+        }
+        else
+            return pc;
+
     }
 }

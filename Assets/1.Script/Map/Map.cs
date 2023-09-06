@@ -137,9 +137,13 @@ public class Map : MonoBehaviourPunCallbacks
 
 
 
-        var p = PhotonNetwork.Instantiate(objName, playerPosition[actorNum-1], Quaternion.identity);
+        var player = PhotonNetwork.Instantiate(objName, playerPosition[actorNum-1], Quaternion.identity);
+
+        int id = player.GetPhotonView().ViewID;
 
 
+        if (Camera.main.GetComponent<PhotonView>())
+            Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
 
 
     }

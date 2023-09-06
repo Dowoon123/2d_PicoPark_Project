@@ -83,8 +83,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   _colChecker: {fileID: 0}
   anim: {fileID: 0}
-  jumpForce: 25
-  moveSpeed: 7.5
+  jumpForce: 35
+  moveSpeed: 10
   isDead: 0
   isGround: 0
   isUpperPlayer: 0

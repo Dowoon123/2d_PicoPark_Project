@@ -16,9 +16,6 @@ public class Elevator : MonoBehaviour
     [SerializeField] private int maxIntake; //수용 하려는 최대 인원 임의로 설정
     [SerializeField] private List<GameObject> UpSidePlayer;
 
-
-    [SerializeField] private bool endX = false;
-    [SerializeField] private bool endY = false;
     [SerializeField] private Vector3 CheckRect;
 
 
@@ -48,9 +45,6 @@ public class Elevator : MonoBehaviour
     //초기 위치
     Vector3 defpos;
     //반전 여부
-    bool isReverse = false;
-
-
 
 
     void Start()

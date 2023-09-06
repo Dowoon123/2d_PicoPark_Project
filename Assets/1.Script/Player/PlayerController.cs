@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public bool isDead = false;
     public bool isGround = false;
     public bool isUpperPlayer = false;
-    public bool isGimmicked = false; //8.30 ï¿½ï¿½ï¿?ï¿½ï¿½ï¿½ï¿½ ï¿½Ûµï¿½ ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½
+    public bool isGimmicked = false; //
     public PlayerController downPlayer;
     public GameObject m_stateCanvas;
     public Text stateTxt;
@@ -323,18 +323,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
     {
         transform.position = target;
 
-        [PunRPC]
-        void SetPlayerVelocity(float xVelocity, float yVelocity)
-        {
-            // ¿òÁ÷ÀÓ Ã³¸® ·ÎÁ÷
-            SetVelocity(xVelocity, yVelocity);
-        }
-
+  
 
 
     }
 
-
+ 
     [PunRPC]
     public void SetNickName(string str)
     {

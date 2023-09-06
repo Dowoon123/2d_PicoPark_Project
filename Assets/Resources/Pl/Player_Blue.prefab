@@ -83,8 +83,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   _colChecker: {fileID: 0}
   anim: {fileID: 0}
-  jumpForce: 25
-  moveSpeed: 7.5
+  jumpForce: 35
+  moveSpeed: 10
   isDead: 0
   isGround: 0
   isUpperPlayer: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
     m_Bits: 128
   WhatIsObstacle:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 832
   isObstacle: 0
   isPlayer: 0
   obstacleObject: {fileID: 0}

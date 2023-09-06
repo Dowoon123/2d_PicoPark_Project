@@ -36,7 +36,7 @@ public class ElevatorDownFinite : MonoBehaviour
     private string conditionText;
     private int number_remaining;
 
-
+    Rigidbody2D rb;
     //x축 이동거리
     public float moveX = 0.0f;
     //y축 이동거리
@@ -71,9 +71,9 @@ public class ElevatorDownFinite : MonoBehaviour
         //1프레임에 이동하는 시간
         float timestep = Time.deltaTime;
         //1프레임 X 이동값
-        perDX = moveX / (1.0f / timestep * times);
+       // perDX = moveX / (1.0f / timestep * times);
         //1프레임의 Y 이동 값
-        perDY = moveY / (1.0f / timestep * times);
+        //perDY = moveY / (1.0f / timestep * times);
 
 
     }
@@ -82,6 +82,7 @@ public class ElevatorDownFinite : MonoBehaviour
     {
         intake = PhotonNetwork.CurrentRoom.PlayerCount;
         CheckPlayerZone();
+        rb = GetComponent<Rigidbody2D>();
         number_remaining = intake - CheckedIntake;
         conditionText = number_remaining.ToString();
         condition.GetComponent<Text>().text = conditionText;
@@ -102,10 +103,9 @@ public class ElevatorDownFinite : MonoBehaviour
         if (isCheckIntake)
         {//정방향(아래)이동
 
-            Debug.Log("내려가고있음");
             //블록 이동
             Vector3 v = new Vector3(-perDX, -perDY, defpos.z);
-            transform.Translate(v);
+            rb.velocity = v;
 
 
             if (transform.position.y < arrivePos.y)
@@ -118,8 +118,9 @@ public class ElevatorDownFinite : MonoBehaviour
                 transform.position = defpos;
             //내려가는 최소 높이는 = 기존에 있던 위치임.
 
+            Vector3 v = new Vector3(perDX, perDY, defpos.z);
             //블록 이동
-            transform.Translate(new Vector3(perDX, perDY, defpos.z));
+            rb.velocity = v;
         }
 
 

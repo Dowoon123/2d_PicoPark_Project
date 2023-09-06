@@ -9,8 +9,12 @@ public class JumpBlock : MonoBehaviour
 {
     public float jumpForce; //점프에 사용될 힘의 크기
     public float jumpCooldown; //점프 쿨타임
+    Animator anim;
 
-
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //충돌한 오브젝트가 플레이어인지 확인
@@ -25,6 +29,7 @@ public class JumpBlock : MonoBehaviour
 
                 if (rb != null)
                 {
+
                     //현재 속도
                     Vector2 velocity = rb.velocity;
 

@@ -50,6 +50,7 @@ public class ElevatorUpFinite : MonoBehaviour
     //수용인원 조건이 충족하는지 체크하는 bool값
     //TRUE면 엘레베이터 작동
 
+    Rigidbody2D rb;
 
     //1프레임당 x 이동 값
     public float perDX;
@@ -66,14 +67,15 @@ public class ElevatorUpFinite : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         //초기위치
         defpos = transform.position;
         //1프레임에 이동하는 시간
         float timestep = Time.deltaTime;
         //1프레임 X 이동값
-        perDX = moveX / (1.0f / timestep * times);
+       // perDX = moveX / (1.0f / timestep * times);
         //1프레임의 Y 이동 값
-        perDY = moveY / (1.0f / timestep * times);
+        //perDY = moveY / (1.0f / timestep * times);
 
 
     }
@@ -108,7 +110,9 @@ public class ElevatorUpFinite : MonoBehaviour
 
             //블록 이동
             Vector3 v = new Vector3(perDX, perDY, defpos.z);
-            transform.Translate(v);
+            rb.velocity = v;
+            // transform.Translate(v);
+
 
             //현재 올라가는 지점이 도착 지점보다 크다면 도착 지점만큼 멈출것임.
             //반드시 arrivePos값 x,y 정확히 도착하려는것에 입력 해야함.
@@ -117,18 +121,15 @@ public class ElevatorUpFinite : MonoBehaviour
         }
         else if (!isCheckIntake)
         {
-          
+
             if (defpos.y > transform.position.y)
                 transform.position = defpos;
             //내려가는 최소 높이는 = 기존에 있던 위치임.
-
+            Vector3 v = new Vector3(-perDX, -perDY, defpos.z);
             //블록 이동
-            transform.Translate(new Vector3(-perDX, -perDY, defpos.z));
+            rb.velocity = v;
+
         }
-
-
-       
-
     }
     public void OnDrawGizmos()
     {

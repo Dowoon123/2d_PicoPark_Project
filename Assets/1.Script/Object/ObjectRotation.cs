@@ -9,7 +9,7 @@ public class ObjectRotation : MonoBehaviour
     public float y;
     public float z;
     public float rotateSpeed;
-    bool isTurnRotate;
+  
     // Start is called before the first frame update
     void Start()
     {

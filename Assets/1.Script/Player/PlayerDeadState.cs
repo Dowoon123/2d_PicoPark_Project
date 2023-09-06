@@ -14,8 +14,8 @@ public class PlayerDeadState : PlayerState
     {
         base.Enter();
         player.ZeroVelocity();
-        
-      
+
+        Debug.Log("Á×¾úÀ½");
         
         
 

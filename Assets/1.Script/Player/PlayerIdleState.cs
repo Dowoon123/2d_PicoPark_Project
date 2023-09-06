@@ -34,7 +34,14 @@ public class PlayerIdleState : PlayerGroundedState
 
         if (xInput != 0)
             player.stateMachine.ChangeState(player.State_move);
+
+        if (player.isDead)
+        {
+            stateMachine.ChangeState(player.State_Dead);
+        }
     }
+
+     
 
 
 }

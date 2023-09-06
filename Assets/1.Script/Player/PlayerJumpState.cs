@@ -18,11 +18,15 @@ public class PlayerJumpState : PlayerState
         base.Enter();
 
         player._colChecker.JumpCollider(true);
-        rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
+
+        if (player.upsideArray[0] == null)
+            rb.velocity = new Vector2(rb.velocity.x, player.jumpForce);
+        else if (player.upsideArray[0] != null)
+          stateMachine.ChangeState(player.State_idle);
 
         //player._colChecker.JumpCollider(true);
         //Debug.Log("점프진입");
-           
+
     }
 
     public override void Exit()

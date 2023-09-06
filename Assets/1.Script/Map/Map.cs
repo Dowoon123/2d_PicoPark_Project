@@ -13,6 +13,8 @@ public class Map : MonoBehaviourPunCallbacks
 {
     public float mapTimer;
 
+    public List<GameObject> playerList = new List<GameObject>();
+
     public Text Timer_Text;
     public GameObject canvasPrefab;
     public GameObject canvas;  
@@ -104,7 +106,7 @@ public class Map : MonoBehaviourPunCallbacks
             Timer_Text.text = "time / " + minutesstr + " : " + secondsstr;
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             SpawnPlayer();
         }
@@ -137,9 +139,15 @@ public class Map : MonoBehaviourPunCallbacks
 
 
 
-        var p = PhotonNetwork.Instantiate(objName, playerPosition[actorNum-1], Quaternion.identity);
+        var player = PhotonNetwork.Instantiate(objName, playerPosition[actorNum-1], Quaternion.identity);
+
+        playerList.Add(player);
+
+        int id = player.GetPhotonView().ViewID;
 
 
+        if (Camera.main.GetComponent<PhotonView>())
+            Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
 
 
     }

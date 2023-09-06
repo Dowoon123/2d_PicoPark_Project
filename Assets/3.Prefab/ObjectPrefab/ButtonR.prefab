@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 442822648987948539}
   - component: {fileID: 2976317691612991808}
   - component: {fileID: 2930474946449567949}
-  - component: {fileID: 3574754621859307694}
   - component: {fileID: 8723818461276881614}
   m_Layer: 0
   m_Name: ButtonR
@@ -173,22 +172,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &3574754621859307694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5591855886443599274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b605dad6ec0ffde4199dd333b8354709, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetMoveBlock: {fileID: 0}
-  imageOn: {fileID: -1270555510, guid: e6efbec4429b37645863622842a48fdf, type: 3}
-  imageOff: {fileID: 1993671463, guid: e6efbec4429b37645863622842a48fdf, type: 3}
-  on: 0
 --- !u!114 &8723818461276881614
 MonoBehaviour:
   m_ObjectHideFlags: 0

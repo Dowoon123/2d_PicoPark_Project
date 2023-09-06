@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 710097593623373168}
   - component: {fileID: -2277557839488140805}
   - component: {fileID: -1866976797482907286}
-  - component: {fileID: 4615221398522113888}
+  - component: {fileID: 672099826008768205}
   m_Layer: 0
   m_Name: ButtonL
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5356757346331990561
 SpriteRenderer:
@@ -120,7 +120,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.004550934, y: 0.12288916}
+  m_Offset: {x: -0.004550934, y: 0.011823177}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -131,7 +131,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.69023895, y: 0.32638526}
+  m_Size: {x: 0.69023895, y: 0.5485172}
   m_EdgeRadius: 0
 --- !u!114 &-2277557839488140805
 MonoBehaviour:
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &4615221398522113888
+--- !u!114 &672099826008768205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

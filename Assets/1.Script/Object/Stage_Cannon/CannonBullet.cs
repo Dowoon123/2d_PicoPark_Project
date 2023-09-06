@@ -25,13 +25,13 @@ public class CannonBullet : MonoBehaviour
      
         if (KeyBottle.GetComponent<KeyBottle>().Hp == 3)
         {
-            transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed);
+            transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 1.5f);
         }else if(KeyBottle.GetComponent<KeyBottle>().Hp == 2)
         {
-            transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 1.5f);
+            transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 2.5f);
         }else if(KeyBottle.GetComponent<KeyBottle>().Hp == 1) 
         {
-            transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 3f);
+            transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 5f);
         }
     }
 

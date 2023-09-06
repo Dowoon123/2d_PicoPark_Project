@@ -8,7 +8,7 @@ using UnityEngine;
 public class JumpBlock : MonoBehaviour
 {
     public float jumpForce; //점프에 사용될 힘의 크기
-    public float jumpCooldown; //점프 쿨타임
+   // public float jumpCooldown; //점프 쿨타임
     Animator anim;
 
     private void Start()
@@ -40,7 +40,7 @@ public class JumpBlock : MonoBehaviour
                     rb.velocity = velocity;
 
                     //점프 쿨타임 대기 후 점프 가능한 상태로 변경
-                    StartCoroutine(JumpCooldown());
+                   // StartCoroutine(JumpCooldown());
                 }
             }
         }
@@ -51,16 +51,18 @@ public class JumpBlock : MonoBehaviour
     {
         return player.currState == player.State_idle ||
                player.currState == player.State_move ||
-               player.currState == player.State_Air;
+               player.currState == player.State_Air ||
+               player.currState == player.State_Jump ||
+               player.currState == player.State_Stair;
        
     }
 
-
+    /*
     //쿨타임 대기
     private IEnumerator JumpCooldown()
     {
         yield return new WaitForSeconds(jumpCooldown);
 
-    }
+    }*/
 
 }

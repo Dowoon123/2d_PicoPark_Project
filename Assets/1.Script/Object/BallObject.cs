@@ -9,8 +9,8 @@ public class BallObject : MonoBehaviourPunCallbacks
     [SerializeField]float speed; //ball 이동속도 
 
     public Rigidbody2D rb;
-    float X = 3f;
-    float Y = 3f;// 방향 값
+    float X = 4f;
+    float Y = 4f;// 방향 값
 
 
 
@@ -33,20 +33,20 @@ public class BallObject : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //ball이 땅에 닿으면 ball 삭제
-        if (collision.collider.gameObject.layer == 8 &&
-           !collision.collider.gameObject.CompareTag("Brick"))
-        {
-            Debug.Log("들어왔음");
-            PhotonNetwork.Destroy(gameObject);
-        }
+        ////ball이 땅에 닿으면 ball 삭제
+        //if (/*collision.collider.gameObject.layer == 8 &&*/
+        //   !collision.collider.gameObject.CompareTag("Brick"))
+        //{
+        //    Debug.Log("들어왔음");
+        //    PhotonNetwork.Destroy(gameObject);
+        //}
         //ball이 brick에 닿은 경우 brick 삭제
         if (collision.collider.CompareTag("Brick"))
             PhotonNetwork.Destroy(collision.gameObject);
 
 
         //ball이 플레이어에 닿은 경우 공이 움직임 
-        else if (collision.collider.CompareTag("Player"))
+        else if (collision.collider.CompareTag("Player") && !(collision.gameObject))
             BallMoving();
     }
 }

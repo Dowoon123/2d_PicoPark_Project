@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BallObject : MonoBehaviourPunCallbacks
 {
-    [SerializeField]float speed; //ball 이동속도 
+    [SerializeField] float speed; //ball 이동속도 
 
     public Rigidbody2D rb;
     float X = 4f;
@@ -25,10 +25,12 @@ public class BallObject : MonoBehaviourPunCallbacks
 
     private void BallMoving()
     {
-
-        //방향 * 스피드로 힘을 가함
+        
+        ////방향 * 스피드로 힘을 가함
         Vector2 dir = new Vector2(X, Y).normalized;
+
         rb.velocity = dir * speed;
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -37,7 +39,6 @@ public class BallObject : MonoBehaviourPunCallbacks
         //if (/*collision.collider.gameObject.layer == 8 &&*/
         //   !collision.collider.gameObject.CompareTag("Brick"))
         //{
-        //    Debug.Log("들어왔음");
         //    PhotonNetwork.Destroy(gameObject);
         //}
 
@@ -46,15 +47,25 @@ public class BallObject : MonoBehaviourPunCallbacks
         if (collision.collider.CompareTag("Brick"))
             PhotonNetwork.Destroy(collision.gameObject);
 
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         //ball이 플레이어에 닿은 경우 공이 움직임 
-        else if (collision.collider.CompareTag("Player"))
-            BallMoving();
+        if (collision.CompareTag("Player"))
+        BallMoving();
+    }
 
-        //공끼리의 충돌 방지
-        else if (collision.collider.CompareTag("Ball"))
+
+    //공 삭제
+    private void DeleteAllball()
+    {
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+
+        foreach (GameObject ball in balls)
         {
-            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+            PhotonNetwork.Destroy(ball);
         }
     }
+
 }

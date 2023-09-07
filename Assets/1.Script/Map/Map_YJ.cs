@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
@@ -14,6 +15,8 @@ public class Map_YJ : Map
     public Vector2[] spawnPoints = new Vector2[4];
     public GameObject ball;
     public int ballCount = 0;  //생성된 공 저장 
+    private bool isBallSpawned = false;
+
 
     public Vector2[] planePos = new Vector2[4];
 
@@ -26,7 +29,6 @@ public class Map_YJ : Map
     {
         base.Start();
         BallSpawn();
-
     }
 
 
@@ -34,36 +36,45 @@ public class Map_YJ : Map
     {
         base.Update();
 
-        if(!ChangeComplete)
-        CheckPlayerXpos();
+        if (!ChangeComplete)
+            CheckPlayerXpos();
 
 
-        if(isChange)
+        if (isChange)
         {
             CharacterChange();
             isChange = false;
             ChangeComplete = true;
         }
-
-        
     }
 
+
+
     //공 스폰
-    void BallSpawn()
+    private void BallSpawn()
     {
-
-        for (int i = 0; i < spawnPoints.Length; ++i)
+        if (!isBallSpawned)
         {
-            if (ballCount < 4) //4개의 공만 스폰
+            for (int i = 0; i < spawnPoints.Length; ++i)
             {
-                Debug.Log("공 생성");
-                PhotonNetwork.Instantiate("Object/Ball", spawnPoints[i], Quaternion.identity);
-                ballCount++;
-            }
-            else
-                break; // 4개의 공이 생성되면 반복문 종료
-        }
+                if (ballCount < 4) //4개의 공만 스폰
+                {
+                    if (PhotonNetwork.IsMasterClient)
+                    {
+                        //마스터 클라이언트에서만 공 생성하도록
+                        photonView.RPC("BallSpawn", RpcTarget.MasterClient);
 
+                        Debug.Log("공 생성");
+                        PhotonNetwork.Instantiate("Object/Ball", spawnPoints[i], Quaternion.identity);
+                        ballCount++;
+                    }
+ 
+                }
+                else
+                    break; // 4개의 공이 생성되면 반복문 종료
+            }
+            isBallSpawned = true;
+        }
     }
 
     public override void OnJoinedRoom()
@@ -100,7 +111,7 @@ public class Map_YJ : Map
 
         int id = player.GetPhotonView().ViewID;
 
-        
+
 
 
         //카메라가 쫓아가게끔
@@ -115,9 +126,9 @@ public class Map_YJ : Map
     //특정 구간을 지나면 플레이어가 바뀜
     public void CheckPlayerXpos()
     {
-        for(int i=0;i <playerList.Count; ++i)
+        for (int i = 0; i < playerList.Count; ++i)
         {
-           if(playerList[i].transform.position.x >= 65)
+            if (playerList[i].transform.position.x >= 65)
             {
                 isChange = true;
 
@@ -131,7 +142,7 @@ public class Map_YJ : Map
         //기존 플레이어 가려줌
 
         Debug.Log("체인지 시작");
-        for(int i = 0; i < playerList.Count; i++)
+        for (int i = 0; i < playerList.Count; i++)
         {
             playerList[i].SetActive(false);
         }
@@ -141,5 +152,5 @@ public class Map_YJ : Map
 
     }
 
-    
+
 }

@@ -105,7 +105,7 @@ public class FlyObject : MonoBehaviourPunCallbacks
             {
                 transform.Translate(Vector2.down);
                 count++;
-                if (count == 12)
+                if (count == 20)
                 {
                     break;
                 }

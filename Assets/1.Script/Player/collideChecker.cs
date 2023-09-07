@@ -133,15 +133,13 @@ public class collideChecker : MonoBehaviour
 
     public virtual bool IsUpper()
     {
-      //  var col = Physics2D.OverlapBox(, DrawGizmos, 0, WhatIsFoot);
-
-        //if (col)
-        //{
-        //    if (col.gameObject.layer == 11)
-        //        return true;
-
-
-        //}
+        var col = Physics2D.OverlapBoxAll(UpCheckPos,new Vector2(0.92503953f, 0.0494964123f), 0, WhatIsFoot);
+          
+        for(int i=0; i< col.Length; ++i)
+        {
+            if (col[i].gameObject.layer == 11)
+                return true;
+        }
 
         return false;
     }

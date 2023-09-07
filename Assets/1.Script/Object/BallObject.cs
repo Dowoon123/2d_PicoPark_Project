@@ -41,12 +41,12 @@ public class BallObject : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        ////ball이 땅에 닿으면 ball 삭제
-        //if (/*collision.collider.gameObject.layer == 8 &&*/
-        //   !collision.collider.gameObject.CompareTag("Brick"))
-        //{
-        //    PhotonNetwork.Destroy(gameObject);
-        //}
+        //ball이 땅에 닿으면 ball 삭제
+        if (collision.collider.gameObject.layer == 8 &&
+           !collision.collider.gameObject.CompareTag("Brick"))
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
 
 
         //ball이 brick에 닿은 경우 brick 삭제
@@ -62,7 +62,6 @@ public class BallObject : MonoBehaviourPunCallbacks
 
         }
 
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -71,12 +70,9 @@ public class BallObject : MonoBehaviourPunCallbacks
         if (collision.CompareTag("Player"))
         {
             GetComponent<PhotonView>().RPC("BallMoving", RpcTarget.AllBuffered);
+               //
                // BallMoving();
         }
-
-        ////ball 넘어갈 경우 삭제 
-        //if (collision.CompareTag("DeleteZone"))
-        //    PhotonNetwork.Destroy(gameObject);
     }
 
     [PunRPC]

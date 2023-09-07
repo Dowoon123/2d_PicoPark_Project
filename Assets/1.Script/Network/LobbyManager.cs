@@ -185,7 +185,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         for(int i=0; i<roomList.Count; i++)
         {
-            var panelObj = Instantiate(RoomPanelPrefab,canvas.transform);
+            var panelObj = Instantiate(RoomPanelPrefab,canvas.transform); 
              
            
              

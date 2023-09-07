@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5360806062526318529
+--- !u!1 &5594041563563307547
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,41 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 917505700153409086}
-  - component: {fileID: 3287935927086512111}
-  - component: {fileID: 7077899328317244483}
+  - component: {fileID: 6235913375285931474}
+  - component: {fileID: 8211980722022617402}
+  - component: {fileID: 3927120012076590400}
   m_Layer: 0
-  m_Name: MapYJ
+  m_Name: Map_Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &917505700153409086
+--- !u!4 &6235913375285931474
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5360806062526318529}
+  m_GameObject: {fileID: 5594041563563307547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.8223915, y: -4.0329947, z: -0.029452119}
+  m_LocalPosition: {x: 6.8975143, y: 0.1921463, z: -10.076624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3287935927086512111
+--- !u!114 &8211980722022617402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5360806062526318529}
+  m_GameObject: {fileID: 5594041563563307547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c04e69dbc6a22a240a6b0e1759db3a35, type: 3}
+  m_Script: {fileID: 11500000, guid: f63da3c791400e74e8cc8b1177ac6754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mapTimer: 0
@@ -50,29 +50,31 @@ MonoBehaviour:
   Timer_Text: {fileID: 0}
   canvasPrefab: {fileID: 0}
   canvas: {fileID: 0}
-  Scene_name: "\uC724\uC8FC\uC52C"
-  Map_name: 2.YJ
+  Scene_name: "\uC724\uC8FC\uC52C2"
+  Map_name: 5.YJ
   Map_subTitle: "\uD14C\uC2A4\uD2B8"
   isSelectOption: 0
   isSpawnEnd: 0
   pv: {fileID: 0}
   playerPosition:
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  planePos:
-  - {x: -14.07, y: 6.6}
-  - {x: -14.07, y: 0.12}
-  - {x: -6.06, y: 4.13}
-  - {x: -6.06, y: -2.35}
---- !u!114 &7077899328317244483
+  - {x: -49.2, y: -24.7}
+  - {x: -22.7, y: -24.7}
+  - {x: 21.5, y: -24.7}
+  - {x: 42.9, y: -24.7}
+  spawnPoints:
+  - {x: -36.9, y: -22.8}
+  - {x: -12.8, y: -22.8}
+  - {x: 10.3, y: -22.8}
+  - {x: 31.7, y: -22.8}
+  ball: {fileID: 2352631885819310822, guid: f903a70506babac489fb531dff2a59ad, type: 3}
+  ballCount: 0
+--- !u!114 &3927120012076590400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5360806062526318529}
+  m_GameObject: {fileID: 5594041563563307547}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}

@@ -124,12 +124,17 @@ MonoBehaviour:
   WhatIsObstacle:
     serializedVersion: 2
     m_Bits: 832
+  WhatIsFoot:
+    serializedVersion: 2
+    m_Bits: 0
   isObstacle: 0
   isPlayer: 0
   obstacleObject: {fileID: 0}
   PushedPlayer: {fileID: 0}
   UpsidePlayers: []
   upPosition: []
+  DrawGizmos: {x: 0, y: 0}
+  UpCheckPos: {x: -0.046, y: -0.001, z: 0}
 --- !u!114 &5631247468460075448
 MonoBehaviour:
   m_ObjectHideFlags: 0

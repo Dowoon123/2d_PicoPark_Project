@@ -116,18 +116,24 @@ MonoBehaviour:
   PlayerCheckRadius: 0
   UpperCollider: {fileID: 6908958455738618019}
   BodyCollider: {fileID: 4115319889081573340}
+  LowerCollider: {fileID: 0}
   WhatIsUpper:
     serializedVersion: 2
     m_Bits: 128
   WhatIsObstacle:
     serializedVersion: 2
     m_Bits: 576
+  WhatIsFoot:
+    serializedVersion: 2
+    m_Bits: 0
   isObstacle: 0
   isPlayer: 0
   obstacleObject: {fileID: 0}
   PushedPlayer: {fileID: 0}
   UpsidePlayers: []
   upPosition: []
+  DrawGizmos: {x: 0, y: 0}
+  UpCheckPos: {x: 0, y: 0, z: 0}
 --- !u!114 &5631247468460075448
 MonoBehaviour:
   m_ObjectHideFlags: 0

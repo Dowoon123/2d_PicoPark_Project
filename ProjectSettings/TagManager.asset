@@ -27,9 +27,9 @@ TagManager:
   - Ground
   - Obstacle
   - Ball
-  - 
-  - 
-  - 
+  - Aircheck
+  - Button
+  - Wall
   - 
   - 
   - 

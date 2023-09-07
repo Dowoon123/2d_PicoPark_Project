@@ -13,7 +13,7 @@ public class collideChecker : MonoBehaviour
 
     [SerializeField] LayerMask WhatIsUpper;
     [SerializeField] LayerMask WhatIsObstacle;
-    [SerializeField] LayerMask Players;
+    [SerializeField] LayerMask WhatIsFoot;
 
     PlayerController player;
 
@@ -28,7 +28,7 @@ public class collideChecker : MonoBehaviour
     public List<PlayerController> UpsidePlayers = new List<PlayerController>();
     public List<Vector2> upPosition = new List<Vector2>();
     public Vector2 DrawGizmos;
-    public Vector3 translate;
+    public Vector3 UpCheckPos;
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -58,7 +58,7 @@ public class collideChecker : MonoBehaviour
         pos.y += 5.0f;
         Gizmos.DrawCube(pos, new Vector3(1, 10, 0));
 
-        Gizmos.DrawCube(transform.position + translate, DrawGizmos);
+       
         // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
     }
     //public virtual void IsUpsideDetected()
@@ -133,14 +133,12 @@ public class collideChecker : MonoBehaviour
 
     public virtual bool IsUpper()
     {
-        var col = Physics2D.OverlapBox(transform.position + translate, DrawGizmos, 0, Players);
-
-        if (col)
+        var col = Physics2D.OverlapBoxAll(UpCheckPos,new Vector2(0.92503953f, 0.0494964123f), 0, WhatIsFoot);
+          
+        for(int i=0; i< col.Length; ++i)
         {
-            if (col.gameObject.layer == 7)
+            if (col[i].gameObject.layer == 11)
                 return true;
-
-
         }
 
         return false;

@@ -21,6 +21,7 @@ public class FlyObject : MonoBehaviourPunCallbacks
 
     bool isDead;
 
+    bool canMove = true; // ÀÌµ¿ °¡´ÉÇÑÁö ¿©ºÎ 
 
     [Header("Door")]
     public bool isNearDoor = false;
@@ -48,6 +49,11 @@ public class FlyObject : MonoBehaviourPunCallbacks
             h = Input.GetAxisRaw("Horizontal");
             v = Input.GetAxisRaw("Vertical");
         }
+        else
+        {
+            h = 0f;
+            v = 0f;
+        }
 
         rb.velocity = new Vector2(h * Speed, v * Speed);
     }
@@ -66,6 +72,7 @@ public class FlyObject : MonoBehaviourPunCallbacks
         isDead = true;
         transform.localScale = new Vector3(3.61999989f, 3.61999989f, 3.61999989f);
 
+        //ÄÝ¶óÀÌ´õ ²¨ÁÜ
         GetComponent<Collider2D>().enabled = false;
 
 
@@ -83,11 +90,9 @@ public class FlyObject : MonoBehaviourPunCallbacks
         {
             if (!isFall)
             {
-
-
                 transform.Translate(Vector2.up);
                 count++;
-                if (count == 6)
+                if (count == 5)
                 {
                     isFall = true;
                     count = 0;
@@ -96,20 +101,18 @@ public class FlyObject : MonoBehaviourPunCallbacks
                 yield return new WaitForSeconds(0.05f);
 
 
-
-
             }
             else
             {
                 transform.Translate(Vector2.down);
                 count++;
-                if (count == 20)
+                if (count == 50)
                 {
                     break;
                 }
                 yield return new WaitForSeconds(0.02f);
             }
-
+            
 
         }
 
@@ -117,17 +120,12 @@ public class FlyObject : MonoBehaviourPunCallbacks
 
         rb.velocity = new Vector2(0, 0);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
 
-        ReStart();
+        canMove = false;
 
     }
 
-    private static void ReStart()
-    {
-        //¾À·Îµå
-        PhotonNetwork.LoadLevel("À±ÁÖ¾À");
-    }
 
 
     //¹®¿¡ µé¾î°¨

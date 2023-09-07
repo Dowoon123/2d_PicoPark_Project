@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class collideChecker : MonoBehaviour
 {
@@ -11,22 +8,28 @@ public class collideChecker : MonoBehaviour
     [SerializeField] float PlayerCheckRadius;
     [SerializeField] Collider2D UpperCollider;
     [SerializeField] Collider2D BodyCollider;
+    [SerializeField] Collider2D LowerCollider;
 
 
     [SerializeField] LayerMask WhatIsUpper;
     [SerializeField] LayerMask WhatIsObstacle;
+    [SerializeField] LayerMask Players;
 
     PlayerController player;
 
     public bool isObstacle;
     public bool isPlayer;
+ 
 
 
     public GameObject obstacleObject;
     public GameObject PushedPlayer;
 
-    public List<PlayerController> UpsidePlayers = new List<PlayerController>(); 
+    public List<PlayerController> UpsidePlayers = new List<PlayerController>();
     public List<Vector2> upPosition = new List<Vector2>();
+    public Vector2 DrawGizmos;
+    public Vector3 translate;
+
     private void OnCollisionStay2D(Collision2D collision)
     {
 
@@ -41,11 +44,12 @@ public class collideChecker : MonoBehaviour
 
     public void Update()
     {
-      //   isObstacle = IsObstacleDetected();
+        //   isObstacle = IsObstacleDetected();
         isPlayer = IsFrontObject();
-      //  IsUpsideDetected();
+        //  IsUpsideDetected();
+      //IsUpper();
 
-       
+
     }
 
     public void OnDrawGizmos()
@@ -53,6 +57,8 @@ public class collideChecker : MonoBehaviour
         var pos = transform.position;
         pos.y += 5.0f;
         Gizmos.DrawCube(pos, new Vector3(1, 10, 0));
+
+        Gizmos.DrawCube(transform.position + translate, DrawGizmos);
         // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
     }
     //public virtual void IsUpsideDetected()
@@ -60,7 +66,7 @@ public class collideChecker : MonoBehaviour
 
     //    var pos = transform.position;
     //    pos.y += 5.0f;
-        
+
     //    var colBox = Physics2D.OverlapBoxAll(pos, new Vector2(0.8f, 10.0f), 0, WhatIsObstacle);
     //  //  Debug.Log(colBox.Length);
     //    UpsidePlayers.Clear();
@@ -72,28 +78,28 @@ public class collideChecker : MonoBehaviour
     //            if (colBox[i].gameObject.layer == 6)
     //            {
     //                var pc = colBox[i].gameObject.GetComponent<PlayerController>();
-                     
+
 
     //                if(pc.currState is PlayerIdleState)
     //                {
     //                    if (pc != player)
     //                    {
     //                        UpsidePlayers.Add(pc);
-                    
+
     //                        upPosition.Add(new Vector2(pc.transform.position.x - player.transform.position.x,
     //                            pc.transform.position.y - player.transform.position.y));
     //                    }
     //                }
-                     
+
 
     //            }
     //        }
-        
+
     //    }
 
 
     //}
-    
+
     public virtual bool IsFrontObject()
     {
         // RaycastHit2D playerFind;
@@ -103,7 +109,7 @@ public class collideChecker : MonoBehaviour
 
         //  var capsule = Physics2D.OverlapCapsule(playerChecker.transform.position, new Vector2(0.441907406f, 0.92f), CapsuleDirection2D.Vertical, 0,WhatIsObstacle);
 
-        var colBox = Physics2D.OverlapBox(playerChecker.transform.position,new Vector2(0.15f, 0.80f), 0, WhatIsObstacle);
+        var colBox = Physics2D.OverlapBox(playerChecker.transform.position, new Vector2(0.15f, 0.80f), 0, WhatIsObstacle);
 
         if (colBox)
         {
@@ -111,8 +117,8 @@ public class collideChecker : MonoBehaviour
                 PushedPlayer = colBox.gameObject;
             else if (colBox.gameObject.layer == 9)
                 obstacleObject = colBox.gameObject;
-            
-         
+
+
 
 
             return true;
@@ -124,6 +130,24 @@ public class collideChecker : MonoBehaviour
             return false;
         }
     }
+
+    public virtual bool IsUpper()
+    {
+        var col = Physics2D.OverlapBox(transform.position + translate, DrawGizmos, 0, Players);
+
+        if (col)
+        {
+            if (col.gameObject.layer == 7)
+                return true;
+
+
+        }
+
+        return false;
+    }
+
+  
+
     public virtual bool IsObstacleDetected()
     {
         RaycastHit2D result;
@@ -153,7 +177,12 @@ public class collideChecker : MonoBehaviour
         mask = b == true ? WhatIsUpper : 0;
         BodyCollider.excludeLayers = mask;
 
+        mask = b == false ? WhatIsUpper : 11;
+        LowerCollider.excludeLayers = mask;
+
+
     }
+
 
 
 

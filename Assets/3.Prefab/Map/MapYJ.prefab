@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3287935927086512111
 MonoBehaviour:
@@ -58,23 +58,14 @@ MonoBehaviour:
   pv: {fileID: 0}
   playerPosition:
   - {x: 0, y: 0}
-  - {x: 5, y: 0}
-  - {x: 10.4, y: 0}
-  - {x: 15.6, y: 0}
-  isChange: 0
-  ChangeComplete: 0
-  spawnPoints:
-  - {x: -17, y: -1.74}
-  - {x: -13.32, y: -1.74}
-  - {x: -9.04, y: -1.74}
-  - {x: -4.760004, y: -1.74}
-  ball: {fileID: 2352631885819310822, guid: f903a70506babac489fb531dff2a59ad, type: 3}
-  ballCount: 0
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
   planePos:
-  - {x: 70, y: 5.64}
-  - {x: 70, y: 2.36}
-  - {x: 70, y: -2.28}
-  - {x: 70, y: -6.12}
+  - {x: -14.07, y: 6.6}
+  - {x: -14.07, y: 0.12}
+  - {x: -6.06, y: 4.13}
+  - {x: -6.06, y: -2.35}
 --- !u!114 &7077899328317244483
 MonoBehaviour:
   m_ObjectHideFlags: 0

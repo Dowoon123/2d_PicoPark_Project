@@ -59,7 +59,13 @@ public class BallObject : MonoBehaviourPunCallbacks
     {
         //ball이 플레이어에 닿은 경우 공이 움직임 
         if (collision.CompareTag("Player"))
-        BallMoving();
+        {
+            BallMoving();
+        }
+        else if (collision.CompareTag("DeleteZone"))
+        {
+            DeleteAllball();
+        }
     }
 
 

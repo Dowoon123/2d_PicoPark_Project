@@ -13,7 +13,7 @@ public class collideChecker : MonoBehaviour
 
     [SerializeField] LayerMask WhatIsUpper;
     [SerializeField] LayerMask WhatIsObstacle;
-    [SerializeField] LayerMask Players;
+    [SerializeField] LayerMask WhatIsFoot;
 
     PlayerController player;
 
@@ -133,11 +133,11 @@ public class collideChecker : MonoBehaviour
 
     public virtual bool IsUpper()
     {
-        var col = Physics2D.OverlapBox(transform.position + translate, DrawGizmos, 0, Players);
+        var col = Physics2D.OverlapBox(transform.position + translate, DrawGizmos, 0, WhatIsFoot);
 
         if (col)
         {
-            if (col.gameObject.layer == 7)
+            if (col.gameObject.layer == 11)
                 return true;
 
 

@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,7 +39,7 @@ public class PushableObject :MonoBehaviourPunCallbacks
 
     public void Update()
     {
-    
+        NeedPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
 
     }
 

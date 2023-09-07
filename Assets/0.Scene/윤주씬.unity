@@ -10522,7 +10522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4380326308429648394, guid: fd291dd67cd3d8d44acb3b1127139eb2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6307161962690079322, guid: fd291dd67cd3d8d44acb3b1127139eb2, type: 3}
       propertyPath: m_RootOrder
@@ -31795,8 +31795,8 @@ GameObject:
   - component: {fileID: 2122297347}
   - component: {fileID: 2122297346}
   m_Layer: 0
-  m_Name: Square (1)
-  m_TagString: Untagged
+  m_Name: Delete
+  m_TagString: DeleteZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

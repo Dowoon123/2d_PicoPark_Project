@@ -22,6 +22,12 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public STATE_INFO currStateEnum = STATE_INFO.IDLE;
 
 
+    #region ROPE
+
+
+    #endregion
+
+
     #region network
     private Vector2 networkPostion;
     private Vector2 networkVelocity;
@@ -125,6 +131,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         // State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
 
 
+      
 
 
 

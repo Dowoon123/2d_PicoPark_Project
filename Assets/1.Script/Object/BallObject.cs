@@ -52,9 +52,7 @@ public class BallObject : MonoBehaviourPunCallbacks
         if (collision.collider.CompareTag("Brick"))
             PhotonNetwork.Destroy(collision.gameObject);
 
-        //ball 넘어갈 경우 삭제 
-        if (collision.collider.CompareTag("DeleteZone"))
-            PhotonNetwork.Destroy(gameObject);
+
 
     }
 
@@ -66,7 +64,9 @@ public class BallObject : MonoBehaviourPunCallbacks
             BallMoving();
         }
 
-
+        //ball 넘어갈 경우 삭제 
+        if (collision.CompareTag("DeleteZone"))
+            PhotonNetwork.Destroy(gameObject);
     }
 
 

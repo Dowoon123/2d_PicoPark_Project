@@ -48,7 +48,13 @@ public class BallObject : MonoBehaviourPunCallbacks
 
 
         //ball이 플레이어에 닿은 경우 공이 움직임 
-        else if (collision.collider.CompareTag("Player") && !(collision.gameObject))
+        else if (collision.collider.CompareTag("Player"))
             BallMoving();
+
+        //공끼리의 충돌 방지
+        else if (collision.collider.CompareTag("Ball"))
+        {
+            Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>());
+        }
     }
 }

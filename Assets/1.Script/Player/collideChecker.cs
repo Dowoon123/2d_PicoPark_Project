@@ -11,6 +11,7 @@ public class collideChecker : MonoBehaviour
     [SerializeField] float PlayerCheckRadius;
     [SerializeField] Collider2D UpperCollider;
     [SerializeField] Collider2D BodyCollider;
+    [SerializeField] Collider2D LowerCollider;
 
 
     [SerializeField] LayerMask WhatIsUpper;
@@ -152,6 +153,13 @@ public class collideChecker : MonoBehaviour
         LayerMask mask;
         mask = b == true ? WhatIsUpper : 0;
         BodyCollider.excludeLayers = mask;
+        
+        mask = b == false ? WhatIsUpper : 11;
+        LowerCollider.excludeLayers = mask;
+
+
+
+
 
     }
 

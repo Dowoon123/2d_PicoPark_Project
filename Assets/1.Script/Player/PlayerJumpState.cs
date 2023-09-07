@@ -41,7 +41,11 @@ public class PlayerJumpState : PlayerState
         if (player.rb.velocity.y < 0)
             stateMachine.ChangeState(player.State_Air);
 
-        player._colChecker.IsUpper();
+        if(player._colChecker.IsUpper())
+        {
+            int viewID = 0;
+            player.pv.RPC("ChangeOtherVel", RpcTarget.AllBuffered, viewID);
+        }
 
         
 

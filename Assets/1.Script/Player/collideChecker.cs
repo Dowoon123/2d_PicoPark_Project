@@ -131,17 +131,19 @@ public class collideChecker : MonoBehaviour
         }
     }
 
-    public virtual void IsUpper()
+    public virtual bool IsUpper()
     {
         var col = Physics2D.OverlapBox(transform.position + translate, DrawGizmos, 0, Players);
 
         if (col)
         {
             if (col.gameObject.layer == 7)
-                col.GetComponentInParent<Rigidbody2D>().velocity = new Vector2(col.GetComponentInParent<Rigidbody2D>().velocity.x, 0);
+                return true;
 
 
         }
+
+        return false;
     }
 
   

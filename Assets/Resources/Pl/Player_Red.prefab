@@ -124,9 +124,9 @@ MonoBehaviour:
   WhatIsObstacle:
     serializedVersion: 2
     m_Bits: 832
-  Players:
+  WhatIsFoot:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   isObstacle: 0
   isPlayer: 0
   obstacleObject: {fileID: 0}

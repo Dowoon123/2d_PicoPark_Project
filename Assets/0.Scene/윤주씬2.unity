@@ -19583,6 +19583,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
+      propertyPath: Map_name
+      value: 2.YJ
+      objectReference: {fileID: 0}
+    - target: {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
       propertyPath: spawnPoints.Array.data[0].y
       value: -22.8
       objectReference: {fileID: 0}

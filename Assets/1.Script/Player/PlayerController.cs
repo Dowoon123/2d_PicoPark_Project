@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public bool isLeftEdge = false;
     public bool isRightEdge = false;
     public string NickName;
+
+    public bool isReadyToClear = false;
     #endregion
 
 
@@ -266,8 +268,13 @@ public class PlayerController : MonoBehaviourPunCallbacks
         }
 
 
+    [PunRPC]
+    public void SetReady(bool b)
+    {
+        isReadyToClear = b;
+    }
 
-        public void FlipController(float _x)
+    public void FlipController(float _x)
         {
             if (_x > 0 && !facingRight)
             {

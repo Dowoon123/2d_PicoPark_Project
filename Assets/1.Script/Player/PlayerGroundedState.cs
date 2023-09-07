@@ -2,7 +2,7 @@ using Photon.Pun;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+
 
 public class PlayerGroundedState : PlayerState
 {
@@ -83,6 +83,7 @@ public class PlayerGroundedState : PlayerState
                 {
 
                          DoorEnter();
+                 
                 }
                 
        }
@@ -97,16 +98,18 @@ public class PlayerGroundedState : PlayerState
         {
             if (isInDoor)
             {
-                Time.timeScale = 1;
+               
                 player.GetComponentInChildren<SpriteRenderer>().enabled = true;
                 isInDoor = false;
-
+                player.pv.GetComponent<PhotonView>().RPC("SetReady", RpcTarget.AllBuffered, false);
             }
             else
             {
-                Time.timeScale = 0;
+               
                 player.GetComponentInChildren<SpriteRenderer>().enabled = false;
+
                 isInDoor = true;
+                player.pv.GetComponent<PhotonView>().RPC("SetReady",RpcTarget.AllBuffered,true);
 
             }
          

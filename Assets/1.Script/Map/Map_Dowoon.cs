@@ -72,7 +72,7 @@ public class Map_Dowoon : Map
       
         distJoint.maxDistanceOnly = true;
         distJoint.autoConfigureDistance = false;
-        distJoint.distance = 9.5f;
+        distJoint.distance = 8.5f;
     }
 
 

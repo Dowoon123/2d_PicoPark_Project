@@ -1,7 +1,9 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PushableObject :MonoBehaviourPunCallbacks
 {
@@ -13,8 +15,10 @@ public class PushableObject :MonoBehaviourPunCallbacks
     public List<PlayerController> isLeftPusher = new List<PlayerController>();
     public List<PlayerController> isRightPusher =     new List<PlayerController>();
 
+    public Text condition;
+    private int number_remaining;
+    private string conditionText;
 
-  
     public LayerMask whatIsPlayer;
     public List<PlayerController> players = new List<PlayerController>();
 
@@ -35,7 +39,7 @@ public class PushableObject :MonoBehaviourPunCallbacks
 
     public void Update()
     {
-    
+        NeedPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
 
     }
 
@@ -53,6 +57,11 @@ public class PushableObject :MonoBehaviourPunCallbacks
                 players[i].transform.Translate(Vector2.right * speed * Time.deltaTime);
             }
         }
+
+        number_remaining = NeedPlayers - currPushPlayers;
+        conditionText = number_remaining.ToString();
+        condition.GetComponent<Text>().text = conditionText;
+
     }
 
 

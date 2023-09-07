@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: -2152271969206732778}
   - component: {fileID: -8713051198556912068}
   - component: {fileID: 6217753909673997965}
-  - component: {fileID: 7201805792315375880}
   m_Layer: 10
   m_Name: Ball
   m_TagString: Ball
@@ -122,7 +121,7 @@ CircleCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.005363941}
   serializedVersion: 2
@@ -168,6 +167,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 30
   rb: {fileID: 8217200301004156500}
+  WhatIsReflectObject:
+    serializedVersion: 2
+    m_Bits: 8448
 --- !u!114 &3889063213295496290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +256,7 @@ PolygonCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -289,22 +291,3 @@ PolygonCollider2D:
       - {x: 0.29296875, y: 0.40234375}
       - {x: 0.15234375, y: 0.47265625}
   m_UseDelaunayMesh: 0
---- !u!251 &7201805792315375880
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2352631885819310822}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RotationalOffset: 0
-  m_UseOneWay: 0
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1

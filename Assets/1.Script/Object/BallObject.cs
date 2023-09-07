@@ -14,6 +14,8 @@ public class BallObject : MonoBehaviourPunCallbacks
     float Y = 50f;// 방향 값
 
 
+    public LayerMask WhatIsReflectObject;
+
 
     private void Start()
     {
@@ -59,12 +61,18 @@ public class BallObject : MonoBehaviourPunCallbacks
         }
 
         // ball이 벽에 부딪혔을 때, 반사 벡터를 계산하여 적용합니다.
-        if (collision.collider.gameObject.layer == 9) // Layer 9: 장애물
-        {
-            Vector2 reflectionVector = Vector2.Reflect(rb.velocity.normalized, collision.contacts[0].normal);
-            rb.velocity = reflectionVector * speed;
-        }
+        //if (collision.collider.gameObject.layer == 9) // Layer 9: 장애물
+        //{
+        //    Vector2 reflectionVector = Vector2.Reflect(rb.velocity.normalized, collision.contacts[0].normal);
+        //    rb.velocity = reflectionVector * speed;
+        //}
+
+        if (collision.collider.gameObject.layer == WhatIsReflectObject)
+        { Vector2 reflectionVector = Vector2.Reflect(rb.velocity.normalized, collision.contacts[0].normal);
+        rb.velocity = reflectionVector * speed;
     }
+
+}
 
     [PunRPC]
     private void BallMoving()

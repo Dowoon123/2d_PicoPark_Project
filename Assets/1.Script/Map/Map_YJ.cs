@@ -111,10 +111,7 @@ public class Map_YJ : Map
 
         int id = player.GetPhotonView().ViewID;
         GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
-       
         GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
-
-        
 
 
 
@@ -148,8 +145,9 @@ public class Map_YJ : Map
         Debug.Log("체인지 시작");
         for (int i = 0; i < playerList.Count; i++)
         {
-            Destroy(playerList[i].gameObject);
-          
+            playerList[i].SetActive(false);
+         
+         
         }
 
 

@@ -43,7 +43,7 @@ public class PlayerMoveState : PlayerGroundedState
 
           
 
-
+        
 
         player.pv.RPC("SetPlayerVelocity", RpcTarget.All, xInput * player.moveSpeed, rb.velocity.y);
 

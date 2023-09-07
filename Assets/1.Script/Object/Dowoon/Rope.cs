@@ -35,10 +35,11 @@ public class Rope : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateSegments();
-        for (int i = 0; i < costraitroof; ++i)
-        {
-            ApplyConstraint();
-        }
+        //for (int i = 0; i < costraitroof; ++i)
+        //{
+        //    ApplyConstraint();
+        //}
+        ApplyConstraint();
         DrawRope();
     }
 

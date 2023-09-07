@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1673573592545840131}
   - component: {fileID: 6091914376280531746}
   - component: {fileID: 1493643392193692735}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: needle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,11 +29,11 @@ Transform:
   m_GameObject: {fileID: 8747128648051339970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.8206491, y: 2.5639, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1022183797539040035
 SpriteRenderer:
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5bf20a0c45d1d8d47880a526b1475d79, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.6415094, g: 0.6142755, b: 0.6142755, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -163,12 +163,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8747128648051339970}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc3e2378a6e48734aa54e532889ef660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CheckRect: {x: 1.15, y: 0.55, z: 0}
+  CheckRect: {x: 0, y: 0, z: 0}
   IsPlayer:
     serializedVersion: 2
     m_Bits: 64

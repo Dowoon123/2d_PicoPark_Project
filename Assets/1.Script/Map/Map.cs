@@ -183,6 +183,14 @@ public class Map : MonoBehaviourPunCallbacks
             isSpawnEnd = true;
     }
 
+    [PunRPC]
+    public void ResetPlayer(int viewID)
+    {
+        for(int i =0; i< playerList.Count; i++) 
+        {
+            playerList[i] = null;
+        }
+    }
 
 
 

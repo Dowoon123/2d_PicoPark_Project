@@ -110,15 +110,18 @@ public class Map_YJ : Map
         var player = PhotonNetwork.Instantiate(objName, planePos[actorNum - 1], Quaternion.identity);
 
         int id = player.GetPhotonView().ViewID;
-  
+        GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
+       
         GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
+
+        
 
 
 
         //카메라가 쫓아가게끔
         if (Camera.main.GetComponent<PhotonView>())
         {
-           
+            Camera.main.GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
             Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
         }
     }
@@ -145,9 +148,8 @@ public class Map_YJ : Map
         Debug.Log("체인지 시작");
         for (int i = 0; i < playerList.Count; i++)
         {
-            playerList[i].SetActive(false);
-            GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
-            Camera.main.GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
+            Destroy(playerList[i].gameObject);
+          
         }
 
 

@@ -87,10 +87,14 @@ MonoBehaviour:
   anim: {fileID: 0}
   jumpForce: 25
   moveSpeed: 7.5
+  State_GunIdle: {fileID: 0}
+  State_GunMove: {fileID: 0}
+  State_GunJump: {fileID: 0}
   isDead: 0
   isGround: 0
   isUpperPlayer: 0
   isGimmicked: 0
+  isGunMode: 0
   downPlayer: {fileID: 0}
   m_stateCanvas: {fileID: 0}
   stateTxt: {fileID: 8856625206632810969}

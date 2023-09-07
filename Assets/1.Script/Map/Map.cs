@@ -159,7 +159,7 @@ public class Map : MonoBehaviourPunCallbacks
 
 
         if (Camera.main.GetComponent<PhotonView>())
-            Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
+           Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
 
 
     }

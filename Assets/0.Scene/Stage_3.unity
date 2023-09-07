@@ -12714,6 +12714,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestServer_mustNeed
       objectReference: {fileID: 0}
+    - target: {fileID: 4380326308429648394, guid: fd291dd67cd3d8d44acb3b1127139eb2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6307161962690079322, guid: fd291dd67cd3d8d44acb3b1127139eb2, type: 3}
       propertyPath: m_RootOrder
       value: 19
@@ -13805,8 +13809,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4182685346388595001, guid: 1f0c2ebdd978e3f4cba911971d8b0586, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1999119105}
   m_SourcePrefab: {fileID: 100100000, guid: 1f0c2ebdd978e3f4cba911971d8b0586, type: 3}
+--- !u!1 &1999119104 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4182685346388595001, guid: 1f0c2ebdd978e3f4cba911971d8b0586, type: 3}
+  m_PrefabInstance: {fileID: 1999119103}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1999119105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999119104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 17
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &2028207603
 GameObject:
   m_ObjectHideFlags: 0

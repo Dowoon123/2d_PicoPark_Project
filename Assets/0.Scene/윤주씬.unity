@@ -3681,6 +3681,7 @@ GameObject:
   - component: {fileID: 738435637}
   - component: {fileID: 738435640}
   - component: {fileID: 738435641}
+  - component: {fileID: 738435642}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3780,7 +3781,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 738435642}
   sceneViewId: 166
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3806,6 +3808,22 @@ MonoBehaviour:
   RightPlayer: {fileID: 0}
   Edge_RightPlayer: {fileID: 0}
   Edge_LeftPlayer: {fileID: 0}
+--- !u!114 &738435642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738435636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1001 &747172972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31795,8 +31813,8 @@ GameObject:
   - component: {fileID: 2122297347}
   - component: {fileID: 2122297346}
   m_Layer: 0
-  m_Name: Square (1)
-  m_TagString: Untagged
+  m_Name: Delete
+  m_TagString: DeleteZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32079,6 +32097,10 @@ PrefabInstance:
     - target: {fileID: 5360806062526318529, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
       propertyPath: m_Name
       value: MapYJ
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077899328317244483, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
+      propertyPath: sceneViewId
+      value: 164
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

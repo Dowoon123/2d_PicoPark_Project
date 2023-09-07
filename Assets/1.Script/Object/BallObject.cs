@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class BallObject : MonoBehaviourPunCallbacks
 {
-    [SerializeField]float speed; //ball 이동속도 
+    [SerializeField] float speed; //ball 이동속도 
 
     public Rigidbody2D rb;
+
     float X = 4f;
     float Y = 4f;// 방향 값
 
@@ -23,12 +24,18 @@ public class BallObject : MonoBehaviourPunCallbacks
 
     }
 
+    private void Update()
+    {
+    }
+
     private void BallMoving()
     {
 
-        //방향 * 스피드로 힘을 가함
+        ////방향 * 스피드로 힘을 가함
         Vector2 dir = new Vector2(X, Y).normalized;
+
         rb.velocity = dir * speed;
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -37,7 +44,6 @@ public class BallObject : MonoBehaviourPunCallbacks
         //if (/*collision.collider.gameObject.layer == 8 &&*/
         //   !collision.collider.gameObject.CompareTag("Brick"))
         //{
-        //    Debug.Log("들어왔음");
         //    PhotonNetwork.Destroy(gameObject);
         //}
 
@@ -46,9 +52,20 @@ public class BallObject : MonoBehaviourPunCallbacks
         if (collision.collider.CompareTag("Brick"))
             PhotonNetwork.Destroy(collision.gameObject);
 
-
-        //ball이 플레이어에 닿은 경우 공이 움직임 
-        else if (collision.collider.CompareTag("Player") && !(collision.gameObject))
-            BallMoving();
+        //ball 넘어갈 경우 삭제 
+        if (collision.collider.CompareTag("DeleteZone"))
+            PhotonNetwork.Destroy(gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //ball이 플레이어에 닿은 경우 공이 움직임 
+        if (collision.CompareTag("Player"))
+        {
+            BallMoving();
+        }
+
+    }
+
+
 }

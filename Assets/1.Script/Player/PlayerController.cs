@@ -84,6 +84,9 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public PlayerHitState State_Hit;
     public PlayerDeadState State_Dead;
     public PlayerStairState State_Stair;
+    public Player_GunIdle State_GunIdle;
+    public Player_GunMove State_GunMove;
+    public Player_GunJump State_GunJump;
 
 
 
@@ -105,6 +108,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public bool isGround = false;
     public bool isUpperPlayer = false;
     public bool isGimmicked = false; //
+    public bool isGunMode = false;
     public PlayerController downPlayer;
     public GameObject m_stateCanvas;
     public Text stateTxt;
@@ -130,6 +134,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
         State_Hit = new PlayerHitState(this, stateMachine, "Hit", STATE_INFO.HIT);
         State_Dead = new PlayerDeadState(this, stateMachine, "Dead", STATE_INFO.DEAD);
         State_Stair = new PlayerStairState(this, stateMachine, "Idle", STATE_INFO.STAIR);
+        
         // State_AirPush = new PlayerAirPushState(this, stateMachine, "Idle");
 
 

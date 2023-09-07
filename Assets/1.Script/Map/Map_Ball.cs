@@ -20,6 +20,8 @@ public class Map_Ball : Map
     {
         base.Start();
 
+        GetComponent<PhotonView>().RPC("Setting", RpcTarget.AllBuffered);
+
 
         if (!isSelectOption)
             if (PhotonNetwork.IsMasterClient)
@@ -74,6 +76,5 @@ public class Map_Ball : Map
     {
         base.Update();
 
-        GetComponent<PhotonView>().RPC("Setting", RpcTarget.AllBuffered);
     }
 }

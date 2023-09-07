@@ -110,7 +110,7 @@ public class Map_YJ : Map
         var player = PhotonNetwork.Instantiate(objName, planePos[actorNum - 1], Quaternion.identity);
 
         int id = player.GetPhotonView().ViewID;
-
+        GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
 
 
 

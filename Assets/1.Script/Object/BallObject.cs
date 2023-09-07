@@ -9,6 +9,7 @@ public class BallObject : MonoBehaviourPunCallbacks
     [SerializeField] float speed; //ball 이동속도 
 
     public Rigidbody2D rb;
+
     float X = 4f;
     float Y = 4f;// 방향 값
 
@@ -23,9 +24,13 @@ public class BallObject : MonoBehaviourPunCallbacks
 
     }
 
+    private void Update()
+    {
+    }
+
     private void BallMoving()
     {
-        
+
         ////방향 * 스피드로 힘을 가함
         Vector2 dir = new Vector2(X, Y).normalized;
 
@@ -46,6 +51,7 @@ public class BallObject : MonoBehaviourPunCallbacks
         //ball이 brick에 닿은 경우 brick 삭제
         if (collision.collider.CompareTag("Brick"))
             PhotonNetwork.Destroy(collision.gameObject);
+            
 
     }
 

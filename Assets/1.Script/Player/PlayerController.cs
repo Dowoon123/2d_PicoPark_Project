@@ -405,6 +405,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
         pcl.arrayLength -= 1;
 
     }
+    [PunRPC]
+    public void ChangeOtherVel()
+    {
+        //
+    }
 
 
     [PunRPC]

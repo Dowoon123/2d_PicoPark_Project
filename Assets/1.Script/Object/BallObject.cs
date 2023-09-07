@@ -10,8 +10,8 @@ public class BallObject : MonoBehaviourPunCallbacks
 
     public Rigidbody2D rb;
 
-    float X = 4f;
-    float Y = 4f;// 방향 값
+    float X = 10f;
+    float Y = 10f;// 방향 값
 
 
 
@@ -50,8 +50,16 @@ public class BallObject : MonoBehaviourPunCallbacks
 
         //ball이 brick에 닿은 경우 brick 삭제
         if (collision.collider.CompareTag("Brick"))
-            PhotonNetwork.Destroy(collision.gameObject);
+        {
+            if (GetComponent<PhotonView>().IsMine)
+            {
+                var BallObj = collision.collider.gameObject;
+                var Id = BallObj.GetComponent<PhotonView>().ViewID;
 
+                GetComponent<PhotonView>().RPC("DeleteBrick", RpcTarget.AllBuffered, Id);
+            }
+
+        }
 
 
     }
@@ -64,10 +72,21 @@ public class BallObject : MonoBehaviourPunCallbacks
             BallMoving();
         }
 
-        //ball 넘어갈 경우 삭제 
-        if (collision.CompareTag("DeleteZone"))
-            PhotonNetwork.Destroy(gameObject);
+        ////ball 넘어갈 경우 삭제 
+        //if (collision.CompareTag("DeleteZone"))
+        //    PhotonNetwork.Destroy(gameObject);
     }
 
+    [PunRPC]
+    //마스터 클라이언트에서 ID 가져와서 삭제해줌
+    public void DeleteBrick(int viewID)
+    {
+        var ball = PhotonView.Find(viewID);
 
+        if (ball.gameObject != null)
+        {
+            PhotonNetwork.Destroy(ball.gameObject);
+        }
+
+    }
 }

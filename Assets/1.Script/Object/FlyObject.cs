@@ -45,8 +45,8 @@ public class FlyObject : MonoBehaviourPunCallbacks
     {
         if (pv.IsMine && !isDead)
         {
-            h = Input.GetAxisRaw("Horizontal");
-            v = Input.GetAxisRaw("Vertical");
+            h = Input.GetAxisRaw("Horizontal")* Speed *Time.deltaTime;
+            v = Input.GetAxisRaw("Vertical") * Speed * Time.deltaTime;
         }
 
         rb.velocity = new Vector2(h * Speed, v * Speed);
@@ -119,15 +119,15 @@ public class FlyObject : MonoBehaviourPunCallbacks
 
         yield return new WaitForSeconds(0.5f);
 
-        ReStart();
+        // ReStart();
 
     }
 
-    private static void ReStart()
-    {
-        //¾À·Îµå
-        PhotonNetwork.LoadLevel("À±ÁÖ¾À");
-    }
+    //private static void ReStart()
+    //{
+    //    //¾À·Îµå
+    //    PhotonNetwork.LoadLevel("À±ÁÖ¾À");
+    //}
 
 
     //¹®¿¡ µé¾î°¨

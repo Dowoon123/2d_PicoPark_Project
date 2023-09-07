@@ -93,6 +93,9 @@ MonoBehaviour:
   - DeleteBrick
   - Setting
   - BallMoving
+  - getAngle
+  - V2Rotate
+  - ReflectBall
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

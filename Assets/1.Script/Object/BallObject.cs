@@ -28,26 +28,23 @@ public class BallObject : MonoBehaviourPunCallbacks
     {
     }
 
-    [PunRPC]
-    private void BallMoving()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        ////방향 * 스피드로 힘을 가함
-        Vector2 dir = new Vector2(X, Y).normalized;
-
-        rb.velocity = dir * speed;
-
+        //ball이 플레이어에 닿은 경우 공이 움직임 
+        if (collision.CompareTag("Player"))
+        {
+            // 플레이어와 충돌한 경우, 공을 발사합니다.
+            BallMoving();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //ball이 땅에 닿으면 ball 삭제
-        if (collision.collider.gameObject.layer == 8 &&
-           !collision.collider.gameObject.CompareTag("Brick"))
+        if (collision.collider.gameObject.layer == 8 && !collision.collider.gameObject.CompareTag("Brick"))
         {
-            PhotonNetwork.Destroy(gameObject);
+          //  PhotonNetwork.Destroy(gameObject);
         }
-
 
         //ball이 brick에 닿은 경우 brick 삭제
         if (collision.collider.CompareTag("Brick"))
@@ -59,21 +56,24 @@ public class BallObject : MonoBehaviourPunCallbacks
 
                 GetComponent<PhotonView>().RPC("DeleteBrick", RpcTarget.AllBuffered, Id);
             }
-
         }
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //ball이 플레이어에 닿은 경우 공이 움직임 
-        if (collision.CompareTag("Player"))
+        // ball이 벽에 부딪혔을 때, 반사 벡터를 계산하여 적용합니다.
+        if (collision.collider.gameObject.layer == 9) // Layer 9: 장애물
         {
-            GetComponent<PhotonView>().RPC("BallMoving", RpcTarget.AllBuffered);
-               //
-               // BallMoving();
+            Vector2 reflectionVector = Vector2.Reflect(rb.velocity.normalized, collision.contacts[0].normal);
+            rb.velocity = reflectionVector * speed;
         }
     }
+
+    [PunRPC]
+    private void BallMoving()
+    {
+        // 방향 * 스피드로 힘을 가함
+        Vector2 dir = new Vector2(X, Y).normalized;
+        rb.velocity = dir * speed;
+    }
+
 
     [PunRPC]
     //마스터 클라이언트에서 ID 가져와서 삭제해줌

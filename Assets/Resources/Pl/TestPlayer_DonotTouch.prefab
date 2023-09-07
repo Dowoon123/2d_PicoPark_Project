@@ -123,7 +123,7 @@ MonoBehaviour:
   WhatIsObstacle:
     serializedVersion: 2
     m_Bits: 576
-  Players:
+  WhatIsFoot:
     serializedVersion: 2
     m_Bits: 0
   isObstacle: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   UpsidePlayers: []
   upPosition: []
   DrawGizmos: {x: 0, y: 0}
-  translate: {x: 0, y: 0, z: 0}
+  UpCheckPos: {x: 0, y: 0, z: 0}
 --- !u!114 &5631247468460075448
 MonoBehaviour:
   m_ObjectHideFlags: 0

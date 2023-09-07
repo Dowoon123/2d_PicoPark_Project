@@ -89,7 +89,7 @@ MonoBehaviour:
   - SetCurrPushInt
   - SetJoint
   - SpawnEnd
-  - BallSpawn
+  - SetSpeed
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

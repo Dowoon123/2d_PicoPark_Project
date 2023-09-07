@@ -35,12 +35,15 @@ public class Map_Dowoon : Map
                     var view_2 = playerList[i + 1].GetComponent<PhotonView>().ViewID;
 
                     GetComponent<PhotonView>().RPC("SetJoint", RpcTarget.AllBuffered, view_1, view_2);
+      
                     Debug.Log("¤¤¤·¤°");
+
+
 
                 }
             }
 
-
+            GetComponent<PhotonView>().RPC("SetSpeed", RpcTarget.AllBuffered);
             isSpawnEnd = false;
             
         }
@@ -72,10 +75,24 @@ public class Map_Dowoon : Map
       
         distJoint.maxDistanceOnly = true;
         distJoint.autoConfigureDistance = false;
-        distJoint.distance = 8.5f;
+
+        distJoint.distance = 9f; 
+
+        player_1.GetComponent<PlayerController>().conectedBody = player_2.gameObject;
+        player_2.GetComponent<PlayerController>().conectedBody = player_1.gameObject;
     }
 
-
+    [PunRPC]
+    public void SetSpeed()
+    {
+        for(int i=0; i< playerList.Count; ++i)
+        {
+            var player = playerList[i].GetComponent<PlayerController>();
+            player.moveSpeed = 10f;
+            player.isRope = true;
+            
+        }
+    }
 
 
 

@@ -55,6 +55,7 @@ public class BallObject : MonoBehaviourPunCallbacks
         //ball 넘어갈 경우 삭제 
         if (collision.collider.CompareTag("DeleteZone"))
             PhotonNetwork.Destroy(gameObject);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -64,6 +65,7 @@ public class BallObject : MonoBehaviourPunCallbacks
         {
             BallMoving();
         }
+
 
     }
 

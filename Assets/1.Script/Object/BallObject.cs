@@ -52,10 +52,9 @@ public class BallObject : MonoBehaviourPunCallbacks
         if (collision.collider.CompareTag("Brick"))
             PhotonNetwork.Destroy(collision.gameObject);
 
-        else if (collision.collider.CompareTag("DeleteZone"))
-        {
-            DeleteAllball();
-        }
+        //ball 넘어갈 경우 삭제 
+        if (collision.collider.CompareTag("DeleteZone"))
+            PhotonNetwork.Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -68,16 +67,5 @@ public class BallObject : MonoBehaviourPunCallbacks
 
     }
 
-
-    //공 삭제
-    private void DeleteAllball()
-    {
-        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
-
-        foreach (GameObject ball in balls)
-        {
-            PhotonNetwork.Destroy(ball);
-        }
-    }
 
 }

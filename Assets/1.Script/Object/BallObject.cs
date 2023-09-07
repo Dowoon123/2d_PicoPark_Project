@@ -28,6 +28,7 @@ public class BallObject : MonoBehaviourPunCallbacks
     {
     }
 
+    [PunRPC]
     private void BallMoving()
     {
 
@@ -69,7 +70,8 @@ public class BallObject : MonoBehaviourPunCallbacks
         //ball이 플레이어에 닿은 경우 공이 움직임 
         if (collision.CompareTag("Player"))
         {
-            BallMoving();
+            GetComponent<PhotonView>().RPC("BallMoving", RpcTarget.AllBuffered);
+               // BallMoving();
         }
 
         ////ball 넘어갈 경우 삭제 

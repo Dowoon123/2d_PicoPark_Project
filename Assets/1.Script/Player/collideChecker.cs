@@ -28,7 +28,7 @@ public class collideChecker : MonoBehaviour
     public List<PlayerController> UpsidePlayers = new List<PlayerController>();
     public List<Vector2> upPosition = new List<Vector2>();
     public Vector2 DrawGizmos;
-    public Vector3 translate;
+    public Vector3 UpCheckPos;
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -58,7 +58,7 @@ public class collideChecker : MonoBehaviour
         pos.y += 5.0f;
         Gizmos.DrawCube(pos, new Vector3(1, 10, 0));
 
-        Gizmos.DrawCube(transform.position + translate, DrawGizmos);
+       
         // Gizmos.DrawCube(transform.position + new Vector3(rectXSize, 0,0) , CheckRect);
     }
     //public virtual void IsUpsideDetected()
@@ -133,15 +133,15 @@ public class collideChecker : MonoBehaviour
 
     public virtual bool IsUpper()
     {
-        var col = Physics2D.OverlapBox(transform.position + translate, DrawGizmos, 0, WhatIsFoot);
+      //  var col = Physics2D.OverlapBox(, DrawGizmos, 0, WhatIsFoot);
 
-        if (col)
-        {
-            if (col.gameObject.layer == 11)
-                return true;
+        //if (col)
+        //{
+        //    if (col.gameObject.layer == 11)
+        //        return true;
 
 
-        }
+        //}
 
         return false;
     }

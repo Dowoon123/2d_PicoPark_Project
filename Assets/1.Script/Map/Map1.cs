@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -18,7 +19,14 @@ public class Map1 : Map
     public override void Update()
     {
         base.Update();
-
+         
+        if(PhotonNetwork.IsMasterClient)
+        {
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                PhotonNetwork.LoadLevel(Scene_name);
+            }
+        }
       
     }
 

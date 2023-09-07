@@ -58,18 +58,22 @@ public class PlayerMoveState : PlayerGroundedState
                 targetObject = player.GetComponent<collideChecker>().obstacleObject;
 
 
-            if (targetObject.transform.position.x > player.transform.position.x)
+            if (targetObject != null)
             {
-                if (xInput > 0)
+
+                if (targetObject.transform.position.x > player.transform.position.x)
                 {
-                    stateMachine.ChangeState(player.State_Push);
+                    if (xInput > 0)
+                    {
+                        stateMachine.ChangeState(player.State_Push);
+                    }
                 }
-            }
-            else if (targetObject.transform.position.x < player.transform.position.x)
-            {
-                if (xInput < 0)
+                else if (targetObject.transform.position.x < player.transform.position.x)
                 {
-                    stateMachine.ChangeState(player.State_Push);
+                    if (xInput < 0)
+                    {
+                        stateMachine.ChangeState(player.State_Push);
+                    }
                 }
             }
         }

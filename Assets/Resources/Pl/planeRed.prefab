@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 15
+  isNearDoor: 0
 --- !u!50 &2720420245813916174
 Rigidbody2D:
   serializedVersion: 4

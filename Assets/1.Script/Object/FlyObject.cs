@@ -5,8 +5,6 @@ using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 using Photon.Realtime;
-using UnityEditorInternal;
-
 
 public class FlyObject : MonoBehaviourPunCallbacks
 {

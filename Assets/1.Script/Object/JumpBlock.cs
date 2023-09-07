@@ -23,8 +23,7 @@ public class JumpBlock : MonoBehaviour
 
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
 
-            if (CanJump(player))
-            {
+         
                 Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
 
                 if (rb != null)
@@ -42,11 +41,11 @@ public class JumpBlock : MonoBehaviour
                     //점프 쿨타임 대기 후 점프 가능한 상태로 변경
                    // StartCoroutine(JumpCooldown());
                 }
-            }
+            
         }
     }
     
-
+    /*
     private bool CanJump(PlayerController player)
     {
         return player.currState == player.State_idle ||
@@ -56,7 +55,7 @@ public class JumpBlock : MonoBehaviour
                player.currState == player.State_Stair;
        
     }
-
+    */
     /*
     //쿨타임 대기
     private IEnumerator JumpCooldown()

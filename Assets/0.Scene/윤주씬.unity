@@ -32080,6 +32080,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapYJ
       objectReference: {fileID: 0}
+    - target: {fileID: 7077899328317244483, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
+      propertyPath: sceneViewId
+      value: 164
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

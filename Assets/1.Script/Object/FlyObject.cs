@@ -5,6 +5,7 @@ using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 using Photon.Realtime;
+using UnityEditorInternal;
 
 
 public class FlyObject : MonoBehaviourPunCallbacks
@@ -12,6 +13,7 @@ public class FlyObject : MonoBehaviourPunCallbacks
     public float Speed;
     Animator anim;
     Transform trans;
+    SpriteRenderer sr;
 
     float h;
     float v;
@@ -21,17 +23,25 @@ public class FlyObject : MonoBehaviourPunCallbacks
 
     bool isDead;
 
+
+    [Header("Door")]
+    public bool isNearDoor = false;
+    bool isInDoor;
+
     private void Start()
     {
         pv = GetComponent<PhotonView>();
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        {
+                enterDoor();
+        }
     }
     private void FixedUpdate()
     {
@@ -119,5 +129,33 @@ public class FlyObject : MonoBehaviourPunCallbacks
     {
         //씬로드
         PhotonNetwork.LoadLevel("윤주씬");
+    }
+
+
+    //문에 들어감
+    public void enterDoor()
+    {
+
+        if (isNearDoor)
+
+        {
+            if (isInDoor)
+            {
+                Time.timeScale = 1; //시간 정상 속도로 복원
+                sr.GetComponent <SpriteRenderer>().enabled = true;
+                isInDoor = false; //문에서 나옴
+                sr.enabled = true;
+
+            }
+            else
+            {
+                Time.timeScale = 0; //시간 중지
+                sr.GetComponent<SpriteRenderer>().enabled = true;
+                isInDoor = true;
+                sr.enabled = false;
+            }
+
+        }
+
     }
 }

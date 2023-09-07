@@ -151,6 +151,7 @@ public class Map : MonoBehaviourPunCallbacks
 
 
         var player = PhotonNetwork.Instantiate(objName, playerPosition[actorNum-1], Quaternion.identity);
+
         int id = player.GetPhotonView().ViewID;
         GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
        
@@ -182,6 +183,14 @@ public class Map : MonoBehaviourPunCallbacks
             isSpawnEnd = true;
     }
 
+    [PunRPC]
+    public void ResetPlayer(int viewID)
+    {
+        for(int i =0; i< playerList.Count; i++) 
+        {
+            playerList[i] = null;
+        }
+    }
 
 
 

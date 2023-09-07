@@ -28,6 +28,7 @@ public class Map_YJ : Map
     public override void Start()
     {
         base.Start();
+        if(!isSelectOption)
         BallSpawn();
     }
 
@@ -146,6 +147,8 @@ public class Map_YJ : Map
         for (int i = 0; i < playerList.Count; i++)
         {
             playerList[i].SetActive(false);
+         
+         
         }
 
 

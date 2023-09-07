@@ -117,7 +117,7 @@ public class Map_YJ : Map
         //Ä«¸Þ¶ó°¡ ÂÑ¾Æ°¡°Ô²û
         if (Camera.main.GetComponent<PhotonView>())
         {
-            Camera.main.GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
+           // Camera.main.GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
             Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
         }
     }

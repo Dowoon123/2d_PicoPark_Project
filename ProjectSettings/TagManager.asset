@@ -14,6 +14,7 @@ TagManager:
   - DeadZone
   - Obstacle
   - DeleteZone
+  - Ball
   layers:
   - Default
   - TransparentFX

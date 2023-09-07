@@ -10,8 +10,8 @@ public class BallObject : MonoBehaviourPunCallbacks
 
     public Rigidbody2D rb;
 
-    float X = 10f;
-    float Y = 10f;// 방향 값
+    float X = 50f;
+    float Y = 50f;// 방향 값
 
 
 

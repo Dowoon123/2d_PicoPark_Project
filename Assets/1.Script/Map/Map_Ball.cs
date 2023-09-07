@@ -19,14 +19,26 @@ public class Map_Ball : Map
     public override void Start()
     {
         base.Start();
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.localScale = new Vector3(11f, 11f, 11f);
+
 
         if (!isSelectOption)
             if (PhotonNetwork.IsMasterClient)
             {
                 BallSpawn();
             }
+    }
+
+    [PunRPC]
+    public void Setting()
+    {
+        for (int i = 0; i < playerList.Count; ++i)
+        {
+            var player = playerList[i].GetComponent<PlayerController>();
+            player.moveSpeed = 40f;
+            player.jumpForce = 50f;
+            player.transform.localScale = new Vector3(11f, 11f, 11f);
+
+        }
     }
 
     //°ø ½ºÆù
@@ -61,5 +73,7 @@ public class Map_Ball : Map
     public override void Update()
     {
         base.Update();
+
+        GetComponent<PhotonView>().RPC("Setting", RpcTarget.AllBuffered);
     }
 }

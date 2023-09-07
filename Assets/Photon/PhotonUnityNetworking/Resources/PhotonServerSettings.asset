@@ -96,6 +96,7 @@ MonoBehaviour:
   - getAngle
   - V2Rotate
   - ReflectBall
+  - SetReady
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

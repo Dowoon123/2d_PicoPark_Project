@@ -16,6 +16,7 @@ public class Map : MonoBehaviourPunCallbacks
     public List<GameObject> playerList = new List<GameObject>();
 
     public Text Timer_Text;
+    public Text ClearText;
     public GameObject canvasPrefab;
     public GameObject canvas;  
 
@@ -30,6 +31,12 @@ public class Map : MonoBehaviourPunCallbacks
     public PhotonView pv;
 
    public Vector2[] playerPosition = new Vector2[4];
+
+    public bool isClear = false;
+    public GameObject Door;
+   
+
+    
     public  void SetMapInfo(string SceneName, string MapName, string MapSubName,
         Vector2 player1_pos, Vector2 player2_pos, Vector2 player3_pos, Vector2 player4_pos)
     {
@@ -48,9 +55,8 @@ public class Map : MonoBehaviourPunCallbacks
 
    public virtual void Awake()
     {
-        //canvas = Instantiate(canvasPrefab);
-
-        //Timer_Text =  canvas.GetComponentInChildren<Text>();
+        if(!isSelectOption)
+        SpawnTimer();
 
         SceneManager.sceneLoaded += OnSceneLoaded;
 
@@ -69,7 +75,22 @@ public class Map : MonoBehaviourPunCallbacks
     public virtual void SpawnTimer()
     {
       canvas = Instantiate(canvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        Timer_Text = canvas.GetComponentInChildren<Text>();
+
+        var texts = canvas.GetComponentsInChildren<Text>();
+
+        for(int i=0; i<texts.Length; i++)
+        {
+            if (texts[i].name == "Timer")
+            {
+                Timer_Text = texts[i];
+            }
+            if (texts[i].name == "Clear")
+            {
+                ClearText = texts[i];
+                ClearText.gameObject.SetActive(false);
+            }
+
+        }
     }
    
     public virtual void Start()
@@ -85,6 +106,22 @@ public class Map : MonoBehaviourPunCallbacks
         }
     }
 
+    public void CheckPlayerAllReady()
+    {
+        var count = 0;
+        for (int i=0; i< playerList.Count; ++i)
+        {
+            var pc = playerList[i].GetComponent<PlayerController>();
+            if (pc.isReadyToClear)
+                count++;
+        }
+
+        if (count == PhotonNetwork.CurrentRoom.PlayerCount)
+        {
+            StartCoroutine(ClearMap());
+            isClear = true;
+        }
+    }
    public virtual void Update()
     {
         if (Timer_Text)
@@ -116,6 +153,17 @@ public class Map : MonoBehaviourPunCallbacks
 
             Timer_Text.text = "time / " + minutesstr + " : " + secondsstr;
         }
+
+
+        if(!isClear && playerList.Count > 0)
+        {
+            if(PhotonNetwork.IsMasterClient)
+            CheckPlayerAllReady();
+        }
+
+
+
+
 
         //if (Input.GetKeyDown(KeyCode.R))
         //{
@@ -193,5 +241,31 @@ public class Map : MonoBehaviourPunCallbacks
     }
 
 
+    IEnumerator ClearMap()
+    {
+        float dist = 1000f;
+        ClearText.gameObject.SetActive(true);
+
+        while(true)
+        {
+            dist = Vector3.Distance(ClearText.transform.localPosition, Vector3.zero);
+
+            if (dist > 10)
+            {
+                ClearText.transform.Translate(Vector3.right * 10.5f);
+                Debug.Log("dist :" + dist);
+                yield return new WaitForSeconds(0.03f);
+            }
+            else
+                break;
+           
+
+        }
+
+        yield return new WaitForSeconds(4.1f);
+
+        if (PhotonNetwork.IsMasterClient)
+            PhotonNetwork.LoadLevel("StageSelectScene");
+    }
 
 }

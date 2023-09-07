@@ -57,6 +57,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currStateEnum: 0
+  isRope: 0
+  conectedBody: {fileID: 0}
   pv: {fileID: 0}
   prevId: 0
   isTransfer: 0

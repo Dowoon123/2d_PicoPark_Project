@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public enum STATE_INFO
 {
@@ -23,7 +24,8 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
     #region ROPE
-
+    public bool isRope;
+    public GameObject conectedBody;
 
     #endregion
 
@@ -205,7 +207,11 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
 
 
+
     }
+
+
+
 
    
         public void SetPlayerCharacter(GameObject obj)
@@ -418,6 +424,20 @@ public class PlayerController : MonoBehaviourPunCallbacks
 
         }
 
+        if(conectedBody != null)
+        {
+            if(!conectedBody.GetComponent<PlayerController>().IsGroundDetected() )
+            {
+                if (conectedBody.GetComponent<PlayerController>().currState is PlayerAirState)
+                    return;
+
+                var dist = Vector2.Distance(transform.position, conectedBody.transform.position);
+                if( dist > 8.0f)
+                conectedBody.GetComponent<PlayerController>().SetVelocity(conectedBody.GetComponent<PlayerController>().rb.velocity.x, 5.5f);
+            }
+        }
+
+      
     }
 
 

@@ -405,17 +405,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
         pcl.arrayLength -= 1;
 
     }
-    [PunRPC]
-    public void ChangeOtherVel(int viewID)
-    {
-        var pc = PhotonView.Find(viewID).GetComponent<PlayerController>();
-
-        if(pc)
-        {
-            pc.SetVelocity(pc.rb.velocity.x, 0);
-
-        }
-    }
 
 
     [PunRPC]

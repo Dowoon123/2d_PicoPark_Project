@@ -111,7 +111,7 @@ public class Map_YJ : Map
         var player = PhotonNetwork.Instantiate(objName, planePos[actorNum - 1], Quaternion.identity);
 
         int id = player.GetPhotonView().ViewID;
-  
+        GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
         GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
 
 
@@ -119,7 +119,7 @@ public class Map_YJ : Map
         //Ä«¸Þ¶ó°¡ ÂÑ¾Æ°¡°Ô²û
         if (Camera.main.GetComponent<PhotonView>())
         {
-           
+            Camera.main.GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
             Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
         }
     }
@@ -147,8 +147,8 @@ public class Map_YJ : Map
         for (int i = 0; i < playerList.Count; i++)
         {
             playerList[i].SetActive(false);
-            GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
-            Camera.main.GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
+         
+         
         }
 
 

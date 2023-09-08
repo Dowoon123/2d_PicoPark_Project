@@ -76,7 +76,7 @@ public class ChaseCam : MonoBehaviourPunCallbacks
     // 맨끝 플레이어 를 알아내기 위한 함수. 
     public void CheckPlayerPosition()
     {
-        float minX = 100;
+        float minX = 1000;
         float maxX = 0;
         int minIndex = 0;
         int maxIndex = 0;

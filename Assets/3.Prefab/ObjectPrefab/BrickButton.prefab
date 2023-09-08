@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8583070292603525969}
   - component: {fileID: 3527580630269291136}
   - component: {fileID: 5015137512636219288}
+  - component: {fileID: -659211008846546447}
   m_Layer: 0
   m_Name: BrickButton
   m_TagString: Untagged
@@ -188,3 +189,25 @@ MonoBehaviour:
   imageOn: {fileID: 1993671463, guid: e6efbec4429b37645863622842a48fdf, type: 3}
   imageOff: {fileID: -1270555510, guid: e6efbec4429b37645863622842a48fdf, type: 3}
   on: 0
+--- !u!114 &-659211008846546447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5934698798663797779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

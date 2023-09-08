@@ -1,12 +1,13 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class CannonBullet : MonoBehaviour
 {
     public float MoveSpeed;
 
-
+    Coroutine coroutine;
 
     GameObject KeyBottle;
    
@@ -32,6 +33,9 @@ public class CannonBullet : MonoBehaviour
         }else if(KeyBottle.GetComponent<KeyBottle>().Hp == 1) 
         {
             transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 5f);
+        }else if(KeyBottle.GetComponent<KeyBottle>().Hp == 0)
+        {
+            KeyBottle = null;
         }
     }
 

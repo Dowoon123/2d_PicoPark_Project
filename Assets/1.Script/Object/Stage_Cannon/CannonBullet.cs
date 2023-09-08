@@ -1,12 +1,13 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class CannonBullet : MonoBehaviour
 {
     public float MoveSpeed;
 
-
+    Coroutine coroutine;
 
     GameObject KeyBottle;
    

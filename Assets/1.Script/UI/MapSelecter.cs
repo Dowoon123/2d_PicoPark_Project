@@ -64,7 +64,7 @@ public class MapSelecter : MonoBehaviourPunCallbacks
             {
 
                 currentIndex -= 3;
-
+                 
                 if (currentIndex < 0)
                 {
                     currentIndex += Maps.Length;

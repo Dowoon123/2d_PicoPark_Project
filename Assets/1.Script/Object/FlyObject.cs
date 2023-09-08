@@ -23,6 +23,8 @@ public class FlyObject : MonoBehaviourPunCallbacks
 
     bool canMove = true; // 이동 가능한지 여부 
 
+    bool isMoving = true; //자동 이동 여부 
+
     [Header("Door")]
     public bool isNearDoor = false;
     bool isInDoor;
@@ -33,10 +35,17 @@ public class FlyObject : MonoBehaviourPunCallbacks
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+
+
     }
 
     private void Update()
     {
+        //자동 이동
+        if (isMoving && canMove)
+            transform.Translate(new Vector2(13f * Time.smoothDeltaTime, 0) , Space.Self);
+
+
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
                 enterDoor();
@@ -46,9 +55,12 @@ public class FlyObject : MonoBehaviourPunCallbacks
     {
         if (pv.IsMine && !isDead)
         {
+            
             h = Input.GetAxisRaw("Horizontal");
             v = Input.GetAxisRaw("Vertical");
+
         }
+
         else
         {
             h = 0f;
@@ -76,10 +88,10 @@ public class FlyObject : MonoBehaviourPunCallbacks
         GetComponent<Collider2D>().enabled = false;
 
 
-
         //플레이어를 위로 튀어 오르게 하는 연출
         StartCoroutine(deadJump());
 
+        canMove = false;
     }
 
     IEnumerator deadJump()
@@ -120,10 +132,9 @@ public class FlyObject : MonoBehaviourPunCallbacks
 
         rb.velocity = new Vector2(0, 0);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.01f);
 
         canMove = false;
-
     }
 
 

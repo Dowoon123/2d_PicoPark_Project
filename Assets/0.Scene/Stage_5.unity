@@ -176,6 +176,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3287935927086512111, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
+      propertyPath: Door
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287935927086512111, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
       propertyPath: Map_name
       value: 5.YJ
       objectReference: {fileID: 0}

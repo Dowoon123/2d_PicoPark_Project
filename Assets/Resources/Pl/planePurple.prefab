@@ -103,6 +103,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 30
+  isReadyClear: 0
+  isFrontOfGoal: 0
   isNearDoor: 0
 --- !u!50 &7538460930056437336
 Rigidbody2D:

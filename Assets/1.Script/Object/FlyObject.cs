@@ -22,7 +22,7 @@ public class FlyObject : MonoBehaviourPunCallbacks
     bool isDead;
 
     bool canMove = true; // 이동 가능한지 여부 
-
+  public  bool isCanClear = false;
     bool isMoving = true; //자동 이동 여부 
 
     public bool isReadyClear;
@@ -156,7 +156,7 @@ public class FlyObject : MonoBehaviourPunCallbacks
         if (isNearDoor)
 
         {
-            if (!isReadyClear)
+            if (!isReadyClear && isCanClear)
             {
                 GetComponent<PhotonView>().RPC("Set", RpcTarget.All, true);
 

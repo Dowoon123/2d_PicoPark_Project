@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public string NickName;
 
     public bool isReadyToClear = false;
+    public bool isCanClear = false;
     #endregion
 
 

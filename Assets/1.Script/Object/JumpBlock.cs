@@ -11,6 +11,7 @@ public class JumpBlock : MonoBehaviour
    // public float jumpCooldown; //점프 쿨타임
     Animator anim;
 
+    public float Force;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -28,7 +29,7 @@ public class JumpBlock : MonoBehaviour
 
                 if (player != null)
                 {
-                player.jumpForce = 50;
+                player.jumpForce = Force;
                      player.stateMachine.ChangeState(player.State_Jump);
                 player.jumpForce = 35;
                    // //현재 속도

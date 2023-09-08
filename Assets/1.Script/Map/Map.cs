@@ -165,10 +165,11 @@ public class Map : MonoBehaviourPunCallbacks
 
 
 
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    SpawnPlayer();
-        //}
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PhotonNetwork.LoadLevel(Scene_name);
+
+        }
     }
 
 
@@ -180,8 +181,7 @@ public class Map : MonoBehaviourPunCallbacks
         switch (PhotonNetwork.LocalPlayer.ActorNumber)
         {
             case 1:
-                objName = "Pl/Player_Red";
-
+                objName = "Pl/Player_Red"; 
                 break;
             case 2:
                 objName = "Pl/Player_Blue";

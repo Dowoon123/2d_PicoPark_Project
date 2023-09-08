@@ -24,22 +24,24 @@ public class JumpBlock : MonoBehaviour
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
 
          
-                Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
+              //  Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
 
-                if (rb != null)
+                if (player != null)
                 {
+                player.jumpForce = 50;
+                     player.stateMachine.ChangeState(player.State_Jump);
+                player.jumpForce = 35;
+                   // //현재 속도
+                   // Vector2 velocity = rb.velocity;
 
-                    //현재 속도
-                    Vector2 velocity = rb.velocity;
+                   // // 위쪽 점프 힘 설정
+                   // velocity.y = jumpForce;
 
-                    // 위쪽 점프 힘 설정
-                    velocity.y = jumpForce;
+                   // // 변경된 속도 적용하여 점프 효과 
+                   // rb.velocity = velocity;
 
-                    // 변경된 속도 적용하여 점프 효과 
-                    rb.velocity = velocity;
-
-                    //점프 쿨타임 대기 후 점프 가능한 상태로 변경
-                   // StartCoroutine(JumpCooldown());
+                   // //점프 쿨타임 대기 후 점프 가능한 상태로 변경
+                   //// StartCoroutine(JumpCooldown());
                 }
             
         }

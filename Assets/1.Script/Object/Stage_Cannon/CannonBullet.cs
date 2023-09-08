@@ -35,7 +35,7 @@ public class CannonBullet : MonoBehaviour
             transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 5f);
         }else if(KeyBottle.GetComponent<KeyBottle>().Hp == 0)
         {
-            KeyBottle = null;
+            return;
         }
     }
 
@@ -53,6 +53,7 @@ public class CannonBullet : MonoBehaviour
             Destroy(transform.gameObject);
             
         }
+
      
     }
 }

@@ -11,6 +11,8 @@ public class Map_YJ : Map
     //public bool isChange;
     //public bool ChangeComplete;
 
+    Rigidbody2D rb;
+
 
     public Vector2[] planePos = new Vector2[4];
 
@@ -21,7 +23,9 @@ public class Map_YJ : Map
 
     public override void Start()
     {
-        base.Start();
+        rb = GetComponent<Rigidbody2D>();
+
+        if(!isSelectOption)
         Playerplane();
     }
 
@@ -29,6 +33,12 @@ public class Map_YJ : Map
     public override void Update()
     {
         base.Update();
+
+        //플레이어가 움직이지 않더라도 저절로 움직이도록
+
+
+
+
 
         //if (!ChangeComplete)
         //    CheckPlayerXpos();
@@ -71,7 +81,6 @@ public class Map_YJ : Map
         var player = PhotonNetwork.Instantiate(objName, planePos[actorNum - 1], Quaternion.identity);
 
         int id = player.GetPhotonView().ViewID;
-        GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
         GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
 
 
@@ -79,7 +88,6 @@ public class Map_YJ : Map
         //카메라가 쫓아가게끔
         if (Camera.main.GetComponent<PhotonView>())
         {
-            Camera.main.GetComponent<PhotonView>().RPC("ResetPlayer", RpcTarget.AllBuffered);
             Camera.main.GetComponent<PhotonView>().RPC("AddPlayer", RpcTarget.AllBuffered, id);
         }
     }

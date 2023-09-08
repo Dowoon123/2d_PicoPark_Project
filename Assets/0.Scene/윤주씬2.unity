@@ -15054,6 +15054,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestServer_mustNeed
       objectReference: {fileID: 0}
+    - target: {fileID: 4380326308429648394, guid: fd291dd67cd3d8d44acb3b1127139eb2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6307161962690079322, guid: fd291dd67cd3d8d44acb3b1127139eb2, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -19586,6 +19590,10 @@ PrefabInstance:
       propertyPath: Map_name
       value: 2.YJ
       objectReference: {fileID: 0}
+    - target: {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
+      propertyPath: canvasPrefab
+      value: 
+      objectReference: {fileID: 4715031464782497255, guid: 6225594a7abeb174284e37bdedbac2a8, type: 3}
     - target: {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
       propertyPath: spawnPoints.Array.data[0].y
       value: -22.8

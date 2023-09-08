@@ -76,7 +76,7 @@ public class Map_Dowoon : Map
         distJoint.maxDistanceOnly = true;
         distJoint.autoConfigureDistance = false;
 
-        distJoint.distance = 9f; 
+        distJoint.distance = 10f; 
 
         player_1.GetComponent<PlayerController>().conectedBody = player_2.gameObject;
         player_2.GetComponent<PlayerController>().conectedBody = player_1.gameObject;

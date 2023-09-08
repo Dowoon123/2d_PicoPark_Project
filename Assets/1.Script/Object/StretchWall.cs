@@ -6,6 +6,7 @@ using UnityEngine;
 public class StretchWall : InteractableObject
 {
     [SerializeField] private bool isActives;
+    [SerializeField] private float moveSpeed;
     public enum Direction
     {
         LEFT,
@@ -73,13 +74,13 @@ public class StretchWall : InteractableObject
 
             if (isAction == true)
             {
-                transform.Translate(dir * 0.1f);
+                transform.Translate(dir * moveSpeed * Time.deltaTime);
                 if (timer > moveLength)
                     break;
             }
             if(isAction== false)
             {
-                transform.Translate(-dir * 0.1f);
+                transform.Translate(-dir * moveSpeed);
                 if (timer > moveLength)
                     break;
             }

@@ -24,7 +24,7 @@ public class Cannon : MonoBehaviour
 
         KeyBottle = GameObject.Find("KeyBottle");
         KeyBottle.GetComponent<KeyBottle>();
-        isShot = false;
+      
 
         GetComponent<PhotonView>().RPC("Shot", RpcTarget.All);
     }
@@ -32,7 +32,7 @@ public class Cannon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isShot && KeyBottle.GetComponent<KeyBottle>().Hp <= 0 && !isEndShoot)
+        if (KeyBottle.GetComponent<KeyBottle>().Hp <= 0 && !isEndShoot)
         {
             GetComponent<PhotonView>().RPC("StopShot", RpcTarget.All);
             isEndShoot = true;
@@ -58,9 +58,12 @@ public class Cannon : MonoBehaviour
 
     IEnumerator ShotBullet()
     {
-        isShot = true;
-        Instantiate(bullet, shotPos.transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(3f);
-        isShot = false;
+        while (true)
+        {
+           
+            Instantiate(bullet, shotPos.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(3f);
+            
+        }
     }
 }

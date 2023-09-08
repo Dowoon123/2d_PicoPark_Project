@@ -100,11 +100,9 @@ public class PlayerGroundedState : PlayerState
 
         if (player.isNearDoor)
         {
-            if (!isInDoor)
+            if (!player.isReadyToClear)
             {
-                player.GetComponentInChildren<SpriteRenderer>().enabled = false;
-
-                isInDoor = true;
+              
                 player.pv.GetComponent<PhotonView>().RPC("SetReady", RpcTarget.AllBuffered, true);
             
                 return;
@@ -113,10 +111,9 @@ public class PlayerGroundedState : PlayerState
             }
         }
 
-        if (isInDoor)
+        if (player.isReadyToClear)
         {
-            player.GetComponentInChildren<SpriteRenderer>().enabled = true;
-            isInDoor = false;
+         
             player.pv.GetComponent<PhotonView>().RPC("SetReady", RpcTarget.AllBuffered, false);
         }
 

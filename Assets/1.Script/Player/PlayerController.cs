@@ -272,7 +272,10 @@ public class PlayerController : MonoBehaviourPunCallbacks
     public void SetReady(bool b)
     {
         isReadyToClear = b;
-        GetComponent<Collider2D>().enabled = b;
+        GetComponent<Collider2D>().enabled = !b;
+        GetComponentInChildren<SpriteRenderer>().enabled = !b;
+
+        
     }
 
     public void FlipController(float _x)

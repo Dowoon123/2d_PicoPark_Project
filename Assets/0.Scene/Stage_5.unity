@@ -180,6 +180,10 @@ PrefabInstance:
       value: 5.YJ
       objectReference: {fileID: 0}
     - target: {fileID: 3287935927086512111, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
+      propertyPath: canvasPrefab
+      value: 
+      objectReference: {fileID: 4715031464782497255, guid: 6225594a7abeb174284e37bdedbac2a8, type: 3}
+    - target: {fileID: 3287935927086512111, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
       propertyPath: playerPosition.Array.data[1].x
       value: 0
       objectReference: {fileID: 0}

@@ -256,6 +256,7 @@ MonoBehaviour:
   mapTimer: 0
   playerList: []
   Timer_Text: {fileID: 0}
+  ClearText: {fileID: 0}
   canvasPrefab: {fileID: 0}
   canvas: {fileID: 0}
   Scene_name: Stage_3
@@ -269,6 +270,8 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
+  isClear: 0
+  Door: {fileID: 0}
   timeLimit: 30
 --- !u!1001 &230061575
 PrefabInstance:
@@ -336,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
       propertyPath: isSelectOption
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -475,6 +478,7 @@ MonoBehaviour:
   mapTimer: 0
   playerList: []
   Timer_Text: {fileID: 0}
+  ClearText: {fileID: 0}
   canvasPrefab: {fileID: 0}
   canvas: {fileID: 0}
   Scene_name: TestScene
@@ -488,6 +492,8 @@ MonoBehaviour:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
+  isClear: 0
+  Door: {fileID: 0}
   spawnPoints:
   - {x: 0, y: 0}
   - {x: 0, y: 0}

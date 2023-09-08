@@ -31,7 +31,7 @@ public class Map_PSJ : Map
         {
             var player = playerList[i].GetComponent<PlayerController>();
             player.moveSpeed = 10f;
-            player.jumpForce = 25f; 
+            player.jumpForce = 30f; 
 
         }
     }

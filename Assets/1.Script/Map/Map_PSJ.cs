@@ -14,6 +14,7 @@ public class Map_PSJ : Map
     {
         base.Start();
 
+        if(isSelectOption == false)
         GetComponent<PhotonView>().RPC("SetSpeed", RpcTarget.AllBuffered);
     }
 

@@ -21,7 +21,8 @@ public class Map_YJ : Map
 
     public override void Start()
     {
-        base.Start();
+
+        if(!isSelectOption)
         Playerplane();
     }
 

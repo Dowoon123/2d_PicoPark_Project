@@ -60,8 +60,9 @@ public class Cannon : MonoBehaviour
     {
         while (true)
         {
-           
-            Instantiate(bullet, shotPos.transform.position, Quaternion.identity);
+            if(PhotonNetwork.IsMasterClient)
+            PhotonNetwork.Instantiate("CannonBullet", shotPos.transform.position, Quaternion.identity);
+  
             yield return new WaitForSeconds(3f);
             
         }

@@ -22,8 +22,7 @@ public class PlayerStairState : PlayerGroundedState
         if(player.downPlayer != null)
         {
 
-            if (player.downPlayer.currState is PlayerGroundedState == false)
-                stateMachine.ChangeState(player.State_Air);
+          
                          
             offsetPos = new Vector2(player.transform.position.x - player.downPlayer.transform.position.x,
                 player.transform.position.y - player.downPlayer.transform.position.y);

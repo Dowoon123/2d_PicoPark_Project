@@ -34,7 +34,20 @@ public class PlayerAirState : PlayerState
         {
 
             if(player.isUpperPlayer)
-            stateMachine.ChangeState(player.State_Stair);
+            {
+                if(player.downPlayer != null)
+                {
+                    if(player.downPlayer.currState is PlayerGroundedState == true)
+                    stateMachine.ChangeState(player.State_Stair);
+
+                }
+
+
+
+
+            }                
+                
+  
             else if(player.isGround)
              stateMachine.ChangeState(player.State_idle);
 

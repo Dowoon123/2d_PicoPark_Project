@@ -100,7 +100,7 @@ public class PlayerGroundedState : PlayerState
 
         if (player.isNearDoor)
         {
-            if (!player.isReadyToClear)
+            if (!player.isReadyToClear && player.isCanClear)
             {
               
                 player.pv.GetComponent<PhotonView>().RPC("SetReady", RpcTarget.AllBuffered, true);

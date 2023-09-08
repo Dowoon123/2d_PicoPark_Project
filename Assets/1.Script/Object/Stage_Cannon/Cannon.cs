@@ -26,6 +26,7 @@ public class Cannon : MonoBehaviour
         KeyBottle.GetComponent<KeyBottle>();
       
 
+        if(PhotonNetwork.IsMasterClient)
         GetComponent<PhotonView>().RPC("Shot", RpcTarget.All);
     }
 
@@ -72,3 +73,4 @@ public class Cannon : MonoBehaviour
         }
     }
 }
+ 

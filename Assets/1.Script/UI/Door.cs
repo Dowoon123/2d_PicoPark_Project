@@ -74,13 +74,14 @@ public class Door : MonoBehaviour
                 {
           
                     collision.gameObject.GetComponent<PlayerController>().isNearDoor = true;
-
+                    collision.gameObject.GetComponent<PlayerController>().isCanClear = true;
 
                 }
                 else if (collision.gameObject.GetComponent <FlyObject >() != null)
                 {
              
                     collision.gameObject.GetComponent<FlyObject>().isNearDoor = true; //planePlayer 때문에 추가
+                    collision.gameObject.GetComponent<FlyObject>().isCanClear = true;
                 }
 
 

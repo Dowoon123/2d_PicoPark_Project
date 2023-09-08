@@ -69,7 +69,8 @@ public class FlyObject : MonoBehaviourPunCallbacks
             h = Input.GetAxisRaw("Horizontal");
             v = Input.GetAxisRaw("Vertical");
 
-            if (h <= 0)
+
+            if (h <= 0 && !isNearDoor)
                 h = 0;
             rb.velocity = new Vector2(h * Speed, v * Speed);
         }
@@ -158,8 +159,8 @@ public class FlyObject : MonoBehaviourPunCallbacks
             if (!isReadyClear)
             {
                 GetComponent<PhotonView>().RPC("Set", RpcTarget.All, true);
-            
 
+                return;
 
             }
         }

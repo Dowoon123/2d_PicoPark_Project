@@ -45,7 +45,7 @@ public class KeyBottle : MonoBehaviour
 
             Hp--;
             if (Hp <= 0)
-            {
+            {   
                 Instantiate(Key, transform.position, Quaternion.identity);
                 Destroy(transform.gameObject);
             }

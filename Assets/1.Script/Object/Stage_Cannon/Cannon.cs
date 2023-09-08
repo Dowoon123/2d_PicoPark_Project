@@ -34,8 +34,11 @@ public class Cannon : MonoBehaviour
     {
         if (KeyBottle.GetComponent<KeyBottle>().Hp <= 0 && !isEndShoot)
         {
-            GetComponent<PhotonView>().RPC("StopShot", RpcTarget.All);
-            isEndShoot = true;
+            if (PhotonNetwork.IsMasterClient)
+            {
+                GetComponent<PhotonView>().RPC("StopShot", RpcTarget.All);
+                isEndShoot = true;
+            }
         }
         else if(KeyBottle.GetComponent<KeyBottle>() == null)
             return;

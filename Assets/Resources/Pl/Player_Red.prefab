@@ -134,8 +134,8 @@ MonoBehaviour:
   PushedPlayer: {fileID: 0}
   UpsidePlayers: []
   upPosition: []
-  DrawGizmos: {x: 1.4, y: 0.25}
-  UpCheckPos: {x: 0, y: 0, z: 0}
+  DrawGizmos: {x: 0, y: 0}
+  UpCheckPos: {x: -0.046, y: -0.001, z: 0}
 --- !u!114 &5631247468460075448
 MonoBehaviour:
   m_ObjectHideFlags: 0

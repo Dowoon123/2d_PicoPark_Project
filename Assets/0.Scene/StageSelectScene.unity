@@ -335,7 +335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
       propertyPath: isSelectOption
@@ -405,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3287935927086512111, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3287935927086512111, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
       propertyPath: Scene_name
@@ -447,6 +447,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 917505700153409086, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
   m_PrefabInstance: {fileID: 249858138}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &249858140 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3287935927086512111, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
+  m_PrefabInstance: {fileID: 249858138}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249858141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c04e69dbc6a22a240a6b0e1759db3a35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &249858141 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5360806062526318529, guid: ee0f4f6be9496e740883bb88e45c955e, type: 3}
@@ -459,7 +470,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249858141}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f63da3c791400e74e8cc8b1177ac6754, type: 3}
   m_Name: 
@@ -473,7 +484,7 @@ MonoBehaviour:
   Scene_name: TestScene
   Map_name: "\uD14C\uC2A4\uD2B8 \uB9F5"
   Map_subTitle: "\uD14C\uC2A4\uD2B8"
-  isSelectOption: 0
+  isSelectOption: 1
   isSpawnEnd: 0
   pv: {fileID: 0}
   playerPosition:
@@ -1580,7 +1591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Maps:
   - {fileID: 37749268}
-  - {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
+  - {fileID: 249858140}
   - {fileID: 1707287560}
   - {fileID: 804003164}
   pv: {fileID: 0}

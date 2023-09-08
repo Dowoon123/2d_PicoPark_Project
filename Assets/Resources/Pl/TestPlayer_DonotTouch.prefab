@@ -77,6 +77,7 @@ MonoBehaviour:
   isLeftEdge: 0
   isRightEdge: 0
   NickName: 
+  isReadyToClear: 0
   WhatIsGround:
     serializedVersion: 2
     m_Bits: 896

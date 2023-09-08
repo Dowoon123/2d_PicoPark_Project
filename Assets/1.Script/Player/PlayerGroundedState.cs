@@ -67,7 +67,7 @@ public class PlayerGroundedState : PlayerState
 
         if (player.isGimmicked)
             stateMachine.ChangeState(player.State_Hit);
-//<<<<<<< HEAD
+        //<<<<<<< HEAD
 
         //  if (!player.IsGroundDetected())
         //    stateMachine.ChangeState(player.airState);
@@ -79,42 +79,12 @@ public class PlayerGroundedState : PlayerState
             stateMachine.ChangeState(player.State_Jump);
         }
 
-                if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W ))
-                {
-
-                         DoorEnter();
-                 
-                }
-                
-       }
-         
-
-
-    public void DoorEnter()
-    {
-
-        if (player.isNearDoor)
-
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
-            if (isInDoor)
-            {
-               
-                player.GetComponentInChildren<SpriteRenderer>().enabled = true;
-                isInDoor = false;
-                player.pv.GetComponent<PhotonView>().RPC("SetReady", RpcTarget.AllBuffered, false);
-            }
-            else
-            {
-               
-                player.GetComponentInChildren<SpriteRenderer>().enabled = false;
 
-                isInDoor = true;
-                player.pv.GetComponent<PhotonView>().RPC("SetReady",RpcTarget.AllBuffered,true);
+            DoorEnter();
 
-            }
-         
         }
-
 
         if (player.isDead)
         {
@@ -122,6 +92,37 @@ public class PlayerGroundedState : PlayerState
         }
 
     }
+
+
+
+    public void DoorEnter()
+    {
+
+        if (player.isNearDoor)
+        {
+            if (!isInDoor)
+            {
+                player.GetComponentInChildren<SpriteRenderer>().enabled = false;
+
+                isInDoor = true;
+                player.pv.GetComponent<PhotonView>().RPC("SetReady", RpcTarget.AllBuffered, true);
+            
+                return;
+
+
+            }
+        }
+
+        if (isInDoor)
+        {
+            player.GetComponentInChildren<SpriteRenderer>().enabled = true;
+            isInDoor = false;
+            player.pv.GetComponent<PhotonView>().RPC("SetReady", RpcTarget.AllBuffered, false);
+        }
+
+    }
+    
+
 
 }
 

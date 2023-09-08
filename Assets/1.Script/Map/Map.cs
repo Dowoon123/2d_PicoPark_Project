@@ -118,9 +118,18 @@ public class Map : MonoBehaviourPunCallbacks
 
         if (count == PhotonNetwork.CurrentRoom.PlayerCount)
         {
-            StartCoroutine(ClearMap());
-            isClear = true;
+            if (PhotonNetwork.IsMasterClient)
+            {
+                GetComponent<PhotonView>().RPC("StartClear", RpcTarget.All);
+                isClear = true;
+            }
         }
+    }
+
+    [PunRPC]
+    public void StartClear()
+    {
+        StartCoroutine(ClearMap());
     }
    public virtual void Update()
     {

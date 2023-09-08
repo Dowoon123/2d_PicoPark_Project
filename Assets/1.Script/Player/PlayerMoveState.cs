@@ -44,7 +44,7 @@ public class PlayerMoveState : PlayerGroundedState
           
 
         
-
+        if(!player.isReadyToClear)
         player.pv.RPC("SetPlayerVelocity", RpcTarget.All, xInput * player.moveSpeed, rb.velocity.y);
 
         if (player._colChecker.IsFrontObject())

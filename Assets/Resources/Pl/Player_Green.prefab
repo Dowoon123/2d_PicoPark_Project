@@ -127,7 +127,7 @@ MonoBehaviour:
     m_Bits: 832
   WhatIsFoot:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   isObstacle: 0
   isPlayer: 0
   obstacleObject: {fileID: 0}

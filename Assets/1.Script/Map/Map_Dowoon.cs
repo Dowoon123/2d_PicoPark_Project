@@ -88,7 +88,8 @@ public class Map_Dowoon : Map
         for(int i=0; i< playerList.Count; ++i)
         {
             var player = playerList[i].GetComponent<PlayerController>();
-            player.moveSpeed = 10f;
+            player.moveSpeed = 15f;
+            player.jumpForce = 45f;
             player.isRope = true;
             
         }

@@ -43,19 +43,22 @@ public class FlyObject : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        //자동 이동
-        if (isMoving && canMove && !isReadyClear && !isFrontOfGoal )
-            transform.Translate(new Vector2(13f * Time.smoothDeltaTime, 0), Space.Self);
-
-
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        if (pv.IsMine)
         {
-            enterDoor();
-        }
+            //자동 이동
+            if (isMoving && canMove && !isReadyClear && !isFrontOfGoal)
+                transform.Translate(new Vector2(13f * Time.smoothDeltaTime, 0), Space.Self);
 
-        if(isNearDoor)
-        {
-            isFrontOfGoal = true;
+
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+            {
+                enterDoor();
+            }
+
+            if (isNearDoor)
+            {
+                isFrontOfGoal = true;
+            }
         }
     }
     private void FixedUpdate()
@@ -66,15 +69,14 @@ public class FlyObject : MonoBehaviourPunCallbacks
             h = Input.GetAxisRaw("Horizontal");
             v = Input.GetAxisRaw("Vertical");
 
+            if (h <= 0)
+                h = 0;
+            rb.velocity = new Vector2(h * Speed, v * Speed);
         }
 
-        else
-        {
-            h = 0f;
-            v = 0f;
-        }
+      
 
-        rb.velocity = new Vector2(h * Speed, v * Speed);
+      
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

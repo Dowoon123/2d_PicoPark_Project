@@ -39,6 +39,7 @@ public class Cannon : MonoBehaviour
             {
                 GetComponent<PhotonView>().RPC("StopShot", RpcTarget.All);
                 isEndShoot = true;
+                Destroy(transform.gameObject);
             }
         }
         else if(KeyBottle.GetComponent<KeyBottle>() == null)

@@ -27,7 +27,7 @@ public class CannonBullet : MonoBehaviour
 
         if (KeyBottle != null)
         {
-
+            
 
 
             if (KeyBottle.GetComponent<KeyBottle>().Hp == 3)
@@ -46,6 +46,10 @@ public class CannonBullet : MonoBehaviour
             {
                 KeyBottle = null;
             }
+        }
+        else
+        {
+            Destroy(transform.gameObject);
         }
 
        

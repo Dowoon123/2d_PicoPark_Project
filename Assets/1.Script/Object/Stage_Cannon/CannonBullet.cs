@@ -23,20 +23,32 @@ public class CannonBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
-        if (KeyBottle.GetComponent<KeyBottle>().Hp == 3)
+
+
+        if (KeyBottle != null)
         {
-            transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 1.5f);
-        }else if(KeyBottle.GetComponent<KeyBottle>().Hp == 2)
-        {
-            transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 2.5f);
-        }else if(KeyBottle.GetComponent<KeyBottle>().Hp == 1) 
-        {
-            transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 5f);
-        }else if(KeyBottle.GetComponent<KeyBottle>().Hp == 0)
-        {
-            KeyBottle = null;
+
+
+
+            if (KeyBottle.GetComponent<KeyBottle>().Hp == 3)
+            {
+                transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 1.5f);
+            }
+            else if (KeyBottle.GetComponent<KeyBottle>().Hp == 2)
+            {
+                transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 2.5f);
+            }
+            else if (KeyBottle.GetComponent<KeyBottle>().Hp == 1)
+            {
+                transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed * 5f);
+            }
+            else if (KeyBottle.GetComponent<KeyBottle>().Hp == 0)
+            {
+                KeyBottle = null;
+            }
         }
+
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -5713,6 +5713,10 @@ PrefabInstance:
       value: JumpingBlock
       objectReference: {fileID: 0}
     - target: {fileID: 3696421223640547319, guid: 8e8fd94d0d67aee498f710176b7618a9, type: 3}
+      propertyPath: Force
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 3696421223640547319, guid: 8e8fd94d0d67aee498f710176b7618a9, type: 3}
       propertyPath: jumpForce
       value: 100
       objectReference: {fileID: 0}
@@ -19596,19 +19600,19 @@ PrefabInstance:
       objectReference: {fileID: 4715031464782497255, guid: 6225594a7abeb174284e37bdedbac2a8, type: 3}
     - target: {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
       propertyPath: spawnPoints.Array.data[0].y
-      value: -22.8
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
       propertyPath: spawnPoints.Array.data[1].y
-      value: -22.8
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
       propertyPath: spawnPoints.Array.data[2].y
-      value: -22.8
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 8211980722022617402, guid: c7b6a2a9a2e38bb4cacf764f06f1566f, type: 3}
       propertyPath: spawnPoints.Array.data[3].y
-      value: -22.8
+      value: -25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

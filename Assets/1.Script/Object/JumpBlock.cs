@@ -29,6 +29,9 @@ public class JumpBlock : MonoBehaviour
 
                 if (player != null)
                 {
+                if (Force == 0)
+                    Force = 50;
+
                 player.jumpForce = Force;
                      player.stateMachine.ChangeState(player.State_Jump);
                 player.jumpForce = 35;

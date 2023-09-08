@@ -111,9 +111,23 @@ public class Map : MonoBehaviourPunCallbacks
         var count = 0;
         for (int i=0; i< playerList.Count; ++i)
         {
+
             var pc = playerList[i].GetComponent<PlayerController>();
-            if (pc.isReadyToClear)
-                count++;
+            var plane = playerList[i].GetComponent<FlyObject>();
+
+            if (pc != null)
+            {
+                if (pc.isReadyToClear)
+                    count++;
+            }
+
+            if(plane != null)
+            {
+
+                if (plane.isReadyClear)
+                    count++;
+            }
+          
         }
 
         if (count == PhotonNetwork.CurrentRoom.PlayerCount)

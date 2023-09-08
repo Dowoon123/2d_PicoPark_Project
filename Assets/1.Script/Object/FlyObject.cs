@@ -25,6 +25,8 @@ public class FlyObject : MonoBehaviourPunCallbacks
 
     bool isMoving = true; //자동 이동 여부 
 
+    public bool isReadyClear;
+    public bool isFrontOfGoal;
     [Header("Door")]
     public bool isNearDoor = false;
     bool isInDoor;
@@ -42,20 +44,25 @@ public class FlyObject : MonoBehaviourPunCallbacks
     private void Update()
     {
         //자동 이동
-        if (isMoving && canMove)
-            transform.Translate(new Vector2(13f * Time.smoothDeltaTime, 0) , Space.Self);
+        if (isMoving && canMove && !isReadyClear && !isFrontOfGoal )
+            transform.Translate(new Vector2(13f * Time.smoothDeltaTime, 0), Space.Self);
 
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
-                enterDoor();
+            enterDoor();
+        }
+
+        if(isNearDoor)
+        {
+            isFrontOfGoal = true;
         }
     }
     private void FixedUpdate()
     {
         if (pv.IsMine && !isDead)
         {
-            
+
             h = Input.GetAxisRaw("Horizontal");
             v = Input.GetAxisRaw("Vertical");
 
@@ -124,7 +131,7 @@ public class FlyObject : MonoBehaviourPunCallbacks
                 }
                 yield return new WaitForSeconds(0.02f);
             }
-            
+
 
         }
 
@@ -146,23 +153,32 @@ public class FlyObject : MonoBehaviourPunCallbacks
         if (isNearDoor)
 
         {
-            if (isInDoor)
+            if (!isReadyClear)
             {
-                Time.timeScale = 1; //시간 정상 속도로 복원
-                sr.GetComponent <SpriteRenderer>().enabled = true;
-                isInDoor = false; //문에서 나옴
-                sr.enabled = true;
+                GetComponent<PhotonView>().RPC("Set", RpcTarget.All, true);
+            
+
 
             }
-            else
-            {
-                Time.timeScale = 0; //시간 중지
-                sr.GetComponent<SpriteRenderer>().enabled = true;
-                isInDoor = true;
-                sr.enabled = false;
-            }
-
+        }
+       
+         
+        if(isReadyClear)
+        {
+            GetComponent<PhotonView>().RPC("Set", RpcTarget.All, false);
         }
 
+           
+        
+
+    }
+
+
+    [PunRPC]
+    public void Set(bool b)
+    {
+        isReadyClear = b;
+        sr.GetComponent<SpriteRenderer>().enabled = !b;
+        GetComponent<Collider2D>().enabled = !b;
     }
 }

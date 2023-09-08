@@ -11,6 +11,8 @@ public class Map_YJ : Map
     //public bool isChange;
     //public bool ChangeComplete;
 
+    Rigidbody2D rb;
+
 
     public Vector2[] planePos = new Vector2[4];
 
@@ -21,6 +23,7 @@ public class Map_YJ : Map
 
     public override void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
 
         if(!isSelectOption)
         Playerplane();
@@ -30,6 +33,12 @@ public class Map_YJ : Map
     public override void Update()
     {
         base.Update();
+
+        //플레이어가 움직이지 않더라도 저절로 움직이도록
+
+
+
+
 
         //if (!ChangeComplete)
         //    CheckPlayerXpos();

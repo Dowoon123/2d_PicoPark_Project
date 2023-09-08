@@ -1,7 +1,8 @@
+using Photon.Pun;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
-public class AutoUpDownBrick : MonoBehaviour
+public class AutoUpDownBrick : MonoBehaviourPunCallbacks
 {
     Vector3 pos; //현재위치
     public float inputY = 5.0f; // 좌(우)로 이동가능한 (x)최대값

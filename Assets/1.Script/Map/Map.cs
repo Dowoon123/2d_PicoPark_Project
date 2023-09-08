@@ -167,7 +167,7 @@ public class Map : MonoBehaviourPunCallbacks
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PhotonNetwork.LoadLevel(StageSelectScene);
+            PhotonNetwork.LoadLevel("StageSelectScene");
 
         }
     }

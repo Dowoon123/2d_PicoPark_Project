@@ -77,7 +77,7 @@ public class ChaseCam : MonoBehaviourPunCallbacks
     public void CheckPlayerPosition()
     {
         float minX = 1000;
-        float maxX = 0;
+        float maxX = -1000;
         int minIndex = 0;
         int maxIndex = 0;
         for(int i=0; i <Players.Length; ++i)

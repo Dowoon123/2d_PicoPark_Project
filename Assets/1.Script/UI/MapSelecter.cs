@@ -50,9 +50,9 @@ public class MapSelecter : MonoBehaviourPunCallbacks
             }
             else if (Input.GetKeyDown(KeyCode.S))
             {
-                currentIndex += 2;
+                currentIndex += 3;
 
-                if (currentIndex > 3)
+                if (currentIndex > Maps.Length-1)
                 {
                     currentIndex -= Maps.Length;
                 }
@@ -63,7 +63,7 @@ public class MapSelecter : MonoBehaviourPunCallbacks
             else if (Input.GetKeyDown(KeyCode.W))
             {
 
-                currentIndex -= 2;
+                currentIndex -= 3;
 
                 if (currentIndex < 0)
                 {
